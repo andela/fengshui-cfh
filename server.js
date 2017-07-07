@@ -5,7 +5,8 @@ var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
-    io = require('socket.io');
+    io = require('socket.io'),
+    dotenv = require('dotenv').config();
 
 /**
  * Main application entry file.
@@ -18,9 +19,11 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     config = require('./config/config'),
     auth = require('./config/middlewares/authorization'),
     mongoose = require('mongoose');
+console.log(config.db)
 
 //Bootstrap db connection
 var db = mongoose.connect(config.db);
+console.log(db)
 
 //Bootstrap models
 var models_path = __dirname + '/app/models';
