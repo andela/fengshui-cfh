@@ -4,7 +4,7 @@ services:
 script: 
  - npm install
  - npm test
- - npm run postintall
+ - npm run postinstall
 env:
   global:
   - NODE_ENV=travis
