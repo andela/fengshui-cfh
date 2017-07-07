@@ -1,8 +1,9 @@
 language: node_js
-node_js:
-    - "6"
+services:
+- mongodb
 before_script:
-    - npm install
-    - npm run postinstall
-script: 
-    - npm test
+  - sleep 15
+env:
+  global:
+  - NODE_ENV=travis
+  - MONGOHQ_URL=localhost
