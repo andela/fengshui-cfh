@@ -1,8 +1,10 @@
 language: node_js
 services:
-- mongodb
-before_script:
-  - sleep 15
+ - mongodb
+script: 
+ - npm install
+ - npm test
+ - npm run postintall
 env:
   global:
   - NODE_ENV=travis
