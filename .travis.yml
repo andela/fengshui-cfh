@@ -1,0 +1,11 @@
+language: node_js
+services:
+ - mongodb
+script: 
+ - npm install
+ - npm test
+ - npm run postinstall
+env:
+  global:
+  - NODE_ENV=travis
+  - MONGOHQ_URL=localhost
