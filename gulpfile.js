@@ -33,11 +33,7 @@ gulp.task('test', function () {
         should: require('should')
       }
     }));
-<<<<<<< HEAD
-});
-=======
 })
->>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 
 gulp.task('watch', function () {
   gulp.watch(['app/views/**', 'public/views/**'], ['bs-reload']);
@@ -57,14 +53,6 @@ gulp.task('nodemon', function () {
   });
 });
 
-<<<<<<< HEAD
-gulp.task('install', function () {
-  return bower();
-});
-
-gulp.task('concurrent', ['watch', 'nodemon']);
-gulp.task('default', ['jshint', 'concurrent', 'sass']);
-=======
 gulp.task('bower', function() {
   return bower();
 });
@@ -108,4 +96,3 @@ gulp.task('clean', function() {
 gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore'));
 gulp.task('concurrent', ['watch', 'nodemon']);
 gulp.task('default', ['eslint', 'concurrent', 'sass']);
->>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
