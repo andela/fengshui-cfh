@@ -1,36 +1,22 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
-<<<<<<< HEAD
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
-var mocha = require('gulp-mocha');
-var bower = require('gulp-bower');
-=======
 var eslint = require('gulp-eslint');
 var sass = require('gulp-sass');
 var mocha = require('gulp-mocha');
 var bower = require('gulp-bower');
 var runSequence = require('gulp-sequence');
 var clean = require('gulp-rimraf');
->>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 
 gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
-<<<<<<< HEAD
-gulp.task('jshint', function () {
-  gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
-  .pipe(jshint())
-  .pipe(jshint.reporter('default'));
-=======
 gulp.task('eslint', function () {
   gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
   .pipe(eslint())
   .pipe(eslint.formatEach('compact', process.stderr))
   .pipe(eslint.failAfterError());
->>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 });
 
 gulp.task('sass', function() {

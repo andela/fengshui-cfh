@@ -51,19 +51,12 @@
     "eslint-plugin-react": "^7.1.0",
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
-<<<<<<< HEAD
-    "gulp-jshint": "^2.0.4",
-    "gulp-mocha": "^4.3.1",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-sass": "^3.1.0",
-=======
     "gulp-eslint": "^4.0.0",
     "gulp-mocha": "^4.3.1",
     "gulp-nodemon": "^2.2.1",
     "gulp-rimraf": "^0.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-sequence": "^0.4.6",
->>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
     "should": "~1.3.0",
     "supertest": "~0.8.0"
   }
