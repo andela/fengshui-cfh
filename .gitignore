@@ -5,3 +5,7 @@ public/lib
 c4h_keys.txt
 .env
 package-lock.json
+<<<<<<< HEAD
+=======
+bower_components
+>>>>>>> a73033623228ce03a09ac6d585427f95c72fed66

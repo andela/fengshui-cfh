@@ -1,19 +1,36 @@
 var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
+<<<<<<< HEAD
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var mocha = require('gulp-mocha');
 var bower = require('gulp-bower');
+=======
+var eslint = require('gulp-eslint');
+var sass = require('gulp-sass');
+var mocha = require('gulp-mocha');
+var bower = require('gulp-bower');
+var runSequence = require('gulp-sequence');
+var clean = require('gulp-rimraf');
+>>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 
 gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
+<<<<<<< HEAD
 gulp.task('jshint', function () {
   gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
   .pipe(jshint())
   .pipe(jshint.reporter('default'));
+=======
+gulp.task('eslint', function () {
+  gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
+  .pipe(eslint())
+  .pipe(eslint.formatEach('compact', process.stderr))
+  .pipe(eslint.failAfterError());
+>>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 });
 
 gulp.task('sass', function() {
@@ -30,7 +47,11 @@ gulp.task('test', function () {
         should: require('should')
       }
     }));
+<<<<<<< HEAD
 });
+=======
+})
+>>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
 
 gulp.task('watch', function () {
   gulp.watch(['app/views/**', 'public/views/**'], ['bs-reload']);
@@ -50,9 +71,55 @@ gulp.task('nodemon', function () {
   });
 });
 
+<<<<<<< HEAD
 gulp.task('install', function () {
   return bower();
 });
 
 gulp.task('concurrent', ['watch', 'nodemon']);
 gulp.task('default', ['jshint', 'concurrent', 'sass']);
+=======
+gulp.task('bower', function() {
+  return bower();
+});
+
+gulp.task('angular', () => {
+    gulp.src('bower_components/angular/**/*.js')
+        .pipe(gulp.dest('public/lib/angular'));
+});
+
+gulp.task('angular-bootstrap', () => {
+    gulp.src('bower_components/angular-bootstrap/**/*')
+        .pipe(gulp.dest('public/lib/angular-bootstrap'));
+});
+
+gulp.task('angularUtils', () => {
+    gulp.src('bower_components/angular-ui-utils/modules/route/route.js')
+        .pipe(gulp.dest('public/lib/angular-ui-utils/modules'));
+});
+
+gulp.task('bootstrap', () => {
+    gulp.src('bower_components/bootstrap/dist/**/*')
+        .pipe(gulp.dest('public/lib/bootstrap'));
+});
+
+gulp.task('jquery', () => {
+    gulp.src('bower_components/jquery/**/*')
+        .pipe(gulp.dest('public/lib/jquery'));
+});
+
+
+gulp.task('underscore', function () {
+    gulp.src('bower_components/underscore/**/*')
+        .pipe(gulp.dest('public/lib/underscore'));
+});
+
+gulp.task('clean', function() {
+  gulp.src('bower_components')
+      .pipe(clean({ force: true }));
+});
+
+gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore'));
+gulp.task('concurrent', ['watch', 'nodemon']);
+gulp.task('default', ['eslint', 'concurrent', 'sass']);
+>>>>>>> a73033623228ce03a09ac6d585427f95c72fed66
