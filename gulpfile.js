@@ -7,6 +7,8 @@ var mocha = require('gulp-mocha');
 var bower = require('gulp-bower');
 var runSequence = require('gulp-sequence');
 var clean = require('gulp-rimraf');
+const istanbul = require('gulp-istanbul');
+const coveralls = require('gulp-coveralls');
 
 gulp.task('bs-reload', function () {
     browserSync.reload();
@@ -32,8 +34,19 @@ gulp.task('test', function () {
       globals: {
         should: require('should')
       }
-    }));
-})
+    }))
+    .pipe(istanbul.hookRequire());
+});
+
+gulp.task('coverage', ['test'], () => {
+  gulp.src(['**/*.js', '!test/**/*.js', '!node_modules/**/*.js', '!gulpfile.js'])
+  .pipe(istanbul.writeReports());
+});
+
+gulp.task('coveralls', ['test'], () => {
+  gulp.src('/coverage/lcov.info')
+  .pipe(coveralls());
+});
 
 gulp.task('watch', function () {
   gulp.watch(['app/views/**', 'public/views/**'], ['bs-reload']);
