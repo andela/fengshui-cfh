@@ -1,13 +1,13 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', 'socket', 'game', 'AvatarService', function ($scope, $http, $timeout, Global, $location, socket, game, AvatarService) {
+.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, socket, game, AvatarService) => {
   $scope.global = Global;
 
-  $scope.playAsGuest = function() {
+  $scope.playAsGuest = () => {
     game.joinGame();
     $location.path('/app');
   };
 
-  $scope.showError = function() {
+  $scope.showError = () => {
     if ($location.search().error) {
       return $location.search().error;
     } else {
@@ -17,15 +17,15 @@ angular.module('mean.system')
 
   $scope.avatars = [];
   AvatarService.getAvatars()
-    .then(function(data) {
+    .then((data) => {
       $scope.avatars = data;
     });
 
-  $scope.setAvatar = function(x){
+  $scope.setAvatar = (x) => {
     $scope.avat = x;
   };
 
-  $scope.submitform = function(){
+  $scope.submitform = () => {
     const username = $scope.name;
     const useremail = $scope.email;
     const userpassword = $scope.password;
@@ -38,22 +38,22 @@ angular.module('mean.system')
       avatar: userselectedAvatar
     };
     $http.post(url, data)
-                .then(function mySuccess(response) {
-                  $scope.alert = response.data.message + ' You will be redirected after few minutes';
+                .then((response) => {
+                  $scope.alert = `${response.data.message} You will be redirected after few minutes`;
                   window.localStorage.setItem('jwt', response.data.jwt);
-                  $timeout(function () {
+                  $timeout(() => {
                     $location.path('/#!/');
                     location.reload();
                   }, 3000);
-                }, function myError(response) {
+                }, (response) => {
                   $scope.alert = response.data.message;
                 });
   };
 
-  $scope.logOut = function(){
+  $scope.logOut = () => {
     window.localStorage.removeItem('jwt');
     $http.get('/signout')
-    .then(function(response) {
+    .then((response) => {
       $scope.alert = response.data.message;
       if (response.data.message === 'Logged Out'){
         $location.path('/#!/');
@@ -62,29 +62,28 @@ angular.module('mean.system')
     });
   };
 
-  $scope.playGame = function(){
-    console.log(window.localStorage.getItem('jwt'));
+  $scope.playGame = () => {
     $http({
       method: 'GET',
       url: '/app'
-    }).then(function mySuccess(response) {
+    }).then((response) => {
       $scope.myWelcome = response.data;
-    }, function myError(response) {
+    }, (response) => {
       $scope.myWelcome = response.statusText;
     });
   };
 
-  $scope.playGameCustom = function(){
+  $scope.playGameCustom = () => {
     const token = window.localStorage.getItem('jwt');
     const config = { headers: {
       Authorization: `token ${token}`,
       Accept: 'application/json;odata=verbose'
     }
-  }
+    };
     $http.get('/play?custom', config)
-    .then(function mySuccess(response) {
+    .then((response) => {
       window.location = '/#!/app?custom';
-    }, function myError(response) {
+    }, (response) => {
     });
   };
 }]);
