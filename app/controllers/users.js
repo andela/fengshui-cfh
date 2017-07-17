@@ -1,14 +1,15 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose'),
   User = mongoose.model('User');
-var avatars = require('./avatars').all();
+const avatars = require('./avatars').all();
 
 /**
  * Auth callback
  */
-exports.authCallback = function(req, res, next) {
+exports.authCallback = (req, res, next) => {
   res.redirect('/chooseavatars');
 };
 
@@ -39,7 +40,9 @@ exports.signup = function(req, res) {
  */
 exports.signout = function(req, res) {
   req.logout();
-  res.redirect('/');
+  return res.json({
+    message: 'Logged Out'
+  });
 };
 
 /**
@@ -49,7 +52,7 @@ exports.session = function(req, res) {
   res.redirect('/');
 };
 
-/** 
+/**
  * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -70,40 +73,83 @@ exports.checkAvatar = function(req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
- * Create user
+ * [creates a new User]
+ * @method create
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]}     [the]
  */
-exports.create = function(req, res) {
+exports.create = (req, res) => {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec(function(err,existingUser) {
+    }).exec((err, existingUser) => {
       if (!existingUser) {
-        var user = new User(req.body);
-        // Switch the user's avatar index to an actual avatar url
+        const user = new User(req.body);
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
-        user.save(function(err) {
+        user.save((err) => {
           if (err) {
-            return res.render('/#!/signup?error=unknown', {
-              errors: err.errors,
-              user: user
-            });
+            return res.json({
+              message: 'Unknown Error'
+            }).status(500);
           }
-          req.logIn(user, function(err) {
+          req.logIn(user, (err) => {
             if (err) return next(err);
-            return res.redirect('/#!/');
+            const newUser = {
+              name: req.body.name,
+              email: req.body.email
+            };
+            const token = jwt.sign({
+              exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+              data: newUser
+            }, process.env.JWT_SECRET);
+            return res.json({
+              message: 'Registration Successful',
+              jwt: token
+            }).status(200);
           });
         });
       } else {
-        return res.redirect('/#!/signup?error=existinguser');
+        return res.json({
+          message: 'Existing User'
+        }).status(400);
       }
     });
   } else {
-    return res.redirect('/#!/signup?error=incomplete');
+    return res.json({
+      message: 'Registration Incomplete'
+    }).status(400);
+  }
+};
+
+exports.ensureToken = function(req, res, next) {
+  let token = req.body.token || req.params.token || req.headers.authorization;
+  if (token){
+    token = token.split(' ');
+    token = token[1];
+  }
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+      if (err) {
+        console.log(err);
+        return res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+        // res.redirect('/#!/signin?error=Failed to authenticate token');
+      } else {
+        return res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+      //  req.decoded = decoded;
+        // next();
+      }
+    });
+  } else {
+    /* return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    }); */
+    res.redirect('/#!/signin?error=No_token_provided');
   }
 };
 
