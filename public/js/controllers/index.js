@@ -57,10 +57,8 @@ angular.module('mean.system')
       email: useremail,
       password: userpassword
     };
-    // console.log(data);
     $http.post('/api/auth/signin', data)
     .then((response) => {
-      console.log(data);
       if (response.data.message === 'successful login') {
         window.localStorage.setItem('jwt', response.data.token);
         $location.path('/#!/');
