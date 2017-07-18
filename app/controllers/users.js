@@ -226,3 +226,43 @@ exports.user = (req, res, next, id) => {
       next();
     });
 };
+
+module.exports.jwtSignIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({ message: 'Enter all required field' });
+  }
+  // find the user
+  User.findOne(
+    {
+      email: req.body.email
+    },
+    (error, existingUser) => {
+      const user = new User(req.body);
+      if (error) {
+        return res.json({
+          message: 'An Error Occured'
+        });
+      }
+      if (!existingUser) {
+        return res.json({
+          message: 'Not an existing user'
+        });
+      } else if (existingUser) {
+        if (!existingUser.authenticate(req.body.password)) {
+          return res.json({
+            message: 'Invalid Password'
+          });
+        }
+      }
+      // Create the token
+      req.logIn(existingUser, () => {
+        const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+          data: existingUser
+        }, process.env.JWT_SECRET);
+        // return the token as JSON
+        return res.status(200).json({ message: 'successful login', token });
+      });
+    }
+  );
+};
