@@ -12,7 +12,7 @@ angular.module('mean.system')
     table: [],
     czar: null,
     playerMinLimit: 3,
-    playerMaxLimit: 6,
+    playerMaxLimit: 11,
     pointLimit: null,
     state: null,
     round: 0,
@@ -20,9 +20,10 @@ angular.module('mean.system')
     curQuestion: null,
     notification: null,
     timeLimits: {},
-    joinOverride: false
+    joinOverride: false,
+    modal: false,
+    modalMessage: ''
   };
-
   var notificationQueue = [];
   var timeout = false;
   var self = this;
@@ -176,7 +177,13 @@ angular.module('mean.system')
   socket.on('notification', function(data) {
     addToNotificationQueue(data.notification);
   });
-
+  socket.on('beforeStart', function(data) {
+    game.modalMessage = data;
+    game.modal = !game.modal;
+    $timeout(function() {
+      game.modal = false;
+    }, 1500);
+  });
   game.joinGame = function(mode,room,createPrivate) {
     mode = mode || 'joinGame';
     room = room || '';
