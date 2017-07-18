@@ -59,6 +59,50 @@ angular.module('mean.directives', [])
       link: function(scope, elem, attr) {}
     };
   })
+  .directive('modal', function($compile) {
+    return {
+      template: `<div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" ng-click="hideModal()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="mtitle"></h4>
+              </div>
+              <div class="modal-body" ng-transclude></div>
+            </div>
+          </div>
+        </div>`,
+      restrict: 'E',
+      transclude: true,
+      replace: true,
+      scope: true,
+      link: function postLink(scope, element, attrs) {
+        scope.$watch(attrs.visible, function(value) {
+          if (value === true) {
+            $(element).modal('show');
+          } else {
+            $(element).modal('hide');
+          }
+        });
+        scope.$watch(attrs.message, function(value) {
+          const span = angular.element("<span />");
+          span.text(value);
+          element.find("h4").append(span);
+        });
+        $(element).on('shown.bs.modal', function() {
+          scope.$apply( () => {
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function() {
+          scope.$apply( () => {
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+      }
+    };
+  })
   .directive('timer', function(){
     return{
       restrict: 'EA',
