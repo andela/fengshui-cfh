@@ -70,7 +70,6 @@ exports.checkAvatar = (req, res) => {
       }
     });
   } else {
-    // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
 };
@@ -151,7 +150,6 @@ exports.ensureToken = (req, res, next) => {
  * Assign avatar to user
  */
 exports.avatars = (req, res) => {
-  // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
     /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
@@ -167,13 +165,11 @@ exports.avatars = (req, res) => {
 
 exports.addDonation = (req, res) => {
   if (req.body && req.user && req.user._id) {
-    // Verify that the object contains crowdrise data
     if (req.body.amount && req.body.crowdrise_donation_id && req.body.donor_name) {
       User.findOne({
         _id: req.user._id
       })
       .exec((err, user) => {
-        // Confirm that this object hasn't already been entered
         var duplicate = false;
         for (var i = 0; i < user.donations.length; i++ ) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
@@ -225,4 +221,48 @@ exports.user = (req, res, next, id) => {
       req.profile = user;
       next();
     });
+};
+
+/*
+ * [signin a user]
+ * @method jwtSignIn
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]} Object
+ */
+exports.jwtSignIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({ message: 'Enter all required field' });
+  }
+  User.findOne(
+    {
+      email: req.body.email
+    },
+    (error, existingUser) => {
+      const user = new User(req.body);
+      if (error) {
+        return res.json({
+          message: 'An Error Occured'
+        });
+      }
+      if (!existingUser) {
+        return res.json({
+          message: 'Not an existing user'
+        });
+      } else if (existingUser) {
+        if (!existingUser.authenticate(req.body.password)) {
+          return res.json({
+            message: 'Invalid Password'
+          });
+        }
+      }
+      req.logIn(existingUser, () => {
+        const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+          data: existingUser
+        }, process.env.JWT_SECRET);
+        return res.status(200).json({ message: 'successful login', token });
+      });
+    }
+  );
 };

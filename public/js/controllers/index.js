@@ -50,6 +50,25 @@ angular.module('mean.system')
                 });
   };
 
+  $scope.signIn = () => {
+    const useremail = $scope.email;
+    const userpassword = $scope.password;
+    const data = {
+      email: useremail,
+      password: userpassword
+    };
+    $http.post('/api/auth/signin', data)
+    .then((response) => {
+      if (response.data.message === 'successful login') {
+        window.localStorage.setItem('jwt', response.data.token);
+        $location.path('/#!/');
+        $window.location.reload();
+      } else {
+        alert('Wrong email or user already exist');
+      }
+    })
+  };
+
   $scope.logOut = () => {
     window.localStorage.removeItem('jwt');
     $http.get('/signout')

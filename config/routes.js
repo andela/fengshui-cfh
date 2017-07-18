@@ -89,4 +89,7 @@ module.exports = function(app, passport, auth) {
   var index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+  
+  // jwt on signin
+  app.post('/api/auth/signin', users.jwtSignIn);
 };
