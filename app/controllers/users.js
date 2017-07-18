@@ -227,11 +227,17 @@ exports.user = (req, res, next, id) => {
     });
 };
 
-module.exports.jwtSignIn = (req, res) => {
+/*
+ * [signin a user]
+ * @method jwtSignIn
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]} Object
+ */
+exports.jwtSignIn = (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).json({ message: 'Enter all required field' });
   }
-  // find the user
   User.findOne(
     {
       email: req.body.email
@@ -254,13 +260,11 @@ module.exports.jwtSignIn = (req, res) => {
           });
         }
       }
-      // Create the token
       req.logIn(existingUser, () => {
         const token = jwt.sign({
           exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
           data: existingUser
         }, process.env.JWT_SECRET);
-        // return the token as JSON
         return res.status(200).json({ message: 'successful login', token });
       });
     }
