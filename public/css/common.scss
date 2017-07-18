@@ -407,14 +407,14 @@ html{
 body{
     font-family: $main-font;
     background: transparent;
-    margin: 10px;
+    margin: 0px;
 
     @include tablet-portrait-only{
-        margin: 5px;
+        margin: 0px;
     }
 
     @include mobile-only{
-        margin: 1px;
+        margin: 0px;
     }
 }
 
@@ -1326,4 +1326,91 @@ body{
     }
 }
 
+// new styles for donation, team and footer
+.newdonation {
+   heigth: auto;
+   width: 100%;
+   background: #EBEBEB;
+   text-align: center;
+   padding:2%;
+   div h4 a {
+     color:green;
+   }
+   .donatelink {
+     padding: 2%;
+     a {
+       text-align: center;
+       width: 200%;
+     }
+   }
+  .donatereason {
+     font-size:20px;
+     padding:2%;
+     text-align: justify;
+     p {
+       font-family: Coustard;
+     }
+     a {
+       text-align: center;
+     }
+  }
+}
 
+.newteam {
+  heigth: auto;
+  width: 100%;
+  background: #BDACAC;
+  text-align: center;
+  padding: 2%;
+  div h1 {
+    font-family: Abel Open sans;
+  }
+  .newteamcontainer {
+    margin-bottom:3%;
+    margin-top:3%;
+  }
+  .newteammember {
+    background: #EBEBEB;
+    width:200px;
+    height:200px;
+    border-radius: 100px;
+    margin-left:12%;
+    margin-bottom:1%;
+    padding: 0px;
+  }
+  .newteamimagecontainer {
+    width: 100%;
+    height:70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  .newteamimage {
+    width: 80%;
+  }
+  .newteammembername {
+    margin-top:5%;
+    font-family: Tahoma;
+    font-size: 20px;
+  }
+  .newteamnamecontainer {
+
+  }
+  .newteamcontainertwo {
+    margin-bottom:3%;
+  }
+}
+
+.newfooter {
+   heigth: auto;
+   width: 100%;
+   background: #AF521F;
+   opacity:0.8;
+   padding:1%;
+   font-family: Abel;
+   .newlegal {
+     text-align:justify;
+     font-size: 14px;
+   }
+}
+
+// new styles for donation, team and footer
