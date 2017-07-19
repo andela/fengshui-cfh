@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+    - "7"
+before_script:
+    - npm install gulp -g
+    - npm install
+script: 
+    - npm test
+env:
+  global:
+    - MONGOHQ_URL=mongodb://Fengshui-cfh:Fengshui-cfh123@ds151232.mlab.com:51232/fengshui-cfh
