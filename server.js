@@ -47,7 +47,8 @@ require('./config/passport')(passport);
 var app = express();
 
 app.use(function(req, res, next){
-    next();
+  res.locals.bar = 'jwtToken';
+  next();
 });
 
 //express settings
