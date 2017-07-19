@@ -27,7 +27,7 @@ gulp.task('sass', () => {
   .pipe(gulp.dest('public/css/'));
 });
 
-gulp.task('test', () => {
+gulp.task('test', ['transpile'], () => {
   gulp.src(['test/**/*.js'], { read: false })
     .pipe(mocha({
       reporter: 'spec',
