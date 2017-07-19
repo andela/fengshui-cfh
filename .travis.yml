@@ -1,11 +1,5 @@
 language: node_js
 node_js:
-    - "7"
+    - "stable"
 services:
 - mongodb
-before_script:
-  - sleep 15
-env:
-  global:
-  - NODE_ENV=travis
-  - MONGOHQ_URL=mongodb://localhost
