@@ -1,11 +1,13 @@
 /**
  * Module dependencies.
  */
+require('dotenv').config();
 var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
-    io = require('socket.io');
+    io = require('socket.io'),
+    dotenv = require('dotenv').config();
 
 /**
  * Main application entry file.
@@ -45,7 +47,8 @@ require('./config/passport')(passport);
 var app = express();
 
 app.use(function(req, res, next){
-    next();
+  res.locals.bar = 'jwtToken';
+  next();
 });
 
 //express settings
