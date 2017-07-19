@@ -1,8 +1,8 @@
-var async = require('async');
-var _ = require('underscore');
-var questions = require(__dirname + '/../../app/controllers/questions.js');
-var answers = require(__dirname + '/../../app/controllers/answers.js');
-var guestNames = [
+const async = require('async');
+const _ = require('underscore');
+const questions = require(__dirname + '/../../app/controllers/questions.js');
+const answers = require(__dirname + '/../../app/controllers/answers.js');
+const guestNames = [
   "Disco Potato",
   "Silver Blister",
   "Insulated Mustard",
