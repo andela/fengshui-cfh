@@ -38,16 +38,16 @@ angular.module('mean.system')
       avatar: userselectedAvatar
     };
     $http.post(url, data)
-                .then((response) => {
-                  $scope.alert = `${response.data.message} You will be redirected after few minutes`;
-                  window.localStorage.setItem('jwt', response.data.jwt);
-                  $timeout(() => {
-                    $location.path('/#!/');
-                    location.reload();
-                  }, 3000);
-                }, (response) => {
-                  $scope.alert = response.data.message;
-                });
+    .then((response) => {
+      $scope.alert = `${response.data.message} You will be redirected after few minutes`;
+      window.localStorage.setItem('jwt', response.data.jwt);
+      $timeout(() => {
+        $location.path('/#!/');
+        location.reload();
+      }, 3000);
+    }, (response) => {
+      $scope.alert = response.data.message;
+    });
   };
 
   $scope.signIn = () => {
@@ -57,14 +57,12 @@ angular.module('mean.system')
       email: useremail,
       password: userpassword
     };
-    // console.log(data);
     $http.post('/api/auth/signin', data)
     .then((response) => {
-      console.log(data);
       if (response.data.message === 'successful login') {
         window.localStorage.setItem('jwt', response.data.token);
-        $location.path('/#!/');
-        $window.location.reload();
+        $location.path('/#!/app');
+        location.reload();
       } else {
         alert('Wrong email or user already exist');
       }
