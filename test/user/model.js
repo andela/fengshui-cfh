@@ -1,9 +1,9 @@
 /**
  * Module dependencies.
  */
-import mongoose from 'mongoose';
-import should from 'should';
-import app from '../../server';
+const should = require('should');
+const app = require('../../server');
+const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 let user;

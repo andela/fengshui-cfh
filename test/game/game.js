@@ -1,6 +1,7 @@
-import io from 'socket.io-client';
+const io = require('socket.io-client');
 
 const socketURL = 'http://localhost:3000';
+
 const options = { transports: ['websocket'],
   'force new connection': true
 };
@@ -95,7 +96,7 @@ describe('Game Server', () => {
     });
   });
 
-  it('Should automatically start game when 6 players are in a game', (done) => {
+  it('Should automatically start game when 6 players are in a game', function(done){
     let client2, client3, client4, client5, client6;
     const client1 = io.connect(socketURL, options);
     const disconnect = () => {
