@@ -142,6 +142,29 @@ exports.ensureToken = (req, res, next) => {
       return result;
     });
   } else {
+    return res.json({
+      message: 'Registration Incomplete'
+    }).status(400);
+  }
+};
+
+exports.ensureToken = (req, res, next) => {
+  let token = req.body.token || req.params.token || req.headers.authorization;
+  if (token){
+    token = token.split(' ');
+    token = token[1];
+  }
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      let result;
+      if (err) {
+        result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+      } else {
+        result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+      }
+      return result;
+    });
+  } else {
     res.redirect('/#!/signin?error=No_token_provided');
   }
 };
@@ -150,6 +173,7 @@ exports.ensureToken = (req, res, next) => {
  * Assign avatar to user
  */
 exports.avatars = (req, res) => {
+  // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
     /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
@@ -170,6 +194,7 @@ exports.addDonation = (req, res) => {
         _id: req.user._id
       })
       .exec((err, user) => {
+        // Confirm that this object hasn't already been entered
         var duplicate = false;
         for (var i = 0; i < user.donations.length; i++ ) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
@@ -238,7 +263,6 @@ exports.jwtSignIn = (req, res) => {
       email: req.body.email
     },
     (error, existingUser) => {
-      const user = new User(req.body);
       if (error) {
         return res.json({
           message: 'An Error Occured'
