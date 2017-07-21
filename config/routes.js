@@ -1,4 +1,3 @@
-const async = require('async');
 const users = require('../app/controllers/users');
 
 module.exports = function(app, passport, auth) {
@@ -68,25 +67,27 @@ module.exports = function(app, passport, auth) {
   app.param('userId', users.user);
 
     // Answer Routes
-  var answers = require('../app/controllers/answers');
+  const answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
     // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
     // Question Routes
-  var questions = require('../app/controllers/questions');
+  const questions = require('../app/controllers/questions');
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
     // Finish with setting up the questionId param
   app.param('questionId', questions.question);
 
     // Avatar Routes
-  var avatars = require('../app/controllers/avatars');
+  const avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
     // Home route
-  var index = require('../app/controllers/index');
+  const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+  // jwt on signin
+  app.post('/api/auth/signin', users.jwtSignIn);
 };

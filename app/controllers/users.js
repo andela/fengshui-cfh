@@ -70,7 +70,6 @@ exports.checkAvatar = (req, res) => {
       }
     });
   } else {
-    // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
 };
@@ -143,6 +142,29 @@ exports.ensureToken = (req, res, next) => {
       return result;
     });
   } else {
+    return res.json({
+      message: 'Registration Incomplete'
+    }).status(400);
+  }
+};
+
+exports.ensureToken = (req, res, next) => {
+  let token = req.body.token || req.params.token || req.headers.authorization;
+  if (token){
+    token = token.split(' ');
+    token = token[1];
+  }
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      let result;
+      if (err) {
+        result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+      } else {
+        result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+      }
+      return result;
+    });
+  } else {
     res.redirect('/#!/signin?error=No_token_provided');
   }
 };
@@ -167,7 +189,6 @@ exports.avatars = (req, res) => {
 
 exports.addDonation = (req, res) => {
   if (req.body && req.user && req.user._id) {
-    // Verify that the object contains crowdrise data
     if (req.body.amount && req.body.crowdrise_donation_id && req.body.donor_name) {
       User.findOne({
         _id: req.user._id
@@ -181,7 +202,6 @@ exports.addDonation = (req, res) => {
           }
         }
         if (!duplicate) {
-          console.log('Validated donation');
           user.donations.push(req.body);
           user.premium = 1;
           user.save();
@@ -225,4 +245,47 @@ exports.user = (req, res, next, id) => {
       req.profile = user;
       next();
     });
+};
+
+/*
+ * [signin a user]
+ * @method jwtSignIn
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]} Object
+ */
+exports.jwtSignIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({ message: 'Enter all required field' });
+  }
+  User.findOne(
+    {
+      email: req.body.email
+    },
+    (error, existingUser) => {
+      if (error) {
+        return res.json({
+          message: 'An Error Occured'
+        });
+      }
+      if (!existingUser) {
+        return res.json({
+          message: 'Not an existing user'
+        });
+      } else if (existingUser) {
+        if (!existingUser.authenticate(req.body.password)) {
+          return res.json({
+            message: 'Invalid Password'
+          });
+        }
+      }
+      req.logIn(existingUser, () => {
+        const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+          data: existingUser
+        }, process.env.JWT_SECRET);
+        return res.status(200).json({ message: 'successful login', token });
+      });
+    }
+  );
 };

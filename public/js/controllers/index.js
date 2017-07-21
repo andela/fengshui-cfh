@@ -38,16 +38,35 @@ angular.module('mean.system')
       avatar: userselectedAvatar
     };
     $http.post(url, data)
-                .then((response) => {
-                  $scope.alert = `${response.data.message} You will be redirected after few minutes`;
-                  window.localStorage.setItem('jwt', response.data.jwt);
-                  $timeout(() => {
-                    $location.path('/#!/');
-                    location.reload();
-                  }, 3000);
-                }, (response) => {
-                  $scope.alert = response.data.message;
-                });
+    .then((response) => {
+      $scope.alert = `${response.data.message} You will be redirected after few minutes`;
+      window.localStorage.setItem('jwt', response.data.jwt);
+      $timeout(() => {
+        $location.path('/#!/');
+        location.reload();
+      }, 3000);
+    }, (response) => {
+      $scope.alert = response.data.message;
+    });
+  };
+
+  $scope.signIn = () => {
+    const useremail = $scope.email;
+    const userpassword = $scope.password;
+    const data = {
+      email: useremail,
+      password: userpassword
+    };
+    $http.post('/api/auth/signin', data)
+    .then((response) => {
+      if (response.data.message === 'successful login') {
+        window.localStorage.setItem('jwt', response.data.token);
+        $location.path('/#!/app');
+        location.reload();
+      } else {
+        alert('Wrong email or user already exist');
+      }
+    })
   };
 
   $scope.logOut = () => {
