@@ -51,3 +51,18 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Installation
+This application was built on MongoDB for data persistence, therefore MongoDB must be installed in order to run this app locally:
+### Step 1: 
+- Download and install MongoDB from <a href="https://docs.mongodb.com/manual/administration/install-community/">mongoDb website</a>
+- Start the mongodb from terminal with ```mongod```
+
+### Step 2:
+On another terminal:
+- Clone this repository to have the app on your machine with ```git clone https://github.com/andela/fengshui-cfh.git```
+- Change directory to the app's root with ```cd fengshui-cfh```
+- Then run ```npm install```  to install the dependencies
+- Create a .env file and put ```MONGOHQ_URL=mongodb://localhost``` to create a link to the local mongodb database
+- Run ```npm start``` to start the app, some gulp tasks would be displayed on the terminal as a result of ES6 transpilation
+- The app can then be viewed on ```localhost:3000```
