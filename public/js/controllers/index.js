@@ -1,24 +1,106 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', function ($scope, Global, $location, socket, game, AvatarService) {
-    $scope.global = Global;
+.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, socket, game, AvatarService) => {
+  $scope.global = Global;
 
-    $scope.playAsGuest = function() {
-      game.joinGame();
-      $location.path('/app');
+  $scope.playAsGuest = () => {
+    game.joinGame();
+    $location.path('/app');
+  };
+
+  $scope.showError = () => {
+    if ($location.search().error) {
+      return $location.search().error;
+    } return false;
+  };
+
+  $scope.avatars = [];
+  AvatarService.getAvatars()
+    .then((data) => {
+      $scope.avatars = data;
+    });
+
+  $scope.setAvatar = (x) => {
+    $scope.avat = x;
+  };
+
+  $scope.submitform = () => {
+    const username = $scope.name;
+    const useremail = $scope.email;
+    const userpassword = $scope.password;
+    const userselectedAvatar = $scope.avat;
+    const url = '/api/auth/users';
+    const data = {
+      name: username,
+      email: useremail,
+      password: userpassword,
+      avatar: userselectedAvatar
     };
+    $http.post(url, data)
+    .then((response) => {
+      $scope.alert = `${response.data.message} You will be redirected after few minutes`;
+      window.localStorage.setItem('jwt', response.data.jwt);
+      $timeout(() => {
+        $location.path('/#!/');
+        location.reload();
+      }, 3000);
+    }, (response) => {
+      $scope.alert = response.data.message;
+    });
+  };
 
-    $scope.showError = function() {
-      if ($location.search().error) {
-        return $location.search().error;
+  $scope.signIn = () => {
+    const useremail = $scope.email;
+    const userpassword = $scope.password;
+    const data = {
+      email: useremail,
+      password: userpassword
+    };
+    $http.post('/api/auth/signin', data)
+    .then((response) => {
+      if (response.data.message === 'successful login') {
+        window.localStorage.setItem('jwt', response.data.token);
+        $location.path('/#!/app');
+        location.reload();
       } else {
-        return false;
+        alert('Wrong email or user already exist');
       }
+    });
+  };
+
+  $scope.logOut = () => {
+    window.localStorage.removeItem('jwt');
+    $http.get('/signout')
+    .then((response) => {
+      $scope.alert = response.data.message;
+      if (response.data.message === 'Logged Out'){
+        $location.path('/#!/');
+        location.reload();
+      }
+    });
+  };
+
+  $scope.playGame = () => {
+    $http({
+      method: 'GET',
+      url: '/app'
+    }).then((response) => {
+      $scope.myWelcome = response.data;
+    }, (response) => {
+      $scope.myWelcome = response.statusText;
+    });
+  };
+
+  $scope.playGameCustom = () => {
+    const token = window.localStorage.getItem('jwt');
+    const config = { headers: {
+      Authorization: `token ${token}`,
+      Accept: 'application/json;odata=verbose'
+    }
     };
-
-    $scope.avatars = [];
-    AvatarService.getAvatars()
-      .then(function(data) {
-        $scope.avatars = data;
-      });
-
+    $http.get('/play?custom', config)
+    .then((response) => {
+      window.location = '/#!/app?custom';
+    }, (response) => {
+    });
+  };
 }]);

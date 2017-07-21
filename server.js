@@ -1,11 +1,12 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    fs = require('fs'),
-    passport = require('passport'),
-    logger = require('mean-logger'),
-    io = require('socket.io');
+const express = require('express'),
+  fs = require('fs'),
+  passport = require('passport'),
+  logger = require('mean-logger'),
+  io = require('socket.io'),
+  dotenv = require('dotenv').config();
 
 /**
  * Main application entry file.
@@ -45,7 +46,8 @@ require('./config/passport')(passport);
 var app = express();
 
 app.use(function(req, res, next){
-    next();
+  res.locals.bar = 'jwtToken';
+  next();
 });
 
 //express settings
@@ -55,9 +57,9 @@ require('./config/express')(app, passport, mongoose);
 require('./config/routes')(app, passport, auth);
 
 //Start the app by listening on <port>
-var port = config.port;
-var server = app.listen(port);
-var ioObj = io.listen(server, { log: false });
+const port = config.port;
+const server = app.listen(port);
+const ioObj = io.listen(server, { log: false });
 //game logic handled here
 require('./config/socket/socket')(ioObj);
 console.log('Express app started on port ' + port);
