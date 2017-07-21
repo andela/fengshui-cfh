@@ -1,23 +1,39 @@
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
-    async = require('async'),
-    _ = require('underscore');
+const jwt = require('jsonwebtoken');
 
 /**
  * Redirect users to /#!/app (forcing Angular to reload the page)
  */
-exports.play = function(req, res) {
+
+exports.play = (req, res) => {
   if (Object.keys(req.query)[0] === 'custom') {
-    res.redirect('/#!/app?custom');
+    let token = req.headers.authorization;
+    if (token) {
+      token = token.split(' ');
+      token = token[1];
+    }
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        let result;
+        if (err) {
+          result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+        } else {
+          result = res.json({ success: true, message: 'Token Correct', ded: decoded }).status(200);
+        }
+        return result;
+      });
+    } else {
+      return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+      });
+    }
   } else {
     res.redirect('/#!/app');
   }
 };
 
-exports.render = function(req, res) {
-    res.render('index', {
-        user: req.user ? JSON.stringify(req.user) : "null"
-    });
+exports.render = (req, res) => {
+  res.render('index', {
+    user: req.user ? JSON.stringify(req.user) : 'null'
+  });
 };

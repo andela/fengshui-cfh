@@ -1,8 +1,8 @@
-var async = require('async');
-var _ = require('underscore');
-var questions = require(__dirname + '/../../app/controllers/questions.js');
-var answers = require(__dirname + '/../../app/controllers/answers.js');
-var guestNames = [
+const async = require('async');
+const _ = require('underscore');
+const questions = require(__dirname + '/../../app/controllers/questions.js');
+const answers = require(__dirname + '/../../app/controllers/answers.js');
+const guestNames = [
   "Disco Potato",
   "Silver Blister",
   "Insulated Mustard",
@@ -145,7 +145,7 @@ Game.prototype.sendUpdate = function() {
 
 Game.prototype.stateChoosing = function(self) {
   self.state = "waiting for players to pick";
-  console.log(self.gameID,self.state);
+  // console.log(self.gameID,self.state);
   self.table = [];
   self.winningCard = -1;
   self.winningCardPlayer = -1;
@@ -180,14 +180,14 @@ Game.prototype.selectFirst = function() {
     this.winnerAutopicked = true;
     this.stateResults(this);
   } else {
-    console.log(this.gameID,'no cards were picked!');
+    // console.log(this.gameID,'no cards were picked!');
     this.stateChoosing(this);
   }
 };
 
 Game.prototype.stateJudging = function(self) {
   self.state = "waiting for czar to decide";
-  console.log(self.gameID,self.state);
+  // console.log(self.gameID,self.state);
 
   if (self.table.length <= 1) {
     // Automatically select a card if only one card was submitted
@@ -425,4 +425,3 @@ Game.prototype.killGame = function() {
 };
 
 module.exports = Game;
-
