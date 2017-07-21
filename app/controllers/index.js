@@ -1,15 +1,9 @@
 const jwt = require('jsonwebtoken');
-const users = require('./users');
-/**
- * Module dependencies.
- */
-const mongoose = require('mongoose'),
-  async = require('async'),
-    _ = require('underscore');
 
 /**
  * Redirect users to /#!/app (forcing Angular to reload the page)
  */
+
 exports.play = (req, res) => {
   if (Object.keys(req.query)[0] === 'custom') {
     let token = req.headers.authorization;
