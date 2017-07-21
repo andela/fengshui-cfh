@@ -27,11 +27,7 @@ gulp.task('sass', () => {
   .pipe(gulp.dest('public/css/'));
 });
 
-<<<<<<< HEAD
-gulp.task('test', () => {
-=======
 gulp.task('test', ['transpile'], () => {
->>>>>>> 88b980b455a8ff275dbd8f1f53787320f66d3305
   gulp.src(['test/**/*.js'], { read: false })
     .pipe(mocha({
       reporter: 'spec',
