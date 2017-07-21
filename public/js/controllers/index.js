@@ -38,7 +38,6 @@ angular.module('mean.system')
       avatar: userselectedAvatar
     };
     $http.post(url, data)
-<<<<<<< HEAD
     .then((response) => {
       $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
@@ -79,29 +78,6 @@ angular.module('mean.system')
         $location.path('/#!/');
         location.reload();
       }
-=======
-                .then((response) => {
-                  $scope.alert = `${response.data.message} You will be redirected after few minutes`;
-                  window.localStorage.setItem('jwt', response.data.jwt);
-                  $timeout(() => {
-                    $location.path('/#!/');
-                    location.reload();
-                  }, 3000);
-                }, (response) => {
-                  $scope.alert = response.data.message;
-                });
-  };
-
-  $scope.logOut = () => {
-    window.localStorage.removeItem('jwt');
-    $http.get('/signout')
-    .then((response) => {
-      $scope.alert = response.data.message;
-      if (response.data.message === 'Logged Out'){
-        $location.path('/#!/');
-        location.reload();
-      }
->>>>>>> 88b980b455a8ff275dbd8f1f53787320f66d3305
     });
   };
 
