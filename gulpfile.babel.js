@@ -9,13 +9,15 @@ import runSequence from 'gulp-sequence';
 import clean from 'gulp-rimraf';
 import babel from 'gulp-babel';
 import should from 'should';
+import istanbul from 'gulp-babel-istanbul';
+import coveralls from 'gulp-coveralls';
 
 gulp.task('bs-reload', () => {
   browserSync.reload();
 });
 
 gulp.task('eslint', () => {
-  gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
+  gulp.src(['gulpfile.babel.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
   .pipe(eslint())
   .pipe(eslint.formatEach('compact', process.stderr))
   .pipe(eslint.failAfterError());
@@ -34,7 +36,19 @@ gulp.task('test', () => {
       globals: {
         should
       }
-    }));
+    }))
+    .pipe(istanbul.hookRequire());
+});
+
+gulp.task('coverage', () => {
+  gulp.src(['public/js/**/*.js', 'app/**/*.js'])
+  .pipe(istanbul({ includeUntested: true }))
+  .pipe(istanbul.writeReports());
+});
+
+gulp.task('coveralls', ['coverage'], () => {
+  gulp.src('/coverage/lcov.info')
+  .pipe(coveralls());
 });
 
 gulp.task('watch', () => {
@@ -55,9 +69,9 @@ gulp.task('nodemon', () => {
   });
 });
 
-gulp.task('bower', () => {
-  return bower();
-});
+gulp.task('bower', () =>
+  bower()
+);
 
 gulp.task('angular', () => {
   gulp.src('bower_components/angular/**/*.js')

@@ -6,6 +6,16 @@
    text-transform: uppercase;
  }
 
+video#bgVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-height: 100%;
+  min-width: 100%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
+
  #landing-charity {
    width: 300px !important;
    margin-left: 15px !important;
@@ -84,6 +94,14 @@
    max-width: 25%;
 }
 
+@media only screen and (max-width: 768px) {
+  video {
+    display: none
+  }
+  body {
+    background-image: url("image-url");
+  }
+}
 
 @media(min-width: 400px) and (max-width: 950px) {
    .some-text {
@@ -166,22 +184,9 @@
 #landing-logo {
    margin: 5px 0 5px 0px;
    font-size: 28px;
-   font-family: 'Lobster', cursive;
-   border-radius: 8px;
-   background: #252525;
-   padding: 5px 5px 5px 13px;
-}
-
-#first-word {
-   color: #7CE4E8;
-}
-
-#second-word {
-   color: #FFFFA5;
-}
-
-#third-word {
-   color: #FC575E;
+   font-family: 'Architects Daughter', cursive;
+   color: #F1503C;
+   padding: 5px 0 5px 0;
 }
 
 #warning-word {
@@ -190,12 +195,15 @@
 
  .wpb-top-bar {
    height: 60px;
-   background: transparent;
-   position: fixed;
+   background: #000;
+   opacity: 0.5;
+   position: absolute;
    top:0;
    width: 100%;
    z-index:10000;
    max-width: 1400px;
+   margin: 0;
+   padding: 0;
  }
 
  .wpb-logo-container {
@@ -203,7 +211,7 @@
    font-weight: bold;
    font-size: 11px;
    max-width: 100%;
-   margin-right: 9px;
+   margin-right: 0;
  }
 
  .wpb-logo-container a {
@@ -229,7 +237,7 @@
    text-align: right;
    height: 100px;
    margin-top: -77px;
-   margin-right: 35px;
+   margin-right: 0;
  }
 
  .wpb-menu-container .wpb-main-menu li {
@@ -303,7 +311,6 @@
    height: 100%;
    min-height: 100%;
    z-index:999;
-   background: #252525;
    border-radius: 8px;
    padding: 20px;
  }
@@ -311,7 +318,7 @@
  .wpb-teaser .container {
    position: relative;
    z-index:1000;
-   padding-top: 120px;
+   padding: 0;
  }
 
  .wpb-teaser .modified-container {
@@ -321,11 +328,16 @@
 
  .wpb-teaser .wpb-slogan h2 {
    color: #fff;
+   font-family: 'Architects Daughter', cursive;
    font-weight: bold;
    font-size: 52px;
    text-transform: uppercase;
    line-height: 60px;
    text-align: center;
+ }
+
+ .wpb-teaser #slogan-head .wpb-slogan h2 {
+   color: #f1503c;
  }
 
  #slogan {
@@ -419,7 +431,8 @@
  /**** About Us ****/
 #main-bod {
    max-width: 1400px;
-   margin: 0px auto;
+   margin: 0;
+   padding: 0;
 }
 
  .wpb-about-us {
@@ -946,9 +959,13 @@
 .mod-contain {
    /*padding-right: 15px;
    padding-left: 15px;*/
-   margin-right: auto;
+   /*margin-right: auto;
+   margin-left: auto;*/
+   width: 100%;
+   padding-left: 0;
+   padding-right: 0;
+   margin-right: 0;
    margin-left: auto;
-   width: 90%;
 }
 
  .container-margin {

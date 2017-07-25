@@ -55,6 +55,7 @@
     "eslint-plugin-react": "^7.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
+    "gulp-babel-istanbul": "^1.6.0",
     "gulp-bower": "0.0.13",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^4.0.0",

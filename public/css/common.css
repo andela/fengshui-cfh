@@ -62,32 +62,17 @@
       content: '.'; }
 
 html, body, .main-container, .cont, #first-section, #inner-container {
-  height: 100%; }
+  height: 100%;
+  margin: 0 !important; }
 
-html {
-  /* IE10 Consumer Preview */
-  background-image: -ms-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Mozilla Firefox */
-  background-image: -moz-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Opera */
-  background-image: -o-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Webkit (Safari/Chrome 10) */
-  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #0B394E), color-stop(1, #ABCE8D));
-  /* Webkit (Chrome 11+) */
-  background-image: -webkit-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* W3C Markup, IE10 Release Preview */
-  background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  position: relative; }
-  @media (max-width: 520px) {
-    html {
-      margin-top: 0px; } }
+@media (max-width: 520px) {
+  html {
+    margin-top: 0px; } }
 
 body {
   font-family: "helvetica neue", helvetica, sans-serif;
-  background: transparent;
-  margin: 10px; }
+  background: #F0EADA;
+  padding: 0; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
       margin: 5px; } }
@@ -127,16 +112,11 @@ body {
         display: inline-block;
         margin-left: 10px;
         font-size: 28px;
-        font-family: 'Lobster', cursive; }
+        font-family: 'Architects Daughter', cursive;
+        color: #F1503C !important; }
         @media (max-width: 520px) {
           #main-container #app-container #menu-container #logo {
             font-size: 20px; } }
-        #main-container #app-container #menu-container #logo #first-word {
-          color: #7CE4E8; }
-        #main-container #app-container #menu-container #logo #second-word {
-          color: #FFFFA5; }
-        #main-container #app-container #menu-container #logo #third-word {
-          color: #FC575E; }
       #main-container #app-container #menu-container #abandon-game-button {
         display: inline-block;
         float: right;
