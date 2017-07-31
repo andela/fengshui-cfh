@@ -98,7 +98,7 @@ exports.create = (req, res) => {
             }).status(500);
           }
           req.logIn(user, (err) => {
-            if (err) return next(err);
+            if (err) return err;
             const newUser = {
               name: req.body.name,
               email: req.body.email
