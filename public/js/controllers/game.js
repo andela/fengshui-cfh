@@ -5,6 +5,7 @@ angular.module('mean.system')
   $scope.showTable = false;
   $scope.modalShown = false;
   $scope.game = game;
+  console.log($scope.game);
   $scope.pickedCards = [];
   $scope.messagesList = [
     {
@@ -199,7 +200,6 @@ angular.module('mean.system')
     });
 
   $scope.chat = () => {
-    console.log('====================>');
     const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
     const playerAvater = $scope.game.players[$scope.game.playerIndex].avater;
     const myMessage = $scope.message;
@@ -211,9 +211,10 @@ angular.module('mean.system')
       avater: playerAvater
     };
     $scope.messagesList.push(newMessage);
-    $scope.message = '';
     console.log(IndividualPlayer, playerAvater, myMessage);
     console.log($scope.messagesList);
+    game.chat(newMessage);
+    $scope.message = '';
   };
 
   if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
