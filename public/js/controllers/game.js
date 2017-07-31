@@ -1,13 +1,39 @@
 angular.module('mean.system')
 .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
-    $scope.hasPickedCards = false;
-    $scope.winningCardPicked = false;
-    $scope.showTable = false;
-    $scope.modalShown = false;
-    $scope.game = game;
-    $scope.pickedCards = [];
-    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-    $scope.makeAWishFact = makeAWishFacts.pop();
+  $scope.hasPickedCards = false;
+  $scope.winningCardPicked = false;
+  $scope.showTable = false;
+  $scope.modalShown = false;
+  $scope.game = game;
+  $scope.pickedCards = [];
+  $scope.messagesList = [
+    {
+      sender: 'Ema',
+      message: 'We are Good.',
+      date: '19/12/17',
+      avater: 'king.png'
+    },
+    {
+      sender: 'Lanre',
+      message: 'We are on our way.',
+      date: '19/12/17',
+      avater: 'king.png'
+    },
+    {
+      sender: 'Dayo',
+      message: 'We are there.',
+      date: '19/12/17',
+      avater: 'king.png'
+    },
+    {
+      sender: 'Yemi',
+      message: 'We are back.',
+      date: '19/12/17',
+      avater: 'king.png'
+    }
+  ];
+  var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+  $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
@@ -159,8 +185,8 @@ angular.module('mean.system')
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
           $location.search({game: game.gameID});
-          if(!$scope.modalShown){
-            setTimeout(function(){
+          if (!$scope.modalShown) {
+            setTimeout(function () {
               var link = document.URL;
               var txt = 'Give the following link to your friends so they can join your game: ';
               $('#lobby-how-to-play').text(txt);
@@ -172,13 +198,30 @@ angular.module('mean.system')
       }
     });
 
-    if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-      console.log('joining custom game');
-      game.joinGame('joinGame',$location.search().game);
-    } else if ($location.search().custom) {
-      game.joinGame('joinGame',null,true);
-    } else {
-      game.joinGame();
-    }
+  $scope.chat = () => {
+    console.log('====================>');
+    const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
+    const playerAvater = $scope.game.players[$scope.game.playerIndex].avater;
+    const myMessage = $scope.message;
+    const timeSent = new Date(Date.now()).toLocaleString();
+    const newMessage = {
+      sender: IndividualPlayer,
+      message: myMessage,
+      date: timeSent,
+      avater: playerAvater
+    };
+    $scope.messagesList.push(newMessage);
+    $scope.message = '';
+    console.log(IndividualPlayer, playerAvater, myMessage);
+    console.log($scope.messagesList);
+  };
 
+  if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
+    console.log('joining custom game');
+    game.joinGame('joinGame', $location.search().game);
+  } else if ($location.search().custom) {
+    game.joinGame('joinGame', null, true);
+  } else {
+    game.joinGame();
+  }
 }]);

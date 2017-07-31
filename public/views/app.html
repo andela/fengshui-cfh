@@ -30,4 +30,34 @@
     </div>
     <answers></answers>
   </div>
+  <div class="chat-holder">
+    <div class="">
+      <button class="btn btn-success chat-title" data-toggle="collapse" data-target="#demo">
+        Chat with Other Players
+      </button>
+      <button  data-toggle="collapse" data-target="#demo" class="btn btn-success chat-open">
+        ^
+      </button>
+      <div id="demo" class="collapse mycollapse">
+        <div>
+          <ul class="message-container">
+            <li ng-repeat="message in messagesList" class="row post">
+          <div class="col-sm-4">
+            <img src={{message.avater}} alt="Avatar" />
+            <b>{{message.sender}}</b>
+          </div>
+          <div class="col-sm-8">
+              <p>{{message.message}}</p>
+              <b>{{message.date}}</b>
+          </div>
+        </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <form ng-submit=(chat())>
+    <textarea class="message-area" placeholder="Type your message here" required ng-model="message"></textarea>
+    <input type="submit" value="Post" class="btn btn-success"/>
+    </form>
+  </div>
 </div>
