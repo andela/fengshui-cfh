@@ -89,8 +89,6 @@ angular.module('mean.system')
 
   $scope.playGameCustom = () => {
     const token = window.localStorage.getItem('jwt');
-    console.log('===========token=============>>>>>>>>>>>>>>>>>>>>>>>')
-    console.log(token);
     const config = { headers: {
       Authorization: `token ${token}`,
       Accept: 'application/json;odata=verbose'
