@@ -1,15 +1,16 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
-    var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
-    $scope.pickCard = function(card) {
+
+    $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {
           $scope.pickedCards.push(card.id);
@@ -28,7 +29,7 @@ angular.module('mean.system')
       }
     };
 
-    $scope.pointerCursorStyle = function() {
+    $scope.pointerCursorStyle = () => {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
         return {'cursor': 'pointer'};
       } else {
@@ -36,7 +37,7 @@ angular.module('mean.system')
       }
     };
 
-    $scope.sendPickedCards = function() {
+    $scope.sendPickedCards = () => {
       game.pickCards($scope.pickedCards);
       $scope.showTable = true;
     };
@@ -120,32 +121,54 @@ angular.module('mean.system')
       return game.winningCard !== -1;
     };
 
-    $scope.startGame = function() {
+  $scope.startGame = () => {
+    swal({
+      title: 'Starting Game',
+      text: 'Are you sure you want start?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Wait a little',
+      confirmButtonText: 'Start Game Now'
+    }).then(() => {
       game.startGame();
-    };
+    });
+  };
 
-    $scope.abandonGame = function() {
-      game.leaveGame();
-      $location.path('/');
-    };
+  $scope.abandonGame = () => {
+    game.leaveGame();
+    $location.path('/');
+  };
 
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
-    $scope.$watch('game.round', function() {
-      $scope.hasPickedCards = false;
-      $scope.showTable = false;
-      $scope.winningCardPicked = false;
-      $scope.makeAWishFact = makeAWishFacts.pop();
-      if (!makeAWishFacts.length) {
-        makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-      }
-      $scope.pickedCards = [];
-    });
+  $scope.$watch('game.round', () => {
+    $scope.hasPickedCards = false;
+    $scope.showTable = false;
+    $scope.winningCardPicked = false;
+    $scope.makeAWishFact = makeAWishFacts.pop();
+    if (!makeAWishFacts.length) {
+      makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+    }
+    $scope.pickedCards = [];
+  });
 
     // In case player doesn't pick a card in time, show the table
-    $scope.$watch('game.state', function() {
+    $scope.$watch('game.state', () => {
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
+      }
+      if ($scope.game.state === 'game dissolved' || $scope.game.state === 'game ended') {
+        const gameData = { gameId: $scope.game.gameID,
+          gameOwner: $scope.game.players[0].username,
+          gameWinner: $scope.game.players[game.gameWinner].username,
+          gamePlayers: $scope.game.players
+        };
+
+        console.log('posted game data', gameData);
+
+        $http.post(`/api/games/${game.gameID}/start`, gameData);
       }
     });
 

@@ -1,6 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
-
+  .factory('game', ['socket', '$timeout', (socket, $timeout) => {
   var game = {
     id: null, // This player's socket ID, so we know who this player is
     gameID: null,
@@ -55,7 +54,7 @@ angular.module('mean.system')
     $timeout(decrementTime, 950);
   };
 
-  socket.on('id', function(data) {
+  socket.on('id', (data) => {
     game.id = data.id;
   });
 
@@ -66,8 +65,8 @@ angular.module('mean.system')
     game.timeLimits = data.timeLimits;
   });
 
-  socket.on('gameUpdate', function(data) {
-
+  socket.on('gameUpdate', (data) => {
+    // console.log('all players :', game.players);
     // Update gameID field only if it changed.
     // That way, we don't trigger the $scope.$watch too often
     if (game.gameID !== data.gameID) {
@@ -99,7 +98,6 @@ angular.module('mean.system')
       game.time = game.timeLimits.stateResults - 1;
       timeSetViaUpdate = true;
     }
-
     // Set these properties on each update
     game.round = data.round;
     game.winningCard = data.winningCard;
@@ -164,7 +162,7 @@ angular.module('mean.system')
               game.curQuestion.text.indexOf('<u></u>') > -1) {
       game.curQuestion = data.curQuestion;
     } else if (data.state === 'awaiting players') {
-      joinOverrideTimeout = $timeout(function() {
+      joinOverrideTimeout = $timeout(() => {
         game.joinOverride = true;
       }, 15000);
     } else if (data.state === 'game dissolved' || data.state === 'game ended') {
@@ -173,7 +171,7 @@ angular.module('mean.system')
     }
   });
 
-  socket.on('notification', function(data) {
+  socket.on('notification', (data) => {
     addToNotificationQueue(data.notification);
   });
 
