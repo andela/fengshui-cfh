@@ -21,6 +21,10 @@ exports.play = (req, res) => {
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         let result;
         if (err) {
+          console.log(err);
+          console.log('-------err-------------------------');
+          console.log('=================================>')
+          console.log(decoded);
           result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
         } else {
           result = res.json({ success: true, message: 'Token Correct', ded: decoded }).status(200);

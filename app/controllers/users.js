@@ -156,9 +156,13 @@ exports.jwtSignIn = (req, res) => {
       });
     }
     req.logIn(existingUser, () => {
+      const newUser = {
+        name: existingUser.name,
+        email: existingUser.email
+      };
       const token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
-        data: existingUser
+        data: newUser
       }, process.env.JWT_SECRET);
       return res.status(200).json({ message: 'successful login', token });
     });
