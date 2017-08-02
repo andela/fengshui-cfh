@@ -1,83 +1,57 @@
-<div id="main-bod">
-  <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo">
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span>
-              <span id="third-word">Humanity</span>
-            </div>
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
+<div class="row" ng-controller="IndexController" class="ng-scope">
+  <div style="max-width: 480px;
+    margin: 60px auto;">
+  <div class="panel panel-default signup-panel" style="border-radius: 0px 0px 25px 25px;">
+    <div id="login-buttons" class="panel-heading text-center" style="font-size: 20px; font-weight:bold;">
+      <span>Sign Up With</span>
+    </div>
+    <div class="panel-body">
+      <hr>
+      <div class="text-center">
+        <a href="/auth/facebook"><i class="fa fa-facebook fa-4x" style="font-size:35px"></i></a>
+        <a href="/auth/github"style="margin-left:50px; "><i class="fa fa-github fa-4x" style="font-size:35px"></i></a>
+        <a href="/auth/twitter"style="margin-left:50px; "><i class="fa fa-twitter fa-4x" style="font-size:35px"></i></a>
+        <a href="/auth/google"style="margin-left:50px; "><i class="fa fa-google fa-4x" style="font-size:35px"></i></a>
+      </div>
+      <hr>
+      <p class = "text-center" >Or</p>
+      <form class="form-horizontal" ng-submit="submitform()" method="post">
+    <div class="form-group" style="padding-left: 20px; padding-right: 20px"> 
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text" ng-model="name" class="form-control input-lg ng-pristine ng-invalid ng-invalid-required" id="name" placeholder="Enter full name" name="name" required="" ng-model="formData.name">
           </div>
         </div>
+    <div class="form-group" style="padding-left: 20px; padding-right: 20px">
+      <div class="input-group">
+        <span class="input-group-addon"><i class=" glyphicon glyphicon-envelope"></i></span>
+        <input type="email" ng-model="email" class="form-control input-lg" id="email" placeholder="Enter email" name="email" required>
       </div>
     </div>
-  </div>
-<!-- Fixed Logo & Menu Bar End -->
+    <div class="form-group" style="padding-left: 20px; padding-right: 20px">
+      <div class="input-group"> 
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>         
 
-<!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div>
-  <div class="modified-container">
-    <div class="row" id="main-text">
-    <!-- Teaser Text Start -->
-    <div id="landing-logo">
-      <h2 id="slogan">Sign Up with:</h2>
-      <div id="login-buttons">
-        <a href="/auth/facebook"><img class="login-item" src="/img/icons/facebook.png"></a>
-        <a href="/auth/github"><img class="login-item" src="/img/icons/github.png"></a>
-        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twitter.png"></a>
-        <a href="/auth/google"><img class="login-item" src="/img/icons/google.png"></a>
-      </div>
-      <p id="create">Or create a username/password and select an avatar:</p>
-
-      <div class="sign-body">
-        <div ng-controller="IndexController" class="more-sign">
-          <span>{{alert}}</span>
-          <form ng-submit="submitform()" class="signup form-horizontal" action="" method="post">
-            <div class="control-group">
-              <label for="name" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="name" ng-model="name" type="text" name="name" placeholder="Full name" required novalidate />
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="email" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="email" ng-model="email" type="email" name="email" placeholder="Email" required novalidate />
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="password" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="password" ng-model="password" type="password" name="password" placeholder="Password" required novalidate />
-              </div>
-            </div>
-            <div id="contain-avatars">
-              <ul class="avatar-list">
-                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                  <input ng-click="setAvatar({{$index}})" name="avatar" type='radio' value="{{$index}}">
-                    <img ng-src="{{avatar}}">
-                  </input>
-                </li>
-                <input type="hidden" novalidate value="{{avat}}" ng-model="selectedAvatar" />
-              </ul>
-            </div>
-            <div class="form-actions">
-              <button id="sign-up-btn-other" type='submit'>Sign Up</button>
-            </div>
-          </form>
-        </div>
+        <input type="password" ng-model="password" class="form-control input-lg" id="password" placeholder="Enter password" name="password" required>
       </div>
     </div>
+     <div>
+      <ul>
+        <li ng-repeat="avatar in avatars" class="avatars ng-scope" style="margin-bottom: 20px">
+            <input name="avatar" type='radio' ng-model="avata.name" value="{{$index}}">
+              <img style=" height: 50px; width: 50px class="user-avatar" ng-src="{{avatar}}">
+            </input>
+        </li>
+      </ul>
+    </div>
+    <div class="form-group" id="signupbtn">        
+      <div class="col-sm-12 btnmargin">
+        <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ">Sign Up</button></center>
+      </div>
+    </div>
+    <center><p class="account"> Already have an account? <a href="#!/signin">Sign in</a></p></center>
+    <center class="homelink"><a href="/">Go to Home</a></center><!--  -->
+  </form>
     </div>
     </div>
   </div>
