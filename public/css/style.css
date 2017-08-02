@@ -397,7 +397,7 @@ video#bgVideo {
  }
 
  .btn-reg, .btn-reg:hover {
-   background: #F60C86;
+   background: #a21e4e;
    font-size: 20px !important;
    padding: 10px 50px;
    border-radius: 5px !important;
@@ -409,8 +409,7 @@ video#bgVideo {
  }
 
  .btn-reg:hover {
-   border: 2px solid #9FEED1;
-   color: #9FEED1;
+   border: 2px solid #fff;
    padding: 9px 49px;
  }
 
@@ -426,8 +425,8 @@ video#bgVideo {
  }
 
  .btn-play:hover {
-   border: 2px solid #9FEED1;
-   color: #9FEED1;
+   border: 2px solid #fff;
+   color: #fff;
    padding: 9px 29px;
  }
 
