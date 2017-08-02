@@ -17,7 +17,7 @@ function GameTourController($location) {
     },
     {
       element: '#timer-container',
-      intro: 'Choose an answer to the current question. After time out, CZAR then select a favorite answer. whoever submitted CZAR\'s favorite answer wins the round.'
+      intro: 'Choose an answer to the current question. After time out, CZAR then select a favorite answer. whoever submits CZAR\'s favorite answer wins the round.'
     },
     {
       element: '#abandon-game-button',

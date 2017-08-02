@@ -79,7 +79,7 @@ angular.module('mean.system')
   $scope.playGame = () => {
     swal({
       title: 'Start a new game session',
-      text: 'Are you sure you want start?',
+      text: 'Are you sure you want to start?',
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-import async from 'async';
-import _ from 'underscore';
-import users from './users';
+const jwt =require('jsonwebtoken');
+const mongoose = require('mongoose');
+const async = require('async');
+const _ = require('underscore');
+const users = require('./users');
 
 /**
  * Redirect users to /#!/app (forcing Angular to reload the page)
