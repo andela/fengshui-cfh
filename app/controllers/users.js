@@ -98,7 +98,7 @@ exports.create = (req, res) => {
             }).status(500);
           }
           req.logIn(user, (err) => {
-            if (err) return next(err);
+            if (err) return err;
             const newUser = {
               name: req.body.name,
               email: req.body.email
@@ -126,9 +126,52 @@ exports.create = (req, res) => {
   }
 };
 
+/*
+ * [signin a user]
+ * @method jwtSignIn
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]} Object
+ */
+exports.jwtSignIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({ message: 'Enter all required field' });
+  }
+  User.findOne({
+    email: req.body.email
+  }).exec((error, existingUser) => {
+    if (error) {
+      return res.status(500).json({
+        error: 'Server Login Error'
+      });
+    }
+    if (!existingUser) {
+      return res.status(404).json({
+        error: 'User not found'
+      });
+    }
+    if (!existingUser.authenticate(req.body.password)) {
+      return res.status(400).json({
+        error: 'Invalid Login details'
+      });
+    }
+    req.logIn(existingUser, () => {
+      const newUser = {
+        name: existingUser.name,
+        email: existingUser.email
+      };
+      const token = jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+        data: newUser
+      }, process.env.JWT_SECRET);
+      return res.status(200).json({ message: 'successful login', token });
+    });
+  });
+};
+
 exports.ensureToken = (req, res, next) => {
   let token = req.body.token || req.params.token || req.headers.authorization;
-  if (token){
+  if (token) {
     token = token.split(' ');
     token = token[1];
   }
@@ -174,8 +217,8 @@ exports.addDonation = (req, res) => {
       })
       .exec((err, user) => {
         // Confirm that this object hasn't already been entered
-        var duplicate = false;
-        for (var i = 0; i < user.donations.length; i++ ) {
+        let duplicate = false;
+        for (let i = 0; i < user.donations.length; i++) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
@@ -196,11 +239,11 @@ exports.addDonation = (req, res) => {
  *  Show profile
  */
 exports.show = (req, res) => {
-  var user = req.profile;
+  let user = req.profile;
 
   res.render('users/show', {
     title: user.name,
-    user: user
+    user
   });
 };
 
@@ -221,7 +264,7 @@ exports.user = (req, res, next, id) => {
     })
     .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
+      if (!user) return next(new Error(`Failed to load User ${  id}`));
       req.profile = user;
       next();
     });

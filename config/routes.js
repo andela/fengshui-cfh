@@ -15,6 +15,7 @@ module.exports = (app, passport, auth) => {
   // Setting up the users api
   app.post('/api/auth/users', users.create);
   app.post('/users/avatars', users.avatars);
+  app.post('/api/auth/signin', users.jwtSignIn);
 
     // Donation Routes
   app.post('/donations', users.addDonation);

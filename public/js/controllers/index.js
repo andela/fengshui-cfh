@@ -50,6 +50,20 @@ angular.module('mean.system')
     });
   };
 
+  $scope.signIn = () => {
+    $http.post('api/auth/signin', $scope.formData)
+    .then((response) => {
+      console.log(response.data);
+      if (response.data.message === 'successful login') {
+        window.localStorage.setItem('jwt', response.data.token);
+        $location.path('/#!/');
+        location.reload();
+      }
+    }, (err) => {
+      alert(err);
+    });
+  };
+
   $scope.logOut = () => {
     window.localStorage.removeItem('jwt');
     $http.get('/signout')
