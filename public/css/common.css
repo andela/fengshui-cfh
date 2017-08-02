@@ -960,7 +960,8 @@ body {
   .chat-holder .chat-open {
     width: 13%;
     color: white;
-    text-align: center; }
+    text-align: center;
+    padding: 5px; }
   .chat-holder .demo {
     color: white;
     float: right; }
@@ -982,8 +983,8 @@ body {
   .chat-holder .avater-holder {
     text-align: center; }
   .chat-holder .chat-avater {
-    width: 100%;
-    height: 100%; }
+    width: 70%;
+    height: 70%; }
   .chat-holder .message-input {
     margin-top: 5px; }
   .chat-holder .send-message {
@@ -1004,3 +1005,5 @@ body {
     padding: 2px;
     margin-bottom: 8px;
     border-bottom: 1px solid green; }
+  .chat-holder .chat-header {
+    text-align: center; }

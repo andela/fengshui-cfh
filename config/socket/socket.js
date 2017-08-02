@@ -2,7 +2,12 @@ var Game = require('./game');
 var Player = require('./player');
 require('console-stamp')(console, 'm/dd HH:MM:ss');
 var mongoose = require('mongoose');
+var firebase = require('firebase');
 var User = mongoose.model('User');
+var config = require('../firebaseconfig.js');
+
+firebase.initializeApp(config);
+var database = firebase.database();
 
 var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
 // Valid characters to use to generate random private game IDs
@@ -18,10 +23,10 @@ module.exports = function(io) {
 
   io.sockets.on('connection', function (socket) {
     console.log(socket.id +  ' Connected');
-    socket.emit('id', {id: socket.id});
+    socket.emit('id', { id: socket.id });
 
     socket.on('pickCards', function(data) {
-      console.log(socket.id,"picked",data);
+      console.log(socket.id, "picked", data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
@@ -65,20 +70,27 @@ module.exports = function(io) {
       }
     });
 
-    socket.on('leaveGame', function() {
+    socket.on('leaveGame', function () {
       exitGame(socket);
     });
 
-    socket.on('disconnect', function(){
+    socket.on('disconnect', function () {
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
     });
 
     socket.on('send chat', function (data) {
-      console.log('==========server===================>');
-      console.log('recieving chat here');
-      console.log(data);
-      console.log('===========reciveing==================>');
+    //  var game = new Game();
+      var thisGame = allGames[socket.gameID];
+      // pass game id to identify each game
+      firebase.database().ref(`chat/${data.gameID}/`).push().set(data);
+      // thisGame.sendChat(data);
+      const ref = firebase.database().ref(`chat/${data.gameID}/`).orderByKey();
+      ref.on('value', function (snapshot) {
+        thisGame.sendChat(snapshot);
+      }, function (errorObject) {
+          console.log(`The read failed: ${errorObject.code}`);
+      });
     });
   });
 
@@ -103,13 +115,13 @@ module.exports = function(io) {
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];
         }
-        getGame(player,socket,data.room,data.createPrivate);
+        getGame(player, socket, data.room, data.createPrivate);
       });
     } else {
       // If the user isn't authenticated (guest)
       player.username = 'Guest';
-      player.avatar = avatars[Math.floor(Math.random()*4)+12];
-      getGame(player,socket,data.room,data.createPrivate);
+      player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
+      getGame(player, socket, data.room, data.createPrivate);
     }
   };
 
@@ -159,7 +171,8 @@ module.exports = function(io) {
   var fireGame = function(player, socket) {
     var game;
     if (gamesNeedingPlayers.length <= 0) {
-      gameID += 1;
+      // change id from 1 to timestamp
+      gameID += new Date().getTime();
       var gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;

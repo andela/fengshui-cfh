@@ -59,6 +59,9 @@ angular.module('mean.system')
     game.id = data.id;
   });
 
+  socket.on('reply chat', function(data) {
+  })
+
   socket.on('prepareGame', function(data) {
     game.playerMinLimit = data.playerMinLimit;
     game.playerMaxLimit = data.playerMaxLimit;
@@ -205,6 +208,13 @@ angular.module('mean.system')
 
     game.chat = function (data) {
       socket.emit('send chat', data);
+    };
+
+    game.replyChat = function (){
+      socket.on('reply chat', function(data) {
+        console.log(data);
+        console.log('==================chat reply=========>>>>>>>>>>>>>>>>');
+      })
     };
 
   decrementTime();

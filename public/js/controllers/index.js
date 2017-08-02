@@ -83,7 +83,6 @@ angular.module('mean.system')
     $http.get('/play?custom', config)
     .then((response) => {
       window.location = '/#!/app?custom';
-    }, (response) => {
     });
   };
 }]);
