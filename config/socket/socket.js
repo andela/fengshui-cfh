@@ -36,7 +36,6 @@ module.exports = function(io) {
         console.log('Received pickWinning from',socket.id, 'but game does not appear to exist!');
       }
     });
-
     socket.on('joinGame', function(data) {
       if (!allPlayers[socket.id]) {
         joinGame(socket,data);
@@ -45,12 +44,12 @@ module.exports = function(io) {
 
     socket.on('joinNewGame', function(data) {
       exitGame(socket);
-      joinGame(socket,data);
+      joinGame(socket, data);
     });
 
-    socket.on('startGame', function() {
+    socket.on('startGame', function(next) {
+      const thisGame = allGames[socket.gameID];
       if (allGames[socket.gameID]) {
-        var thisGame = allGames[socket.gameID];
         console.log('comparing',thisGame.players[0].socket.id,'with',socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
@@ -61,6 +60,9 @@ module.exports = function(io) {
           });
           thisGame.prepareGame();
           thisGame.sendNotification('The game has begun!');
+        } else {
+          const message = 'You need a minimum of 3 player to start game';
+          socket.emit('beforeStart', message);
         }
       }
     });
@@ -68,7 +70,6 @@ module.exports = function(io) {
     socket.on('leaveGame', function() {
       exitGame(socket);
     });
-
     socket.on('disconnect', function(){
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
@@ -136,6 +137,8 @@ module.exports = function(io) {
         }
       } else {
         // TODO: Send an error message back to this user saying the game has already started
+        const message = 'The game has already started';
+        socket.emit('beforeStart', message);
       }
     } else {
       // Put players into the general queue
@@ -152,6 +155,7 @@ module.exports = function(io) {
   var fireGame = function(player,socket) {
     var game;
     if (gamesNeedingPlayers.length <= 0) {
+      // new player has just joined the game
       gameID += 1;
       var gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
@@ -166,10 +170,10 @@ module.exports = function(io) {
       game.assignGuestNames();
       game.sendUpdate();
     } else {
+      // players are upto minimum numbers
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
       game.players.push(player);
-      console.log(socket.id,'has joined game',game.gameID);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
       game.assignPlayerColors();
