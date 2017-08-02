@@ -400,7 +400,7 @@ video#bgVideo {
    background: #a21e4e;
    font-size: 20px !important;
    padding: 10px 50px;
-   border-radius: 5px !important;
+   border-radius: 50px !important;
    margin: 30px 0 0 0;
    color: #fff;
    border: 1px solid #fff;
@@ -417,7 +417,7 @@ video#bgVideo {
    border: 1px solid #fff;
    font-size: 20px !important;
    padding: 10px 30px;
-   border-radius: 5px !important;
+   border-radius: 50px !important;
    margin: 30px 0 0 30px;
    color: #fff;
    box-shadow: 0 2px 5px #000;
@@ -527,6 +527,7 @@ video#bgVideo {
 
  #sign-up {
    text-align: center;
+   margin-bottom: 65px;
  }
 
 #sign-up-text {
@@ -1308,9 +1309,11 @@ video#bgVideo {
 
 /* Emmanuel */
 .newdonation {
+  background: url("poor-children.jpg") !important;
+  background-size: cover !important;
   height: auto;
   width: 100%;
-  background: #EBEBEB;
+  background: #fff;
   text-align: center;
   padding: 2%; }
   .newdonation div h4 a {
@@ -1332,7 +1335,7 @@ video#bgVideo {
 .newteam {
   height: auto;
   width: 100%;
-  background: #BDACAC;
+  background: transparent;
   text-align: center;
   padding: 2%; }
   .newteam div h1 {
@@ -1373,3 +1376,11 @@ video#bgVideo {
   .newfooter .newlegal {
     text-align: justify;
     font-size: 14px; }
+
+.second-slogan {
+  margin-bottom: 30px;
+}
+
+.rancho {
+  font-family: Rancho !important;
+}
