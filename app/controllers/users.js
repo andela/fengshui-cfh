@@ -156,6 +156,7 @@ exports.jwtSignIn = (req, res) => {
       });
     }
     req.logIn(existingUser, () => {
+      
       const newUser = {
         name: existingUser.name,
         email: existingUser.email
@@ -177,13 +178,13 @@ exports.ensureToken = (req, res, next) => {
   }
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      let result;
       if (err) {
-        result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+        res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
-        result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        req.token = decoded;
+        // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        next();
       }
-      return result;
     });
   } else {
     res.redirect('/#!/signin?error=No_token_provided');
