@@ -55,7 +55,7 @@ angular.module('mean.system')
     .then((response) => {
       console.log(response.data);
       if (response.data.message === 'successful login') {
-        window.localStorage.setItem('JSONWT', JSON.stringify(response.data.token));
+        window.localStorage.setItem('jwt', response.data.token);
         $location.path('/#!/');
         location.reload();
       }
