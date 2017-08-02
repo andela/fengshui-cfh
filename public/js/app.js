@@ -1,7 +1,7 @@
 angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
   .config(['$routeProvider',
-      function($routeProvider) {
-        $routeProvider
+    ($routeProvider) => {
+      $routeProvider
           .when('/', {
             templateUrl: 'views/index.html'
           })
@@ -23,26 +23,30 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
           .when('/choose-avatar', {
             templateUrl: '/views/choose-avatar.html'
           })
+          .when('/gametour', {
+            templateUrl: '/views/onboard.html'
+          })
           .otherwise({
             redirectTo: '/'
           });
-      }
+    }
   ]).config(['$locationProvider',
-    function($locationProvider) {
-        $locationProvider.hashPrefix("!");
+    ($locationProvider) => {
+      $locationProvider.hashPrefix('!');
     }
   ]).run(['$rootScope', function($rootScope) {
-  $rootScope.safeApply = function(fn) {
-    var phase = this.$root.$$phase;
-    if(phase == '$apply' || phase == '$digest') {
-        if(fn && (typeof(fn) === 'function')) {
-            fn();
+    $rootScope.safeApply = function(fn) {
+      const phase = this.$root.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+        if (fn && (typeof (fn) === 'function')) {
+          fn();
         }
-    } else {
+      } else {
         this.$apply(fn);
       }
     };
-  }]).run(['DonationService', function (DonationService) {
+  }])
+  .run(['DonationService', function (DonationService) {
     window.userDonationCb = function (donationObject) {
       DonationService.userDonated(donationObject);
     };
