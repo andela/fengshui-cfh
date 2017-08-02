@@ -42,8 +42,8 @@ angular.module('mean.system')
       $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
       $timeout(() => {
-        $location.path('/#!/');
         location.reload();
+        $location.path('/gametour');
       }, 3000);
     }, (response) => {
       $scope.alert = response.data.message;
