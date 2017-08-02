@@ -1,3 +1,7 @@
+ body {
+   background-color: #F8F8F8;
+ }
+
  .clear {
    clear:both;
  }
@@ -99,7 +103,7 @@ video#bgVideo {
     display: none
   }
   body {
-    background-image: url("image-url");
+    background-image: url("/../img/cfh-bg.jpg");
   }
 }
 
@@ -162,11 +166,11 @@ video#bgVideo {
  }
 
  p a {
-   color: #60B197;
+   color: #9FEED1;
  }
 
  p a:hover {
-   color: #2ecc71;
+   color: #9FEED1;
  }
 
 
@@ -184,9 +188,14 @@ video#bgVideo {
 #landing-logo {
    margin: 5px 0 5px 0px;
    font-size: 28px;
-   font-family: 'Architects Daughter', cursive;
-   color: #F1503C;
+   font-family: Rancho, cursive;
+   color: #fff;
    padding: 5px 0 5px 0;
+}
+
+.logo-icon {
+  height: 30px;
+  transform: rotate(-40deg);
 }
 
 #warning-word {
@@ -195,8 +204,7 @@ video#bgVideo {
 
  .wpb-top-bar {
    height: 60px;
-   background: #000;
-   opacity: 0.5;
+   background: rgba(0, 0, 0, 0.5);
    position: absolute;
    top:0;
    width: 100%;
@@ -210,8 +218,8 @@ video#bgVideo {
    color: #fff;
    font-weight: bold;
    font-size: 11px;
-   max-width: 100%;
-   margin-right: 0;
+   max-width: 90%;
+   margin: 0 auto;
  }
 
  .wpb-logo-container a {
@@ -279,7 +287,9 @@ video#bgVideo {
  /**** LANDING ****/
 
  #main-text {
-   margin: 5px;
+   margin: 100px;
+   margin-bottom: 0;
+   /*margin-top: -50px;*/
  }
 
  #avatars {
@@ -296,11 +306,10 @@ video#bgVideo {
    min-height: 450px;
    position: relative;
    z-index:990;
-   width: 90%;
+   width: 100%;
    margin: 0px auto;
    border-radius: 8px;
    margin-top: 70px;
-   padding: 30px;
  }
 
  .wpb-teaser .background-opacity {
@@ -327,17 +336,12 @@ video#bgVideo {
  }
 
  .wpb-teaser .wpb-slogan h2 {
-   color: #fff;
-   font-family: 'Architects Daughter', cursive;
+   color: #9FEED1;
+   font-family: Rancho, cursive;
    font-weight: bold;
    font-size: 52px;
-   text-transform: uppercase;
    line-height: 60px;
    text-align: center;
- }
-
- .wpb-teaser #slogan-head .wpb-slogan h2 {
-   color: #f1503c;
  }
 
  #slogan {
@@ -349,11 +353,11 @@ video#bgVideo {
    color: #fff;
    padding-top: 15px;
    text-align: center;
-   font-size: 1.15em;
+   font-size: 1.5em;
    margin: 0 auto;
    width: 84%;
    max-width: 585px;
-   padding-bottom: 20px;
+   padding-bottom: 15px;
  }
 
 #navver {
@@ -392,22 +396,51 @@ video#bgVideo {
     margin-bottom: -13px;
  }
 
- #sign-up-btn-landing {
-   display: inline-block;
-   border-radius: 8px;
-   -moz-border-radius: 5px;
-   -webkit-border-radius: 5px;
-   font-size: 20px;
-   font-size: 2em;
-   font-weight: 400;
-   text-align: center;
-   color: white;
-   background: #C54141;
-   margin-top: 3px;
-   margin-bottom: 3px;
-   margin-right: 10px;
-   padding: 0.65em 35px;
-   cursor: pointer;
+ .btn-reg, .btn-reg:hover {
+   background: #F60C86;
+   font-size: 20px !important;
+   padding: 10px 50px;
+   border-radius: 5px !important;
+   margin: 30px 0 0 0;
+   color: #fff;
+   border: 1px solid #fff;
+   box-shadow: 0 1px 5px #000;
+   font-family: Rancho;   
+ }
+
+ .btn-reg:hover {
+   border: 2px solid #9FEED1;
+   color: #9FEED1;
+   padding: 9px 49px;
+ }
+
+ .btn-play, .btn-play:hover {
+   border: 1px solid #fff;
+   font-size: 20px !important;
+   padding: 10px 30px;
+   border-radius: 5px !important;
+   margin: 30px 0 0 30px;
+   color: #fff;
+   box-shadow: 0 2px 5px #000;
+   font-family: Rancho;
+ }
+
+ .btn-play:hover {
+   border: 2px solid #9FEED1;
+   color: #9FEED1;
+   padding: 9px 29px;
+ }
+
+ .btn-play2 {
+   background: #fff;
+   color: #000;
+   border: 1px solid #000;
+ }
+
+ .btn-play2:hover {
+   border: 2px solid #000;
+   padding: 9px 29px;
+   color: #000;
  }
 
   #sign-up-btn-other {
@@ -430,7 +463,7 @@ video#bgVideo {
 
  /**** About Us ****/
 #main-bod {
-   max-width: 1400px;
+   /*max-width: 1400px;*/
    margin: 0;
    padding: 0;
 }
@@ -502,8 +535,6 @@ video#bgVideo {
    font-size: 18px;
    font-family: 'Lobster', cursive;
    border-radius: 8px;
-   background: #252525;
-   margin-left: 40px;
    overflow: hidden;
 }
 
@@ -891,9 +922,11 @@ video#bgVideo {
 
  /**** Contact Us ****/
  .wpb-contact-us {
+   padding: 0%;
    min-height: 540px;
    position: relative;
    z-index:890;
+   background: #BDACAC;
  }
 
  .wpb-contact-us .google-map-container {
@@ -1005,32 +1038,33 @@ video#bgVideo {
   color: #252525;
   font-family: Arial;
   font-size: 1.1em;
-  font-weight: bold;
-  vertical-align: top;
+  vertical-align: middle;
+  box-shadow: 0 2px 5px #333;
 }
 
 
 /*Override Bootstrap Row Class*/
 .row {
    margin-left: 0;
-   margin-right: 9px;
+   margin-right: 0;
 }
 
 #donations {
    margin-top: 160px;
+   background: #BDACAC;
 }
 
 /*MORE MEDIA QUERIESS WHOOOOOAAAA*/
 
-@media (min-width: 1430px) {
+/*@media (min-width: 1430px) {
    .row {
       margin: 0 0 -9px 0;
    }
-
+   
    .wpb-logo-container {
       margin-right: 0;
    }
-}
+}*/
 
 @media(max-width: 680px) {
    .wpb-menu-container {
@@ -1218,7 +1252,6 @@ video#bgVideo {
       font-family: Arial;
       font-size: 20px;
       font-weight: bold;
-      vertical-align: top;
       width: 100%;
    }
 
@@ -1272,3 +1305,72 @@ video#bgVideo {
       margin: 0 0 0 4px;
    }
  }
+
+
+/* Emmanuel */
+.newdonation {
+  height: auto;
+  width: 100%;
+  background: #EBEBEB;
+  text-align: center;
+  padding: 2%; }
+  .newdonation div h4 a {
+    color: green; }
+  .newdonation .donatelink {
+    padding: 2%; }
+    .newdonation .donatelink a {
+      text-align: center;
+      width: 200%; }
+  .newdonation .donatereason {
+    font-size: 20px;
+    padding: 2%;
+    text-align: justify; }
+    .newdonation .donatereason p {
+      font-family: Coustard; }
+    .newdonation .donatereason a {
+      text-align: center; }
+
+.newteam {
+  height: auto;
+  width: 100%;
+  background: #BDACAC;
+  text-align: center;
+  padding: 2%; }
+  .newteam div h1 {
+    font-family: Abel Open sans; }
+  .newteam .newteamcontainer {
+    margin-bottom: 3%;
+    margin-top: 3%; }
+  .newteam .newteammember {
+    background: #EBEBEB;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-left: 12%;
+    margin-bottom: 1%;
+    padding: 0px; }
+  .newteam .newteamimagecontainer {
+    width: 100%;
+    height: 70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit; }
+  .newteam .newteamimage {
+    width: 80%; }
+  .newteam .newteammembername {
+    margin-top: 5%;
+    font-family: Tahoma;
+    font-size: 20px; }
+  .newteam .newteamcontainertwo {
+    margin-bottom: 3%; }
+
+.newfooter {
+  height: auto;
+  width: 100%;
+  background: #AF521F;
+  opacity: 0.8;
+  padding: 1%;
+  font-family: Comic;
+  color: white; }
+  .newfooter .newlegal {
+    text-align: justify;
+    font-size: 14px; }
