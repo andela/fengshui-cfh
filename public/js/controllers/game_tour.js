@@ -16,6 +16,11 @@ function GameTourController($location) {
       intro: 'Game needs a minimum of 3 players to start. Wait for the minimum number of players and start the game.',
     },
     {
+      element: '#chat-for-Tour',
+      intro: 'Here, you can chat with other players.',
+      position: 'top'
+    },
+    {
       element: '#timer-container',
       intro: 'Choose an answer to the current question. After time out, CZAR then select a favorite answer. whoever submits CZAR\'s favorite answer wins the round.'
     },
