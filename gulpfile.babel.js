@@ -14,14 +14,14 @@ gulp.task('bs-reload', () => {
 });
 
 gulp.task('eslint', () => {
-  gulp.src(['gulpfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
+  gulp.src(['gulpfile.babel.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
   .pipe(eslint())
   .pipe(eslint.formatEach('compact', process.stderr))
   .pipe(eslint.failAfterError());
 });
 
 gulp.task('sass', () => {
-  gulp.src('public/css/common.scss')
+  gulp.src('public/css/*.scss')
   .pipe(sass())
   .pipe(gulp.dest('public/css/'));
 });
@@ -51,9 +51,9 @@ gulp.task('nodemon', () => {
   });
 });
 
-gulp.task('bower', () => {
-  return bower();
-});
+gulp.task('bower', () =>
+  bower()
+);
 
 gulp.task('angular', () => {
   gulp.src('bower_components/angular/**/*.js')

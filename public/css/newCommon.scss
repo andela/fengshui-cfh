@@ -9,26 +9,6 @@ $mq-custom-wide : 1200px !default;
 
 $color-background: #fff;
 
-@mixin gradient-bg {
-/* IE10 Consumer Preview */
-background-image: -ms-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Mozilla Firefox */
-background-image: -moz-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Opera */
-background-image: -o-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Webkit (Safari/Chrome 10) */
-background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #0B394E), color-stop(1, #ABCE8D));
-
-/* Webkit (Chrome 11+) */
-background-image: -webkit-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* W3C Markup, IE10 Release Preview */
-background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
-}
-
 // Both portrait and landscape
 @mixin mobile-only {
     @media (max-width : $mq-mobile-landscape) {
@@ -384,21 +364,10 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
 
 html, body, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
+    margin: 0 !important;
 }
 
 html{
-    // margin: 20px;
-    // margin-top: 5px;
-    // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
-    // -webkit-background-size: cover;
-    // -moz-background-size: cover;
-    // -o-background-size: cover;
-    // background-size: cover;
-    @include gradient-bg;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    position: relative;
-
     @include mobile-only{
         //margin: 3px;
         margin-top: 0px;
@@ -406,7 +375,7 @@ html{
 }
 body{
     font-family: $main-font;
-    background: transparent;
+    background:	lighten(#DCDCDC, 10%) !important;
     margin: 0px;
 
     @include tablet-portrait-only{
@@ -456,28 +425,18 @@ body{
                 display: inline-block;
                 margin-left: 10px;
                 font-size: 28px;
-                font-family: 'Lobster', cursive;
+                font-family: Rancho, cursive;
+                color: #F21368 !important;
+
 
                 @include mobile-only{
                     font-size: 20px;
-                }
-
-                #first-word{
-                    color: #7CE4E8;
-                }
-
-                #second-word{
-                    color: #FFFFA5;
-                }
-
-                #third-word{
-                    color: #FC575E;
                 }
             }
 
             #abandon-game-button{
                 display: inline-block;
-                float:right;
+                float: right;
                 border-radius: 8px;
                 -moz-border-radius: 8px;
                 -webkit-border-radius: 8px;
@@ -1328,7 +1287,7 @@ body{
 
 // new styles for donation, team and footer
 .newdonation {
-   heigth: auto;
+   height: auto;
    width: 100%;
    background: #EBEBEB;
    text-align: center;
@@ -1357,7 +1316,7 @@ body{
 }
 
 .newteam {
-  heigth: auto;
+  height: auto;
   width: 100%;
   background: #BDACAC;
   text-align: center;
@@ -1401,7 +1360,7 @@ body{
 }
 
 .newfooter {
-   heigth: auto;
+   height: auto;
    width: 100%;
    background: #AF521F;
    opacity:0.8;
@@ -1412,6 +1371,17 @@ body{
      text-align:justify;
      font-size: 14px;
    }
+}
+
+
+// new styles for donation, team and footer
+
+.how-to {
+    box-shadow: 0 2px 5px #333;
+}
+
+#slogan-head .wpb-slogan h2 {
+    color: black;
 }
 
 // new styles for donation, team and footer
