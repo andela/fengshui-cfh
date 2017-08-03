@@ -1,3 +1,9 @@
+/**
+ * [Player description]
+ * @method      Player
+ * @param       {[type]} socket [description]
+ * @constructor
+ */
 function Player(socket) {
   this.socket = socket;
   this.hand = [];

@@ -1,14 +1,16 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) => {
-    $scope.hasPickedCards = false;
-    $scope.winningCardPicked = false;
-    $scope.showTable = false;
-    $scope.modalShown = false;
-    $scope.game = game;
-    $scope.pickedCards = [];
-    let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-    $scope.makeAWishFact = makeAWishFacts.pop();
-
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog) {
+  $scope.hasPickedCards = false;
+  $scope.winningCardPicked = false;
+  $scope.showTable = false;
+  $scope.modalShown = false;
+  $scope.game = game;
+  $scope.pickedCards = [];
+  $scope.messagesList = '';
+  $scope.chatControler = '^';
+  $scope.charactersLeft = 100;
+  let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+  $scope.makeAWishFact = makeAWishFacts.pop();
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -182,8 +184,8 @@ angular.module('mean.system')
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
           $location.search({game: game.gameID});
-          if(!$scope.modalShown){
-            setTimeout(function(){
+          if (!$scope.modalShown) {
+            setTimeout(function () {
               var link = document.URL;
               var txt = 'Give the following link to your friends so they can join your game: ';
               $('#lobby-how-to-play').text(txt);
@@ -195,13 +197,52 @@ angular.module('mean.system')
       }
     });
 
-    if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-      console.log('joining custom game');
-      game.joinGame('joinGame',$location.search().game);
-    } else if ($location.search().custom) {
-      game.joinGame('joinGame',null,true);
+  $scope.changeFormOpenIcon = () => {
+    if ($scope.chatControler === '^') {
+      $scope.chatControler = 'v';
     } else {
-      game.joinGame();
+      $scope.chatControler = '^';
     }
+  };
 
+  $scope.charactersRemaining = () => {
+    const myMessage = ($scope.message).trim();
+    const messageLength = myMessage.length;
+    $scope.charactersLeft = 100 - messageLength;
+  };
+
+  $scope.chat = () => {
+    const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
+    const playerAvatar = $scope.game.players[$scope.game.playerIndex].avatar;
+    const myMessage = $scope.message;
+    const timeSent = new Date(Date.now()).toLocaleString();
+    const gameID = $scope.game.gameID;
+    const newMessage = {
+      sender: IndividualPlayer,
+      message: myMessage,
+      date: timeSent,
+      avater: playerAvatar,
+      gameID
+    };
+    game.chat(newMessage);
+    $scope.message = '';
+    $scope.charactersLeft = 100;
+  };
+
+  socket.on('reply chat', function (data) {
+    const message = [];
+    Object.keys(data.chat).forEach((key) => {
+      message.push(data.chat[key]);
+    });
+    $scope.messagesList = message;
+  });
+
+  if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
+    console.log('joining custom game');
+    game.joinGame('joinGame', $location.search().game);
+  } else if ($location.search().custom) {
+    game.joinGame('joinGame', null, true);
+  } else {
+    game.joinGame();
+  }
 }]);
