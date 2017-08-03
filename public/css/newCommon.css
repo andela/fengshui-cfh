@@ -925,3 +925,71 @@ body {
 
 #slogan-head .wpb-slogan h2 {
   color: black; }
+
+.chat-holder {
+  color: red;
+  position: fixed;
+  bottom: 1%;
+  right: 3px;
+  display: block;
+  background: white;
+  padding: 1%;
+  z-index: 1999;
+  height: auto;
+  max-height: 500px;
+  overflow: fixed;
+  width: 230px;
+  border-radius: 5px; }
+  .chat-holder .chat-title {
+    width: 85%;
+    color: white; }
+  .chat-holder .chat-open {
+    width: 13%;
+    color: white;
+    text-align: center;
+    padding: 5px; }
+  .chat-holder .demo {
+    color: white;
+    float: right; }
+  .chat-holder .mycollapse {
+    max-height: 300px;
+    overflow: scroll;
+    padding: 2px;
+    font-size: 11px;
+    color: green;
+    font-family: "Comic Sans MS", cursive, sans-serif; }
+  .chat-holder .chat-messageholder {
+    padding: 2px;
+    font-size: 12px; }
+  .chat-holder .chat-list {
+    margin: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-left: 5px solid #ccc; }
+  .chat-holder .avater-holder {
+    text-align: center; }
+  .chat-holder .chat-avater {
+    width: 70%;
+    height: 70%; }
+  .chat-holder .message-input {
+    margin-top: 5px; }
+  .chat-holder .send-message {
+    margin-top: 3px; }
+  .chat-holder .messageholder {
+    padding: 4px;
+    overflow: auto; }
+  .chat-holder .message-area {
+    width: 100%;
+    margin-top: 5px;
+    margin: 2px;
+    font-size: 10px;
+    border-radius: 4px;
+    border-left: 5px solid green; }
+  .chat-holder .message-container {
+    padding: 0px; }
+  .chat-holder .post {
+    padding: 2px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid green; }
+  .chat-holder .chat-header {
+    text-align: center; }

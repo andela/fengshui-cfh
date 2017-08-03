@@ -421,12 +421,12 @@ video#bgVideo {
 
  .btn-play2 {
    background: transparent;
-   color: #fff;
-   border: 1px solid #fff;
+   color: #000;
+   border: 1px solid #000;
  }
 
  .btn-play2:hover {
-   border: 2px solid #fff;
+   border: 2px solid #000;
    padding: 9px 29px;
  }
 
@@ -1372,7 +1372,7 @@ video#bgVideo {
 .px52 {
   font-size: 52px;
   margin-bottom: 40px;
-  color: #fff;
+  color: #000;
 }
 
 html, body, .main-container, .cont, #first-section, #inner-container{
