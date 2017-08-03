@@ -62,38 +62,23 @@
       content: '.'; }
 
 html, body, .main-container, .cont, #first-section, #inner-container {
-  height: 100%; }
+  height: 100%;
+  margin: 0 !important; }
 
-html {
-  /* IE10 Consumer Preview */
-  background-image: -ms-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Mozilla Firefox */
-  background-image: -moz-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Opera */
-  background-image: -o-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Webkit (Safari/Chrome 10) */
-  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #0B394E), color-stop(1, #ABCE8D));
-  /* Webkit (Chrome 11+) */
-  background-image: -webkit-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* W3C Markup, IE10 Release Preview */
-  background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  position: relative; }
-  @media (max-width: 520px) {
-    html {
-      margin-top: 0px; } }
+@media (max-width: 520px) {
+  html {
+    margin-top: 0px; } }
 
 body {
   font-family: "helvetica neue", helvetica, sans-serif;
-  background: transparent;
-  margin: 10px; }
+  background: #f6f6f6 !important;
+  margin: 0px; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
-      margin: 5px; } }
+      margin: 0px; } }
   @media (max-width: 520px) {
     body {
-      margin: 1px; } }
+      margin: 0px; } }
 
 .navbar .nav > li > a.brand {
   padding-left: 20px;
@@ -127,16 +112,11 @@ body {
         display: inline-block;
         margin-left: 10px;
         font-size: 28px;
-        font-family: 'Lobster', cursive; }
+        font-family: Rancho, cursive;
+        color: #F21368 !important; }
         @media (max-width: 520px) {
           #main-container #app-container #menu-container #logo {
             font-size: 20px; } }
-        #main-container #app-container #menu-container #logo #first-word {
-          color: #7CE4E8; }
-        #main-container #app-container #menu-container #logo #second-word {
-          color: #FFFFA5; }
-        #main-container #app-container #menu-container #logo #third-word {
-          color: #FC575E; }
       #main-container #app-container #menu-container #abandon-game-button {
         display: inline-block;
         float: right;
@@ -872,3 +852,76 @@ body {
   text-transform: none !important; }
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
+
+.newdonation {
+  height: auto;
+  width: 100%;
+  background: #EBEBEB;
+  text-align: center;
+  padding: 2%; }
+  .newdonation div h4 a {
+    color: green; }
+  .newdonation .donatelink {
+    padding: 2%; }
+    .newdonation .donatelink a {
+      text-align: center;
+      width: 200%; }
+  .newdonation .donatereason {
+    font-size: 20px;
+    padding: 2%;
+    text-align: justify; }
+    .newdonation .donatereason p {
+      font-family: Coustard; }
+    .newdonation .donatereason a {
+      text-align: center; }
+
+.newteam {
+  height: auto;
+  width: 100%;
+  background: #BDACAC;
+  text-align: center;
+  padding: 2%; }
+  .newteam div h1 {
+    font-family: Abel Open sans; }
+  .newteam .newteamcontainer {
+    margin-bottom: 3%;
+    margin-top: 3%; }
+  .newteam .newteammember {
+    background: #EBEBEB;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-left: 12%;
+    margin-bottom: 1%;
+    padding: 0px; }
+  .newteam .newteamimagecontainer {
+    width: 100%;
+    height: 70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit; }
+  .newteam .newteamimage {
+    width: 80%; }
+  .newteam .newteammembername {
+    margin-top: 5%;
+    font-family: Tahoma;
+    font-size: 20px; }
+  .newteam .newteamcontainertwo {
+    margin-bottom: 3%; }
+
+.newfooter {
+  height: auto;
+  width: 100%;
+  background: #AF521F;
+  opacity: 0.8;
+  padding: 1%;
+  font-family: Comic;
+  color: white; }
+  .newfooter .newlegal {
+    text-align: justify;
+    font-size: 14px; }
+
+.how-to {
+  box-shadow: 0 2px 5px #333; }
+
+#slogan-head .wpb-slogan h2 {
+  color: black; }

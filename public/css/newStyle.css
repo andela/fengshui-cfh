@@ -1,10 +1,16 @@
- .clear {
-   clear:both;
+ body {
+   /*background-color: #F8F8F8;*/
  }
 
- .uppercase {
-   text-transform: uppercase;
- }
+video#bgVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-height: 100%;
+  min-width: 100%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
 
  #landing-charity {
    width: 300px !important;
@@ -84,6 +90,14 @@
    max-width: 25%;
 }
 
+@media only screen and (max-width: 768px) {
+  video {
+    display: none
+  }
+  body {
+    background-image: url("/../img/cfh-bg.jpg");
+  }
+}
 
 @media(min-width: 400px) and (max-width: 950px) {
    .some-text {
@@ -144,11 +158,11 @@
  }
 
  p a {
-   color: #60B197;
+   color: #9FEED1;
  }
 
  p a:hover {
-   color: #2ecc71;
+   color: #9FEED1;
  }
 
 
@@ -163,50 +177,44 @@
    padding: 5px;
 }
 
-#landing-logo {
+#new-landing-logo {
    margin: 5px 0 5px 0px;
    font-size: 28px;
-   font-family: 'Lobster', cursive;
-   border-radius: 8px;
-   background: #252525;
-   padding: 5px 5px 5px 13px;
+   font-family: Rancho, cursive;
+   color: #fff;
+   padding: 5px 0 5px 0;
 }
 
-#first-word {
-   color: #7CE4E8;
-}
-
-#second-word {
-   color: #FFFFA5;
-}
-
-#third-word {
-   color: #FC575E;
+.logo-icon {
+  height: 30px;
+  transform: rotate(-40deg);
 }
 
 #warning-word {
    color: #FC575E;
 }
 
- .wpb-top-bar {
+ .new-wpb-top-bar {
    height: 60px;
-   background: transparent;
-   position: fixed;
+   background: rgba(0, 0, 0, 0.5);
+   position: absolute;
    top:0;
    width: 100%;
    z-index:10000;
    max-width: 1400px;
+   margin: 0;
+   padding: 0;
  }
 
- .wpb-logo-container {
+ .new-wpb-logo-container {
    color: #fff;
    font-weight: bold;
    font-size: 11px;
-   max-width: 100%;
-   margin-right: 9px;
+   max-width: 90%;
+   margin: 0 auto;
  }
 
- .wpb-logo-container a {
+ .new-wpb-logo-container a {
    color: #ffffff !important;
  }
 
@@ -223,23 +231,23 @@
    float: right;
  }
 
- .wpb-menu-container .wpb-main-menu {
+ .wpb-menu-container .new-wpb-main-menu  {
    list-style: none;
    margin: 0;
    text-align: right;
    height: 100px;
    margin-top: -77px;
-   margin-right: 35px;
+   margin-right: 0;
  }
 
- .wpb-menu-container .wpb-main-menu li {
+ .wpb-menu-container .new-wpb-main-menu  li {
    display: inline-block;
    height: 100%;
    position: relative;
    cursor: pointer;
  }
 
-  .wpb-menu-container .wpb-main-menu li a:hover {
+  .wpb-menu-container .new-wpb-main-menu  li a:hover {
    color: #2ECC71 !important;
    -webkit-transition: color 0.5s ease;
    -moz-transition: color 0.5s ease;
@@ -248,7 +256,7 @@
    transition:  color 0.5s ease;
  }
 
- .wpb-menu-container .wpb-main-menu li a {
+ .wpb-menu-container .new-wpb-main-menu  li a {
    display: block;
    height: 100%;
    line-height: 100px;
@@ -270,8 +278,10 @@
 
  /**** LANDING ****/
 
- #main-text {
-   margin: 5px;
+ #new-main-text {
+   margin: 100px;
+   margin-bottom: 0;
+   margin-top: 180px;
  }
 
  #avatars {
@@ -284,18 +294,15 @@
    width: 8.3%;
  }
 
- .wpb-teaser {
+ .new-wpb-teaser {
    min-height: 450px;
    position: relative;
    z-index:990;
-   width: 90%;
+   width: 100%;
    margin: 0px auto;
-   border-radius: 8px;
-   margin-top: 70px;
-   padding: 30px;
  }
 
- .wpb-teaser .background-opacity {
+ .new-wpb-teaser .background-opacity {
    position: absolute;
    top: 0;
    left: 0;
@@ -303,27 +310,25 @@
    height: 100%;
    min-height: 100%;
    z-index:999;
-   background: #252525;
-   border-radius: 8px;
    padding: 20px;
  }
 
- .wpb-teaser .container {
+ .new-wpb-teaser .container {
    position: relative;
    z-index:1000;
-   padding-top: 120px;
+   padding: 0;
  }
 
- .wpb-teaser .modified-container {
+ .new-wpb-teaser .modified-container {
    position: relative;
    z-index: 1000;
  }
 
- .wpb-teaser .wpb-slogan h2 {
-   color: #fff;
+ .new-wpb-teaser .wpb-slogan h2 {
+   color: #9FEED1;
+   font-family: Rancho, cursive;
    font-weight: bold;
    font-size: 52px;
-   text-transform: uppercase;
    line-height: 60px;
    text-align: center;
  }
@@ -333,15 +338,15 @@
    color: white;
  }
 
- .wpb-teaser .wpb-text p {
+ .new-wpb-teaser .wpb-text p {
    color: #fff;
    padding-top: 15px;
    text-align: center;
-   font-size: 1.15em;
+   font-size: 1.5em;
    margin: 0 auto;
    width: 84%;
    max-width: 585px;
-   padding-bottom: 20px;
+   padding-bottom: 15px;
  }
 
 #navver {
@@ -380,22 +385,49 @@
     margin-bottom: -13px;
  }
 
- #sign-up-btn-landing {
-   display: inline-block;
-   border-radius: 8px;
-   -moz-border-radius: 5px;
-   -webkit-border-radius: 5px;
-   font-size: 20px;
-   font-size: 2em;
-   font-weight: 400;
-   text-align: center;
-   color: white;
-   background: #C54141;
-   margin-top: 3px;
-   margin-bottom: 3px;
-   margin-right: 10px;
-   padding: 0.65em 35px;
-   cursor: pointer;
+ .btn-reg, .btn-reg:hover {
+   background: #a21e4e;
+   font-size: 20px !important;
+   padding: 10px 50px;
+   border-radius: 50px !important;
+   margin: 30px 0 0 0;
+   color: #fff;
+   border: 1px solid #fff;
+   box-shadow: 0 1px 5px #000;
+   font-family: Rancho;   
+ }
+
+ .btn-reg:hover {
+   border: 2px solid #fff;
+   padding: 9px 49px;
+ }
+
+ .btn-play, .btn-play:hover {
+   border: 1px solid #fff;
+   font-size: 20px !important;
+   padding: 10px 30px;
+   border-radius: 50px !important;
+   margin: 30px 0 0 30px;
+   color: #fff;
+   box-shadow: 0 2px 5px #000;
+   font-family: Rancho;
+ }
+
+ .btn-play:hover {
+   border: 2px solid #fff;
+   color: #fff;
+   padding: 9px 29px;
+ }
+
+ .btn-play2 {
+   background: transparent;
+   color: #fff;
+   border: 1px solid #fff;
+ }
+
+ .btn-play2:hover {
+   border: 2px solid #fff;
+   padding: 9px 29px;
  }
 
   #sign-up-btn-other {
@@ -417,9 +449,10 @@
  }
 
  /**** About Us ****/
-#main-bod {
-   max-width: 1400px;
-   margin: 0px auto;
+#new-main-bod {
+   /*max-width: 1400px;*/
+   margin: 0;
+   padding: 0;
 }
 
  .wpb-about-us {
@@ -480,17 +513,16 @@
    text-align: center;
  }
 
- #sign-up {
+ #new-sign-up {
    text-align: center;
+   margin-bottom: 65px;
  }
 
-#sign-up-text {
+#new-sign-up-text {
    margin: 0px auto;
    font-size: 18px;
    font-family: 'Lobster', cursive;
    border-radius: 8px;
-   background: #252525;
-   margin-left: 40px;
    overflow: hidden;
 }
 
@@ -607,16 +639,11 @@
    color:#515e65 !important;
  }
 
- /**** Portfolio ****/
- .wpb-portfolio-body {
-
- }
-
- .wpb-portfolio-body .wpb-teaser {
+ .wpb-portfolio-body .new-wpb-teaser {
    min-height: 350px;
  }
 
- .wpb-portfolio-body .wpb-teaser .container {
+ .wpb-portfolio-body .new-wpb-teaser .container {
    padding-top: 60px;
  }
 
@@ -878,9 +905,11 @@
 
  /**** Contact Us ****/
  .wpb-contact-us {
+   padding: 0%;
    min-height: 540px;
    position: relative;
    z-index:890;
+   background: #BDACAC;
  }
 
  .wpb-contact-us .google-map-container {
@@ -943,12 +972,16 @@
 
  /**** Margins ****/
 
-.mod-contain {
+.new-mod-contain {
    /*padding-right: 15px;
    padding-left: 15px;*/
-   margin-right: auto;
+   /*margin-right: auto;
+   margin-left: auto;*/
+   width: 100%;
+   padding-left: 0;
+   padding-right: 0;
+   margin-right: 0;
    margin-left: auto;
-   width: 90%;
 }
 
  .container-margin {
@@ -975,7 +1008,7 @@
 }
 
 
-.landing-card {
+.new-landing-card {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -983,57 +1016,58 @@
   height: 215px;
   padding: 1%;
   margin: 1%;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  color: #252525;
-  font-family: Arial;
+  color: #fff;
+  font-family: Helvetica;
   font-size: 1.1em;
-  font-weight: bold;
-  vertical-align: top;
+  vertical-align: middle;
+  box-shadow: 0 5px 20px #666;
 }
 
 
 /*Override Bootstrap Row Class*/
-.row {
+.new-row {
    margin-left: 0;
-   margin-right: 9px;
+   margin-right: 0;
 }
 
 #donations {
    margin-top: 160px;
+   background: #BDACAC;
 }
 
 /*MORE MEDIA QUERIESS WHOOOOOAAAA*/
 
-@media (min-width: 1430px) {
+/*@media (min-width: 1430px) {
    .row {
       margin: 0 0 -9px 0;
    }
-
-   .wpb-logo-container {
+   
+   .new-wpb-logo-container {
       margin-right: 0;
    }
-}
+}*/
 
 @media(max-width: 680px) {
    .wpb-menu-container {
       display: none;
    }
 
-   .mod-contain {
+   .new-mod-contain {
       text-align: center;
    }
 }
 
 @media (min-width : 480px) and (max-width : 865px)  {
-   .wpb-menu-container .wpb-main-menu {
+   .wpb-menu-container .new-wpb-main-menu  {
       text-align: right;
       height: 100px;
       margin-top: -77px;
       font-size: .85em;
    }
 
-   .wpb-menu-container .wpb-main-menu li a {
+   .wpb-menu-container .new-wpb-main-menu  li a {
       display: block;
       height: 100%;
       line-height: 100px;
@@ -1049,7 +1083,7 @@
       position: relative;
       z-index: 1000;
    }
-   .wpb-logo-container {
+   .new-wpb-logo-container {
       color: #fff;
       font-weight: bold;
       margin-right: 0;
@@ -1057,19 +1091,19 @@
       max-width: 99%;
    }
 
-   .wpb-teaser .container {
+   .new-wpb-teaser .container {
       position: relative;
       z-index: 1000;
       padding-top: 70px;
    }
 
-   .landing-card {
+   .new-landing-card {
       font-size: 0.8em;
    }
 }
 
 @media (min-width : 865px) and (max-width : 1024px)  {
-   .wpb-menu-container .wpb-main-menu {
+   .wpb-menu-container .new-wpb-main-menu  {
       text-align: right;
       height: 100px;
       margin-top: -77px;
@@ -1077,7 +1111,7 @@
       margin-right: 35px;
    }
 
-   .wpb-menu-container .wpb-main-menu li a {
+   .wpb-menu-container .new-wpb-main-menu  li a {
       display: block;
       height: 100%;
       line-height: 100px;
@@ -1093,14 +1127,14 @@
       position: relative;
       z-index: 1000;
    }
-   .wpb-logo-container {
+   .new-wpb-logo-container {
       color: #fff;
       font-weight: bold;
       margin-right: 10px;
       font-size: 11px;
    }
 
-   .wpb-teaser .container {
+   .new-wpb-teaser .container {
       position: relative;
       z-index: 1000;
       padding-top: 70px;
@@ -1115,13 +1149,13 @@
    #sign-up-btn{
       font-size: 1.5rem;
    }
-   .wpb-teaser .container {
+   .new-wpb-teaser .container {
       position: relative;
       z-index: 1000;
       padding: 0;
    }
 
-    .wpb-teaser {
+    .new-wpb-teaser {
       min-height: 360px;
       position: relative;
       z-index: 990;
@@ -1131,7 +1165,7 @@
       padding: 30px;
    }
 
-    .wpb-teaser .wpb-slogan h2 {
+    .new-wpb-teaser .wpb-slogan h2 {
       color: #fff;
       font-weight: bold;
       font-size: 1.6em;
@@ -1140,7 +1174,7 @@
       line-height: 24px;
    }
 
-   .wpb-top-bar {
+   .new-wpb-top-bar {
       height: 60px;
       background: transparent;
       position: relative;
@@ -1150,7 +1184,7 @@
       max-width: 1400px;
    }
 
-   .mod-contain {
+   .new-mod-contain {
       width: 100%;
       text-align: center;
    }
@@ -1159,7 +1193,7 @@
       padding-top: 0;
    }
 
-   #main-text {
+   #new-main-text {
       margin: 0;
    }
 
@@ -1167,7 +1201,7 @@
       display: none;
    }
 
-   .wpb-teaser .parallax-background {
+   .new-wpb-teaser .parallax-background {
       padding: 10% 0 0 0;
    }
 
@@ -1189,7 +1223,7 @@
       margin-top: 80px;
    }
 
-   .landing-card {
+   .new-landing-card {
       position: relative;
       display: block;
       box-sizing: border-box;
@@ -1198,10 +1232,9 @@
       background-color: #fff;
       border-radius: 8px;
       color: #252525;
-      font-family: Arial;
+      font-family: Helvetica;
       font-size: 20px;
       font-weight: bold;
-      vertical-align: top;
       width: 100%;
    }
 
@@ -1255,3 +1288,96 @@
       margin: 0 0 0 4px;
    }
  }
+
+
+/* Emmanuel */
+.newdonation {
+  background: url("poor-children.jpg") !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  height: auto;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  padding: 2%; }
+  .newdonation div h4 a {
+    color: green; }
+  .newdonation .donatelink {
+    padding: 2%; }
+    .newdonation .donatelink a {
+      text-align: center;
+      width: 200%; }
+  .newdonation .donatereason {
+    font-size: 20px;
+    padding: 2%;
+    text-align: justify; }
+    .newdonation .donatereason p {
+      font-family: Coustard; }
+    .newdonation .donatereason a {
+      text-align: center; }
+
+.newteam {
+  height: auto;
+  width: 100%;
+  background: transparent;
+  text-align: center;
+  padding: 2%; }
+  .newteam div h1 {
+    font-family: Abel Open sans; }
+  .newteam .newteamcontainer {
+    margin-bottom: 3%;
+    margin-top: 3%; }
+  .newteam .newteammember {
+    background: #EBEBEB;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-left: 12%;
+    margin-bottom: 1%;
+    padding: 0px; }
+  .newteam .newteamimagecontainer {
+    width: 100%;
+    height: 70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit; }
+  .newteam .newteamimage {
+    width: 80%; }
+  .newteam .newteammembername {
+    margin-top: 5%;
+    font-family: Tahoma;
+    font-size: 20px; }
+  .newteam .newteamcontainertwo {
+    margin-bottom: 3%; }
+
+.newfooter {
+  height: auto;
+  width: 100%;
+  background: #AF521F;
+  opacity: 0.8;
+  padding: 1%;
+  font-family: Comic;
+  color: white; }
+  .newfooter .newlegal {
+    text-align: justify;
+    font-size: 14px; }
+
+.second-slogan {
+  margin-bottom: 30px;
+}
+
+.rancho {
+  font-family: Rancho !important;
+}
+
+.px52 {
+  font-size: 52px;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+html, body, .main-container, .cont, #first-section, #inner-container{
+    height: 100%;
+    margin: 0 !important;
+}
+
