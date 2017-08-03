@@ -19,6 +19,7 @@ const guestNames = [
 
 function Game(gameID, io) {
   this.io = io;
+  this.chatIdd = Math.random();
   this.gameID = gameID;
   this.players = []; // Contains array of player models
   this.table = []; // Contains array of {card: card, player: player.id}
@@ -27,7 +28,7 @@ function Game(gameID, io) {
   this.winnerAutopicked = false;
   this.czar = -1; // Index in this.players
   this.playerMinLimit = 3;
-  this.playerMaxLimit = 6;
+  this.playerMaxLimit = 12;
   this.pointLimit = 5;
   this.state = "awaiting players";
   this.round = 0;
@@ -67,6 +68,7 @@ Game.prototype.payload = function() {
   return {
     gameID: this.gameID,
     players: players,
+    chatIdd: this.chatId,
     czar: this.czar,
     state: this.state,
     round: this.round,
@@ -82,6 +84,10 @@ Game.prototype.payload = function() {
 
 Game.prototype.sendNotification = function(msg) {
   this.io.sockets.in(this.gameID).emit('notification', {notification: msg});
+};
+
+Game.prototype.sendChat = function (chat) {
+  this.io.sockets.in(this.gameID).emit('reply chat', { chat });
 };
 
 // Currently called on each joinGame event from socket.js

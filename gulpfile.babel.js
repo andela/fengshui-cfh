@@ -8,9 +8,6 @@ import bower from 'gulp-bower';
 import runSequence from 'gulp-sequence';
 import clean from 'gulp-rimraf';
 import babel from 'gulp-babel';
-import should from 'should';
-import istanbul from 'gulp-babel-istanbul';
-import coveralls from 'gulp-coveralls';
 
 gulp.task('bs-reload', () => {
   browserSync.reload();
@@ -29,26 +26,11 @@ gulp.task('sass', () => {
   .pipe(gulp.dest('public/css/'));
 });
 
-gulp.task('test', () => {
-  gulp.src(['test/**/*.js'], { read: false })
+gulp.task('test', ['transpile'], () => {
+  gulp.src(['dist/test/**/*.js'], { read: false })
     .pipe(mocha({
-      reporter: 'spec',
-      globals: {
-        should
-      }
-    }))
-    .pipe(istanbul.hookRequire());
-});
-
-gulp.task('coverage', () => {
-  gulp.src(['public/js/**/*.js', 'app/**/*.js'])
-  .pipe(istanbul({ includeUntested: true }))
-  .pipe(istanbul.writeReports());
-});
-
-gulp.task('coveralls', ['coverage'], () => {
-  gulp.src('/coverage/lcov.info')
-  .pipe(coveralls());
+      reporter: 'spec'
+    }));
 });
 
 gulp.task('watch', () => {
@@ -98,10 +80,39 @@ gulp.task('jquery', () => {
         .pipe(gulp.dest('public/lib/jquery'));
 });
 
-
 gulp.task('underscore', () => {
   gulp.src('bower_components/underscore/**/*')
         .pipe(gulp.dest('public/lib/underscore'));
+});
+
+gulp.task('intro', () => {
+  gulp.src('bower_components/intro.js/**/*')
+  .pipe(gulp.dest('public/lib/intro.js'));
+});
+
+gulp.task('angular-intro', () => {
+  gulp.src('bower_components/angular-intro.js/**/*')
+  .pipe(gulp.dest('public/lib/angular-intro.js'));
+});
+
+gulp.task('angular-cookies', () => {
+  gulp.src('bower_components/angular-cookies/**/*')
+  .pipe(gulp.dest('public/lib/angular-cookies'));
+});
+
+gulp.task('angular-resource', () => {
+  gulp.src('bower_components/angular-resource/**/*')
+  .pipe(gulp.dest('public/lib/angular-resource'));
+});
+
+gulp.task('font-awesome', () => {
+  gulp.src('bower_components/font-awesome/**/*')
+  .pipe(gulp.dest('public/lib/font-awesome'));
+});
+
+gulp.task('angular-unstable', () => {
+  gulp.src('bower_components/angular-unstable/**/*')
+  .pipe(gulp.dest('public/lib/angular-unstable'));
 });
 
 gulp.task('clean', () => {
@@ -131,6 +142,6 @@ gulp.task('babelify', () => {
 });
 
 gulp.task('transpile', runSequence('babelify', 'move_json', 'move_jades', 'move_libs'));
-gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore'));
+gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore', 'intro', 'angular-intro', 'angular-cookies', 'angular-unstable', 'font-awesome', 'angular-resource'));
 gulp.task('concurrent', ['watch', 'nodemon']);
-gulp.task('default', runSequence('transpile', ['eslint', 'concurrent', 'sass']));
+gulp.task('default', runSequence('transpile', ['concurrent', 'sass']));
