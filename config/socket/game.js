@@ -1,8 +1,8 @@
-var async = require('async');
-var _ = require('underscore');
-var questions = require(__dirname + '/../../app/controllers/questions.js');
-var answers = require(__dirname + '/../../app/controllers/answers.js');
-var guestNames = [
+const async = require('async');
+const _ = require('underscore');
+const questions = require(__dirname + '/../../app/controllers/questions.js');
+const answers = require(__dirname + '/../../app/controllers/answers.js');
+const guestNames = [
   "Disco Potato",
   "Silver Blister",
   "Insulated Mustard",
@@ -28,7 +28,7 @@ function Game(gameID, io) {
   this.winnerAutopicked = false;
   this.czar = -1; // Index in this.players
   this.playerMinLimit = 3;
-  this.playerMaxLimit = 6;
+  this.playerMaxLimit = 12;
   this.pointLimit = 5;
   this.state = "awaiting players";
   this.round = 0;

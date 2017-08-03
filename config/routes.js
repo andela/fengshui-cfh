@@ -1,7 +1,7 @@
 const async = require('async');
 const users = require('../app/controllers/users');
 
-module.exports = function(app, passport, auth) {
+module.exports = (app, passport, auth) => {
     // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -11,6 +11,7 @@ module.exports = function(app, passport, auth) {
   // Setting up the users api
   app.post('/api/auth/users', users.create);
   app.post('/users/avatars', users.avatars);
+  app.post('/api/auth/signin', users.jwtSignIn);
 
     // Donation Routes
   app.post('/donations', users.addDonation);
@@ -89,4 +90,8 @@ module.exports = function(app, passport, auth) {
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+  app.get('/gametour', index.gameTour);
+  // Game route
+  const game = require('../app/controllers/game');
+  app.post('/api/games/:id/start', users.ensureToken, game.startGame);
 };

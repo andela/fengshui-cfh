@@ -130,21 +130,64 @@ exports.create = (req, res) => {
   }
 };
 
+/*
+ * [signin a user]
+ * @method jwtSignIn
+ * @param  {[type]} req [the user infomation sent from the frontend]
+ * @param  {[type]} res [the result of the registration]
+ * @return {[type]} Object
+ */
+exports.jwtSignIn = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({ message: 'Enter all required field' });
+  }
+  User.findOne({
+    email: req.body.email
+  }).exec((error, existingUser) => {
+    if (error) {
+      return res.status(500).json({
+        error: 'Server Login Error'
+      });
+    }
+    if (!existingUser) {
+      return res.status(404).json({
+        error: 'User not found'
+      });
+    }
+    if (!existingUser.authenticate(req.body.password)) {
+      return res.status(400).json({
+        error: 'Invalid Login details'
+      });
+    }
+    req.logIn(existingUser, () => {
+      const newUser = {
+        name: existingUser.name,
+        email: existingUser.email
+      };
+      const token = jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+        data: newUser
+      }, process.env.JWT_SECRET);
+      return res.status(200).json({ message: 'successful login', token });
+    });
+  });
+};
+
 exports.ensureToken = (req, res, next) => {
   let token = req.body.token || req.params.token || req.headers.authorization;
-  if (token){
+  if (token) {
     token = token.split(' ');
     token = token[1];
   }
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      let result;
       if (err) {
-        result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+        res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
-        result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        req.token = decoded;
+        // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        next();
       }
-      return result;
     });
   } else {
     res.redirect('/#!/signin?error=No_token_provided');
@@ -178,8 +221,8 @@ exports.addDonation = (req, res) => {
       })
       .exec((err, user) => {
         // Confirm that this object hasn't already been entered
-        var duplicate = false;
-        for (var i = 0; i < user.donations.length; i++ ) {
+        let duplicate = false;
+        for (let i = 0; i < user.donations.length; i++) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
@@ -200,11 +243,11 @@ exports.addDonation = (req, res) => {
  *  Show profile
  */
 exports.show = (req, res) => {
-  var user = req.profile;
+  let user = req.profile;
 
   res.render('users/show', {
     title: user.name,
-    user: user
+    user
   });
 };
 
@@ -225,7 +268,7 @@ exports.user = (req, res, next, id) => {
     })
     .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
+      if (!user) return next(new Error(`Failed to load User ${  id}`));
       req.profile = user;
       next();
     });
