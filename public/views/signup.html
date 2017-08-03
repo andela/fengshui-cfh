@@ -1,6 +1,6 @@
 <div class="row" ng-controller="IndexController" class="ng-scope">
   <div style="max-width: 480px;
-    margin: 60px auto;">
+    margin: 30px auto;">
   <div class="panel panel-default signup-panel" style="border-radius: 0px 0px 25px 25px;">
     <div id="login-buttons" class="panel-heading text-center" style="font-size: 20px; font-weight:bold;">
       <span>Sign Up With</span>
@@ -15,7 +15,6 @@
       </div>
       <hr>
       <p class = "text-center" >Or</p>
-      <span>{{alert}}</span>
       <form class="form-horizontal" ng-submit="submitform()" method="post">
     <div class="form-group" style="padding-left: 20px; padding-right: 20px"> 
           <div class="input-group">
@@ -36,18 +35,16 @@
         <input type="password" ng-model="password" class="form-control input-lg" id="password" placeholder="Enter password" name="password" required>
       </div>
     </div>
-     <div>
       <ul>
-        <li ng-repeat="avatar in avatars" class="avatars ng-scope" style="margin-bottom: 20px">
+        <li ng-repeat="avatar in avatars" class="avatars ng-scope" style="margin-bottom: 5px">
             <input name="avatar" type='radio' ng-model="avata.name" value="{{$index}}">
-              <img style="height: 50px; width: 50px" class="user-avatar" ng-src="{{avatar}}" />
+              <img style="height: 40px; width: 40px" class="user-avatar" ng-src="{{avatar}}" />
             </input>
         </li>
       </ul>
-    </div>
     <div class="form-group" id="signupbtn">        
       <div class="col-sm-12 btnmargin">
-        <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ">Sign Up</button></center>
+        <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ; margin-top: 10px">Sign Up</button></center>
       </div>
     </div>
     <center><p class="account"> Already have an account? <a href="#!/signin">Sign in</a></p></center>
