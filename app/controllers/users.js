@@ -98,7 +98,11 @@ exports.create = (req, res) => {
             }).status(500);
           }
           req.logIn(user, (err) => {
-            if (err) return err;
+            if (err) {
+              return res.json({
+                message: 'Internal Server Error'
+              }).status(500);
+            }
             const newUser = {
               name: req.body.name,
               email: req.body.email
@@ -156,7 +160,6 @@ exports.jwtSignIn = (req, res) => {
       });
     }
     req.logIn(existingUser, () => {
-      
       const newUser = {
         name: existingUser.name,
         email: existingUser.email

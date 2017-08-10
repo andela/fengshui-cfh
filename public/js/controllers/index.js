@@ -42,8 +42,8 @@ angular.module('mean.system')
       $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
       $timeout(() => {
-        $location.path('/#!/');
         location.reload();
+        $location.path('/gametour');
       }, 3000);
     }, (response) => {
       $scope.alert = response.data.message;
@@ -79,7 +79,7 @@ angular.module('mean.system')
   $scope.playGame = () => {
     swal({
       title: 'Start a new game session',
-      text: 'Are you sure you want start?',
+      text: 'Are you sure you want to start?',
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -116,7 +116,6 @@ angular.module('mean.system')
     $http.get('/play?custom', config)
     .then((response) => {
       window.location = '/#!/app?custom';
-    }, (response) => {
     });
     });
   };

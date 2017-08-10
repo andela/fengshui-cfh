@@ -71,7 +71,7 @@ html, body, .main-container, .cont, #first-section, #inner-container {
 
 body {
   font-family: "helvetica neue", helvetica, sans-serif;
-  background: #f6f6f6 !important;
+  background: transparent;
   margin: 0px; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
@@ -858,3 +858,165 @@ body {
   text-transform: none !important; }
   .gradientButton .donateNow {
     border-top: 0px solid black !important; }
+
+.newdonation {
+  heigth: auto;
+  width: 100%;
+  background: #EBEBEB;
+  text-align: center;
+  padding: 2%; }
+  .newdonation div h4 a {
+    color: green; }
+  .newdonation .donatelink {
+    padding: 2%; }
+    .newdonation .donatelink a {
+      text-align: center;
+      width: 200%; }
+  .newdonation .donatereason {
+    font-size: 20px;
+    padding: 2%;
+    text-align: justify; }
+    .newdonation .donatereason p {
+      font-family: Coustard; }
+    .newdonation .donatereason a {
+      text-align: center; }
+
+.newteam {
+  heigth: auto;
+  width: 100%;
+  background: #BDACAC;
+  text-align: center;
+  padding: 2%; }
+  .newteam div h1 {
+    font-family: Abel Open sans; }
+  .newteam .newteamcontainer {
+    margin-bottom: 3%;
+    margin-top: 3%; }
+  .newteam .newteammember {
+    background: #EBEBEB;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-left: 12%;
+    margin-bottom: 1%;
+    padding: 0px; }
+  .newteam .newteamimagecontainer {
+    width: 100%;
+    height: 70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit; }
+  .newteam .newteamimage {
+    width: 80%; }
+  .newteam .newteammembername {
+    margin-top: 5%;
+    font-family: Tahoma;
+    font-size: 20px; }
+  .newteam .newteamcontainertwo {
+    margin-bottom: 3%; }
+
+.newfooter {
+  heigth: auto;
+  width: 100%;
+  background: #AF521F;
+  opacity: 0.8;
+  padding: 1%;
+  font-family: Comic;
+  color: white; }
+  .newfooter .newlegal {
+    text-align: justify;
+    font-size: 14px; }
+
+.controlChat {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  position: fixed;
+  border: 0px;
+  background-color: white;
+  bottom: 1%;
+  right: 3px; }
+
+.chat-holder {
+  color: red;
+  position: fixed;
+  bottom: 1%;
+  right: 3px;
+  display: block;
+  background: white;
+  padding: 1%;
+  z-index: 1999;
+  height: auto;
+  max-height: 600px;
+  overflow: fixed;
+  width: 250px;
+  border-radius: 5px; }
+  .chat-holder .chat-title {
+    width: 72%;
+    color: white; }
+  .chat-holder .chat-open {
+    width: 12%;
+    color: white;
+    text-align: center;
+    padding: 5px; }
+  .chat-holder .close-chat {
+    width: 12%;
+    color: white;
+    text-align: center;
+    padding: 5px; }
+  .chat-holder .demo {
+    color: white;
+    float: right; }
+  .chat-holder .mycollapse {
+    max-height: 300px;
+    overflow: scroll;
+    padding: 2px;
+    font-size: 11px;
+    color: green;
+    font-family: "Comic Sans MS", cursive, sans-serif; }
+  .chat-holder .chat-messageholder {
+    padding: 2px;
+    font-size: 12px; }
+  .chat-holder .chat-list {
+    margin: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-left: 5px solid #ccc; }
+  .chat-holder .avater-holder {
+    text-align: center; }
+  .chat-holder .message-input {
+    margin-top: 5px; }
+  .chat-holder .send-message {
+    margin-top: 3px; }
+  .chat-holder .messageholder {
+    padding: 4px;
+    overflow: auto; }
+  .chat-holder .message-area {
+    width: 100%;
+    margin-top: 5px;
+    margin: 2px;
+    font-size: 10px;
+    border-radius: 4px;
+    border-left: 5px solid green;
+    height: 80px; }
+  .chat-holder .message-container {
+    padding: 0px; }
+  .chat-holder .post {
+    padding: 2px;
+    margin-bottom: 12px; }
+  .chat-holder .chat-header {
+    text-align: center; }
+  .chat-holder .chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    font-size: 12px;
+    line-height: 30px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    width: 100%; }
+  .chat-holder .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; }

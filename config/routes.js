@@ -90,7 +90,7 @@ module.exports = (app, passport, auth) => {
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
-
+  app.get('/gametour', index.gameTour);
   // Game route
   const game = require('../app/controllers/game');
   app.post('/api/games/:id/start', users.ensureToken, game.startGame);
