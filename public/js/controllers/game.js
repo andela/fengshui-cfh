@@ -1,11 +1,12 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', '$http', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, $http, game, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
     $scope.pickedCards = [];
+    $scope.allUser = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -27,7 +28,7 @@ angular.module('mean.system')
         }
       }
     };
-
+    
     $scope.pointerCursorStyle = function() {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
         return {'cursor': 'pointer'};
@@ -124,7 +125,15 @@ angular.module('mean.system')
       game.startGame();
     };
 
+    const displayMessage = (message, modalID) => {
+      $scope.message = message;
+      $(modalID).modal();
+    };
+
+    $scope.joinName = name => name.split(' ').join('');
+
     $scope.abandonGame = function() {
+      // sessionStorage.invitedUsers = JSON.stringify([]);
       game.leaveGame();
       $location.path('/');
     };
@@ -148,6 +157,155 @@ angular.module('mean.system')
         $scope.showTable = true;
       }
     });
+    
+    $scope.getFriends = () => {
+      const userId = window.user._id;
+      $http.post('/api/friends', { user_id: userId })
+        .success((response) => {
+          $scope.userFriends = response;
+        }, error => error
+        );
+    };
+
+      $scope.LoadNotifications = () => {
+        const userId = window.user._id;
+        $http.post('/api/notify', { user_id: userId })
+          .success((response) => {
+            $scope.allNotification = response;
+            $scope.count = $scope.allNotification.length;
+          }, error => error
+          );
+      };
+
+      $scope.readNotifications = (notifyId) => {
+        const userId = window.user._id;
+        $http.post('/api/read', { user_id: userId, notifyId })
+          .success((response) => {
+            if (response.succ) {
+              $scope.LoadNotifications();
+            }
+          }, error => error
+          );
+      };
+  if (window.user !== null) {
+        $scope.LoadNotifications();
+  }
+  $scope.addFriend = (friend, button) => {
+    const friendId = friend._id;
+    const userId = window.user._id;
+    const url = button.target.baseURI;
+    let checkButton;
+    if ($scope.userFriends.includes(friendId)) {
+      checkButton = 'Unfriend';
+    } else {
+      checkButton = 'Addfriend';
+    }
+    $http.post('/friends',
+      {
+        user_id: userId,
+        checkButton,
+        friendId,
+        url
+      })
+          .success((response) => {
+            if (response.succ) {
+              setTimeout(() => {
+                $scope.$apply(() => {
+                  if (response.action === 'addfriend') {
+                    const resultId = response.friendId;
+                    $scope.userFriends.push(resultId);
+                  } else {
+                    const resultId = response.friendId;
+                    const index = $scope.userFriends.indexOf(resultId);
+                    if (index !== -1) {
+                      $scope.userFriends.splice(index, 1);
+                    }
+                  }
+                });
+              }, 100);
+            }
+          });
+  };
+  $scope.sendNotification = (button) => {
+    const friendList = $scope.userFriends;
+    const url = button.target.baseURI;
+    const userName = window.user.name;
+    $http.post('/notify',
+      {
+        userName,
+        friendList,
+        url
+      })
+          .success((response) => {
+            if (response.succ) {
+              response.send('Notification sent Successfully');
+            }
+          });
+  };
+  $scope.invite = (user, button) => {
+    $scope.invitedUsers = JSON.parse(sessionStorage.invitedUsers);
+    if ($scope.invitedUsers.length === 10) {
+      $('[data-toggle="popover"]').popover();
+    }
+
+    if ($scope.invitedUsers.length <= 10) {
+      const inviteButton = document.getElementById(`${button.target.id}`);
+      inviteButton.disabled = true;
+      inviteButton.className.replace(/\binvite pull-right\b/, '');
+      if (inviteButton.class === 'invite')
+      { $scope.class = 'invite'; }
+      else {
+        $scope.class = 'invite';
+      }
+      if ($scope.invitedUsers.indexOf(user.name) === -1) {
+        $scope.invitedUsers.push(user.name);
+        sessionStorage.invitedUsers = JSON.stringify($scope.invitedUsers);
+      }
+    }
+
+    const url = button.target.baseURI;
+    const obj = {
+      url,
+      invitee: user.email,
+      gameOwner: game.players[0].username
+    };
+    $http.post('/inviteusers', obj);
+  };
+
+  $scope.getUsers = () => {
+    $http.get('/api/search/users')
+          .success((response) => {
+            $scope.currentUsers = response;
+            displayMessage('', '#users-modal');
+          }, error => error
+          );
+  };
+
+  $scope.searchUsers = () => {
+    if (!sessionStorage.invitedUsers) {
+      sessionStorage.invitedUsers = JSON.stringify([]);
+    }
+
+    $scope.userMatches = [];
+    $scope.currentUsers.forEach((user) => {
+      const userName = user.name.toLowerCase();
+      const userEmail = user.email.toLowerCase();
+      if (userName.indexOf($scope.searchString.toLowerCase()) !== -1) {
+        $scope.userMatches.push(user);
+      } else if (userEmail === $scope.searchString.toLowerCase()) {
+        $scope.userMatches.push(user);
+      }
+    });
+
+    $scope.userMatches.forEach((user) => {
+      $scope.invitedUsers = JSON.parse(sessionStorage.invitedUsers);
+      user.disabled = $scope.invitedUsers.includes(user.name);
+    });
+    return $scope.userMatches;
+  };
+
+  $scope.startGameChoice = false;
+  $scope.showInviteButton = false;
 
     $scope.$watch('game.gameID', function() {
       if (game.gameID && game.state === 'awaiting players') {

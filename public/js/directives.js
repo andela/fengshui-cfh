@@ -56,7 +56,13 @@ angular.module('mean.directives', [])
     return {
       restrict: 'EA',
       templateUrl: '/views/question.html',
-      link: function(scope, elem, attr) {}
+      link: function(scope) {
+        if (scope.isCustomGame()) {
+          scope.showInviteButton = true;
+        } else {
+          scope.showInviteButton = false;
+        }
+      }
     };
   })
   .directive('modal', function($compile) {
