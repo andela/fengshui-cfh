@@ -53,14 +53,14 @@ angular.module('mean.system')
   $scope.signIn = () => {
     $http.post('api/auth/signin', $scope.formData)
     .then((response) => {
-      console.log(response.data);
+      $scope.alert = response.data.message;
       if (response.data.message === 'successful login') {
         window.localStorage.setItem('jwt', response.data.token);
         $location.path('/#!/');
         location.reload();
       }
-    }, (err) => {
-      alert(err);
+    }, (response) => {
+      $scope.alert = response.data.message;
     });
   };
 
@@ -69,7 +69,7 @@ angular.module('mean.system')
     $http.get('/signout')
     .then((response) => {
       $scope.alert = response.data.message;
-      if (response.data.message === 'Logged Out'){
+      if (response.data.message === 'Logged Out') {
         $location.path('/#!/');
         location.reload();
       }
@@ -77,13 +77,22 @@ angular.module('mean.system')
   };
 
   $scope.playGame = () => {
-    $http({
-      method: 'GET',
-      url: '/app'
-    }).then((response) => {
-      $scope.myWelcome = response.data;
-    }, (response) => {
-      $scope.myWelcome = response.statusText;
+    swal({
+      title: 'Start a new game session',
+      text: 'Are you sure you want start?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Go back',
+      confirmButtonText: 'Start Game'
+    }).then(() => {
+      $http({
+        method: 'GET',
+        url: '/play'
+      }).then((response) => {
+        $location.path('/app');
+      });
     });
   };
 
@@ -93,11 +102,22 @@ angular.module('mean.system')
       Authorization: `token ${token}`,
       Accept: 'application/json;odata=verbose'
     }
-    };
+  };
+    swal({
+      title: 'Start a new game session',
+      text: 'Are you sure you want start?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Go back',
+      confirmButtonText: 'Start Game'
+    }).then(() => { 
     $http.get('/play?custom', config)
     .then((response) => {
       window.location = '/#!/app?custom';
     }, (response) => {
+    });
     });
   };
 }]);

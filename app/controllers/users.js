@@ -6,16 +6,10 @@ const mongoose = require('mongoose'),
   User = mongoose.model('User');
 const avatars = require('./avatars').all();
 
-/**
- * Auth callback
- */
 exports.authCallback = (req, res, next) => {
   res.redirect('/chooseavatars');
 };
 
-/**
- * Show login form
- */
 exports.signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
@@ -24,9 +18,7 @@ exports.signin = (req, res) => {
   }
 };
 
-/**
- * Show sign up form
- */
+
 exports.signup = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signup');
@@ -35,9 +27,6 @@ exports.signup = (req, res) => {
   }
 };
 
-/**
- * Logout
- */
 exports.signout = (req, res) => {
   req.logout();
   return res.json({
@@ -45,18 +34,12 @@ exports.signout = (req, res) => {
   });
 };
 
-/**
- * Session
- */
+
 exports.session = (req, res) => {
   res.redirect('/');
 };
 
-/**
- * Check avatar - Confirm if the user who logged in via passport
- * already has an avatar. If they don't have one, redirect them
- * to our Choose an Avatar page.
- */
+
 exports.checkAvatar = (req, res) => {
   if (req.user && req.user._id) {
     User.findOne({
@@ -142,20 +125,21 @@ exports.jwtSignIn = (req, res) => {
   }).exec((error, existingUser) => {
     if (error) {
       return res.status(500).json({
-        error: 'Server Login Error'
+        message: 'Server Login Error'
       });
     }
     if (!existingUser) {
       return res.status(404).json({
-        error: 'User not found'
+        message: 'User not found'
       });
     }
     if (!existingUser.authenticate(req.body.password)) {
       return res.status(400).json({
-        error: 'Invalid Login details'
+        message: 'Invalid Login details'
       });
     }
     req.logIn(existingUser, () => {
+      
       const newUser = {
         name: existingUser.name,
         email: existingUser.email
@@ -177,22 +161,19 @@ exports.ensureToken = (req, res, next) => {
   }
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      let result;
       if (err) {
-        result = res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
+        res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
-        result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        req.token = decoded;
+        // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
+        next();
       }
-      return result;
     });
   } else {
     res.redirect('/#!/signin?error=No_token_provided');
   }
 };
 
-/**
- * Assign avatar to user
- */
 exports.avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
@@ -224,7 +205,6 @@ exports.addDonation = (req, res) => {
           }
         }
         if (!duplicate) {
-          console.log('Validated donation');
           user.donations.push(req.body);
           user.premium = 1;
           user.save();
@@ -235,28 +215,18 @@ exports.addDonation = (req, res) => {
   res.send();
 };
 
-/**
- *  Show profile
- */
 exports.show = (req, res) => {
-  let user = req.profile;
-
+  const user = req.profile;
   res.render('users/show', {
     title: user.name,
     user
   });
 };
 
-/**
- * Send User
- */
 exports.me = (req, res) => {
   res.jsonp(req.user || null);
 };
 
-/**
- * Find user by id
- */
 exports.user = (req, res, next, id) => {
   User
     .findOne({
@@ -264,7 +234,7 @@ exports.user = (req, res, next, id) => {
     })
     .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error(`Failed to load User ${  id}`));
+      if (!user) return next(new Error(`Failed to load User ${id}`));
       req.profile = user;
       next();
     });
