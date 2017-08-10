@@ -2,7 +2,6 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose');
-
 const Game = mongoose.model('Game');
 
 
