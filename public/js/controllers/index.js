@@ -10,9 +10,8 @@ angular.module('mean.system')
   $scope.showError = () => {
     if ($location.search().error) {
       return $location.search().error;
-    } else {
-      return false;
     }
+    return false;
   };
 
   $scope.avatars = [];
@@ -42,8 +41,8 @@ angular.module('mean.system')
       $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
       $timeout(() => {
-        $location.path('/#!/');
         location.reload();
+        $location.path('/gametour');
       }, 3000);
     }, (response) => {
       $scope.alert = response.data.message;
@@ -53,14 +52,13 @@ angular.module('mean.system')
   $scope.signIn = () => {
     $http.post('api/auth/signin', $scope.formData)
     .then((response) => {
-      console.log(response.data);
       if (response.data.message === 'successful login') {
         window.localStorage.setItem('jwt', response.data.token);
         $location.path('/#!/');
         location.reload();
       }
     }, (err) => {
-      alert(err);
+      // alert(err);
     });
   };
 
@@ -79,7 +77,7 @@ angular.module('mean.system')
   $scope.playGame = () => {
     swal({
       title: 'Start a new game session',
-      text: 'Are you sure you want start?',
+      text: 'Are you sure you want to start?',
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -90,7 +88,7 @@ angular.module('mean.system')
       $http({
         method: 'GET',
         url: '/play'
-      }).then((response) => {
+      }).then(() => {
         $location.path('/app');
       });
     });
@@ -102,7 +100,7 @@ angular.module('mean.system')
       Authorization: `token ${token}`,
       Accept: 'application/json;odata=verbose'
     }
-  };
+    };
     swal({
       title: 'Start a new game session',
       text: 'Are you sure you want start?',
@@ -113,11 +111,11 @@ angular.module('mean.system')
       cancelButtonText: 'Go back',
       confirmButtonText: 'Start Game'
     }).then(() => { 
-    $http.get('/play?custom', config)
-    .then((response) => {
-      window.location = '/#!/app?custom';
-    }, (response) => {
-    });
+      $http.get('/play?custom', config)
+      .then(() => {
+        window.location = '/#!/app?custom';
+      }, () => {
+      });
     });
   };
 }]);
