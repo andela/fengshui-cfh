@@ -1,6 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
-
+  .factory('game', ['socket', '$timeout', (socket, $timeout) => {
   var game = {
     id: null, // This player's socket ID, so we know who this player is
     gameID: null,
@@ -12,7 +11,7 @@ angular.module('mean.system')
     table: [],
     czar: null,
     playerMinLimit: 3,
-    playerMaxLimit: 6,
+    playerMaxLimit: 12,
     pointLimit: null,
     state: null,
     round: 0,
@@ -20,9 +19,10 @@ angular.module('mean.system')
     curQuestion: null,
     notification: null,
     timeLimits: {},
-    joinOverride: false
+    joinOverride: false,
+    modal: false,
+    modalMessage: ''
   };
-
   var notificationQueue = [];
   var timeout = false;
   var self = this;
@@ -55,7 +55,7 @@ angular.module('mean.system')
     $timeout(decrementTime, 950);
   };
 
-  socket.on('id', function(data) {
+  socket.on('id', (data) => {
     game.id = data.id;
   });
 
@@ -69,8 +69,8 @@ angular.module('mean.system')
     game.timeLimits = data.timeLimits;
   });
 
-  socket.on('gameUpdate', function(data) {
-
+  socket.on('gameUpdate', (data) => {
+    // console.log('all players :', game.players);
     // Update gameID field only if it changed.
     // That way, we don't trigger the $scope.$watch too often
     if (game.gameID !== data.gameID) {
@@ -102,7 +102,6 @@ angular.module('mean.system')
       game.time = game.timeLimits.stateResults - 1;
       timeSetViaUpdate = true;
     }
-
     // Set these properties on each update
     game.round = data.round;
     game.winningCard = data.winningCard;
@@ -167,7 +166,7 @@ angular.module('mean.system')
               game.curQuestion.text.indexOf('<u></u>') > -1) {
       game.curQuestion = data.curQuestion;
     } else if (data.state === 'awaiting players') {
-      joinOverrideTimeout = $timeout(function() {
+      joinOverrideTimeout = $timeout(() => {
         game.joinOverride = true;
       }, 15000);
     } else if (data.state === 'game dissolved' || data.state === 'game ended') {
@@ -176,17 +175,23 @@ angular.module('mean.system')
     }
   });
 
-  socket.on('notification', function(data) {
+  socket.on('notification', (data) => {
     addToNotificationQueue(data.notification);
   });
-
-    game.joinGame = function(mode,room,createPrivate) {
-      mode = mode || 'joinGame';
-      room = room || '';
-      createPrivate = createPrivate || false;
-      var userID = !!window.user ? user._id : 'unauthenticated';
-      socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate});
-    };
+  socket.on('beforeStart', function(data) {
+    game.modalMessage = data;
+    game.modal = !game.modal;
+    $timeout(function() {
+      game.modal = false;
+    }, 1500);
+  });
+  game.joinGame = function(mode,room,createPrivate) {
+    mode = mode || 'joinGame';
+    room = room || '';
+    createPrivate = createPrivate || false;
+    var userID = !!window.user ? user._id : 'unauthenticated';
+    socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate});
+  };
 
     game.startGame = function () {
       socket.emit('startGame');
@@ -212,8 +217,6 @@ angular.module('mean.system')
 
     game.replyChat = function (){
       socket.on('reply chat', function(data) {
-        console.log(data);
-        console.log('==================chat reply=========>>>>>>>>>>>>>>>>');
       })
     };
 

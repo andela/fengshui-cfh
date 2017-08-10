@@ -1,13 +1,13 @@
 /**
  * Module dependencies.
  */
+require('dotenv').config();
 var express = require('express'),
   fs = require('fs'),
   passport = require('passport'),
   logger = require('mean-logger'),
   io = require('socket.io'),
   dotenv = require('dotenv').config();
-var admin = require('firebase-admin');
 
 /**
  * Main application entry file.
