@@ -53,14 +53,14 @@ angular.module('mean.system')
   $scope.signIn = () => {
     $http.post('api/auth/signin', $scope.formData)
     .then((response) => {
-      console.log(response.data);
+      $scope.alert = response.data.message;
       if (response.data.message === 'successful login') {
         window.localStorage.setItem('jwt', response.data.token);
         $location.path('/#!/');
         location.reload();
       }
-    }, (err) => {
-      alert(err);
+    }, (response) => {
+      $scope.alert = response.data.message;
     });
   };
 
