@@ -77,7 +77,7 @@ const sendMail = (inviteeMail, gameLink, gameOwner) => {
     );
 };
 
-module.exports = function(app, passport, auth) {
+module.exports = (app, passport, auth) => {
     // User Routes
   app.get('/signin', users.signin);
   app.get('/signup', users.signup);
@@ -87,6 +87,7 @@ module.exports = function(app, passport, auth) {
   // Setting up the users api
   app.post('/api/auth/users', users.create);
   app.post('/users/avatars', users.avatars);
+  app.post('/api/auth/signin', users.jwtSignIn);
 
     // Donation Routes
   app.post('/donations', users.addDonation);
@@ -144,25 +145,25 @@ module.exports = function(app, passport, auth) {
   app.param('userId', users.user);
 
     // Answer Routes
-  var answers = require('../app/controllers/answers');
+  const answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
     // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
     // Question Routes
-  var questions = require('../app/controllers/questions');
+  const questions = require('../app/controllers/questions');
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
     // Finish with setting up the questionId param
   app.param('questionId', questions.question);
 
     // Avatar Routes
-  var avatars = require('../app/controllers/avatars');
+  const avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
     // Home route
-  var index = require('../app/controllers/index');
+  const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
   app.get('/api/search/users', middleware.requiresLogin, (req, res) => {
