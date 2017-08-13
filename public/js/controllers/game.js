@@ -6,6 +6,9 @@ angular.module('mean.system')
   $scope.modalShown = false;
   $scope.game = game;
   $scope.pickedCards = [];
+  $scope.messagesList = '';
+  $scope.chatControler = '^';
+  $scope.charactersLeft = 100;
   let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
 
