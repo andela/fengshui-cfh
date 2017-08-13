@@ -75,7 +75,6 @@ module.exports = function(io) {
     socket.on('leaveGame', function () {
       exitGame(socket);
     });
-
     socket.on('disconnect', function(){
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);

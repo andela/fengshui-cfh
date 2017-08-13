@@ -7,7 +7,9 @@
     "angular-ui-utils": "0.0.4",
     "jquery": "~1.9.1",
     "underscore": "~1.5.2",
-    "intro.js": "~2.5.0"
+    "intro.js": "~2.5.0",
+    "emojionearea": "~2.1.0",
+    "angular-scroll-glue": "^2.2.0"
   },
   "exportsOverride": {
     "bootstrap": {

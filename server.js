@@ -8,7 +8,6 @@ var express = require('express'),
   logger = require('mean-logger'),
   io = require('socket.io'),
   dotenv = require('dotenv').config();
-var admin = require('firebase-admin');
 
 /**
  * Main application entry file.
