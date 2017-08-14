@@ -7,13 +7,19 @@ const mongoose = require('mongoose'),
 const avatars = require('./avatars').all();
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Void}
  * Auth callback
  */
-exports.authCallback = (req, res, next) => {
+exports.authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Show login form
  */
 exports.signin = (req, res) => {
@@ -25,6 +31,9 @@ exports.signin = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Show sign up form
  */
 exports.signup = (req, res) => {
@@ -36,6 +45,9 @@ exports.signup = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Logout
  */
 exports.signout = (req, res) => {
@@ -46,6 +58,9 @@ exports.signout = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Session
  */
 exports.session = (req, res) => {
@@ -53,6 +68,9 @@ exports.session = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Check avatar - Confirm if the user who logged in via passport
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
@@ -98,7 +116,11 @@ exports.create = (req, res) => {
             }).status(500);
           }
           req.logIn(user, (err) => {
-            if (err) return err;
+            if (err) {
+              return res.json({
+                message: 'Internal Server Error'
+              }).status(500);
+            }
             const newUser = {
               name: req.body.name,
               email: req.body.email
@@ -156,7 +178,6 @@ exports.jwtSignIn = (req, res) => {
       });
     }
     req.logIn(existingUser, () => {
-      
       const newUser = {
         name: existingUser.name,
         email: existingUser.email
@@ -192,6 +213,9 @@ exports.ensureToken = (req, res, next) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Assign avatar to user
  */
 exports.avatars = (req, res) => {
@@ -219,13 +243,12 @@ exports.addDonation = (req, res) => {
       .exec((err, user) => {
         // Confirm that this object hasn't already been entered
         let duplicate = false;
-        for (let i = 0; i < user.donations.length; i++) {
+        for (let i = 0; i < user.donations.length; i += 1) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
         }
         if (!duplicate) {
-          console.log('Validated donation');
           user.donations.push(req.body);
           user.premium = 1;
           user.save();
@@ -237,11 +260,13 @@ exports.addDonation = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  *  Show profile
  */
 exports.show = (req, res) => {
-  let user = req.profile;
-
+  const user = req.profile;
   res.render('users/show', {
     title: user.name,
     user
@@ -249,6 +274,9 @@ exports.show = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
  * Send User
  */
 exports.me = (req, res) => {
@@ -256,6 +284,12 @@ exports.me = (req, res) => {
 };
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @param{Function} next
+ * @param{Number} id
+ * @return{Object} request object
+ * @return{Object} request object
  * Find user by id
  */
 exports.user = (req, res, next, id) => {
@@ -265,7 +299,7 @@ exports.user = (req, res, next, id) => {
     })
     .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error(`Failed to load User ${  id}`));
+      if (!user) return next(new Error(`Failed to load User ${id}`));
       req.profile = user;
       next();
     });

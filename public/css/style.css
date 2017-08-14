@@ -878,9 +878,11 @@
 
  /**** Contact Us ****/
  .wpb-contact-us {
+   padding: 0%;
    min-height: 540px;
    position: relative;
    z-index:890;
+   background: #BDACAC;
  }
 
  .wpb-contact-us .google-map-container {
@@ -1001,6 +1003,7 @@
 
 #donations {
    margin-top: 160px;
+   background: #BDACAC;
 }
 
 /*MORE MEDIA QUERIESS WHOOOOOAAAA*/
@@ -1255,3 +1258,4 @@
       margin: 0 0 0 4px;
    }
  }
+ 
