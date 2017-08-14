@@ -1,13 +1,13 @@
-const jwt = require('jsonwebtoken');
+const jwt =require('jsonwebtoken');
+const mongoose = require('mongoose');
+const async = require('async');
+const _ = require('underscore');
 const users = require('./users');
-/**
- * Module dependencies.
- */
-const mongoose = require('mongoose'),
-  async = require('async'),
-    _ = require('underscore');
 
 /**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request response
  * Redirect users to /#!/app (forcing Angular to reload the page)
  */
 exports.play = (req, res) => {
@@ -42,4 +42,9 @@ exports.render = (req, res) => {
   res.render('index', {
     user: req.user ? JSON.stringify(req.user) : 'null'
   });
+};
+
+exports.gameTour = (req, res) => {
+  location.reload();
+  res.redirect('/#!/gametour');
 };

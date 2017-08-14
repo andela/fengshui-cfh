@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+    - "stable"
+services:
+- mongodb
+before_script:
+    - npm install gulp -g
+    - npm install
+script: 
+    - npm test
