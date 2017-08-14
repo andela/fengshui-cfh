@@ -1,11 +1,16 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) => {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$anchorScroll', function ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll) {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
   $scope.modalShown = false;
   $scope.game = game;
   $scope.pickedCards = [];
+  $scope.messagesList = '';
+  $scope.chatControler = '^';
+  $scope.charactersLeft = 100;
+  $scope.showChatStatus = false;
+  $scope.chatter = {};
   let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -25,6 +30,22 @@ angular.module('mean.system')
       } else {
         $scope.pickedCards.pop();
       }
+    }
+  };
+
+  $scope.shuffleCards = () => {
+    const card = $(`#${event.target.id}`);
+    card.addClass('animated flipOutY');
+    setTimeout(() => {
+      $scope.startNextRound();
+      card.removeClass('animated flipOutY');
+      $('#czarModal').modal('hide');
+    }, 500);
+  };
+
+  $scope.startNextRound = () => {
+    if ($scope.isCzar()) {
+      game.startNextRound();
     }
   };
 
@@ -109,7 +130,7 @@ angular.module('mean.system')
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#41c2ca',
       cancelButtonText: 'Wait a little',
       confirmButtonText: 'Start Game Now'
     }).then(() => {
@@ -140,14 +161,24 @@ angular.module('mean.system')
     if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
       $scope.showTable = true;
     }
-    if ($scope.game.state === 'game dissolved' || $scope.game.state === 'game ended') {
-      const gameData = { gameId: $scope.game.gameID,
-        gameOwner: $scope.game.players[0].username,
-        gameWinner: $scope.game.players[game.gameWinner].username,
-        gamePlayers: $scope.game.players
-      };
-
-      $http.post(`/api/games/${game.gameID}/start`, gameData);
+    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+      $('#czarModal').modal({
+        dismissible: false
+      });
+      $('#czarModal').modal('open');
+    }
+    if (game.state === 'game dissolved') {
+      $('#czarModal').modal('close');
+    }
+    if ($scope.isCzar() === false && game.state === 'czar pick card'
+         && game.state !== 'game dissolved'
+         && game.state !== 'awaiting players' && game.table.length === 0) {
+      $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+    }
+    if (game.state !== 'czar pick card'
+        && game.state !== 'awaiting players'
+         && game.state !== 'game dissolve') {
+      $scope.czarHasDrawn = '';
     }
   });
 
@@ -172,6 +203,58 @@ angular.module('mean.system')
         }
       }
     }
+  });
+
+  $scope.charactersRemaining = () => {
+    const myMessage = ($scope.message).trim();
+    const messageLength = myMessage.length;
+    $scope.charactersLeft = 100 - messageLength;
+  };
+
+  $scope.submitWithEnter = (event) => {
+    if (event.which === 13) {
+      event.preventDefault();
+      $scope.chat();
+    }
+  };
+
+
+  $scope.chat = () => {
+    const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
+    const playerAvatar = $scope.game.players[$scope.game.playerIndex].avatar;
+    const myMessage = $scope.message;
+    const timeSent = new Date(Date.now()).toLocaleString();
+    const gameID = $scope.game.gameID;
+    if (myMessage !== '' && myMessage !== undefined) {
+      const newMessage = {
+        sender: IndividualPlayer,
+        message: myMessage,
+        date: timeSent,
+        avater: playerAvatar,
+        gameID
+      };
+      game.chat(newMessage);
+      $scope.message = '';
+      $scope.charactersLeft = 100;
+    }
+  };
+
+  $scope.gotoBottom = () => {
+    $location.hash('bottom');
+    $anchorScroll();
+  };
+
+  $scope.showChat = () => {
+    $scope.showChatStatus = !$scope.showChatStatus;
+  };
+
+  socket.on('reply chat', (data) => {
+    const message = [];
+    Object.keys(data.chat).forEach((key) => {
+      message.push(data.chat[key]);
+    });
+    $scope.messagesList = message;
+    $scope.gotoBottom();
   });
 
   if ($location.search().game && !(/^\d+$/).test($location.search().game)) {

@@ -59,6 +59,9 @@ angular.module('mean.system')
     game.id = data.id;
   });
 
+  socket.on('reply chat', function(data) {
+  })
+
   socket.on('prepareGame', function(data) {
     game.playerMinLimit = data.playerMinLimit;
     game.playerMaxLimit = data.playerMaxLimit;
@@ -137,7 +140,17 @@ angular.module('mean.system')
       game.state = data.state;
     }
 
-    if (data.state === 'waiting for players to pick') {
+  if (data.state === 'czar pick card') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue(
+             `You are now a Czar, 
+             click black card to pop a new question`
+           );
+      } else {
+        addToNotificationQueue('Waiting for Czar to pick card');
+      }
+      } else if (data.state === 'waiting for players to pick') {
       game.czar = data.czar;
       game.curQuestion = data.curQuestion;
       // Extending the underscore within the question
@@ -182,7 +195,7 @@ angular.module('mean.system')
       game.modal = false;
     }, 1500);
   });
-  game.joinGame = function(mode,room,createPrivate) {
+  game.joinGame = (mode, room, createPrivate) => {
     mode = mode || 'joinGame';
     room = room || '';
     createPrivate = createPrivate || false;
@@ -190,25 +203,34 @@ angular.module('mean.system')
     socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate});
   };
 
-  game.startGame = function() {
-    socket.emit('startGame');
-  };
+    game.startGame = () => {
+      socket.emit('startGame');
+    };
 
-  game.leaveGame = function() {
-    game.players = [];
-    game.time = 0;
-    socket.emit('leaveGame');
-  };
+    game.leaveGame = () => {
+      game.players = [];
+      game.time = 0;
+      socket.emit('leaveGame');
+    };
 
-  game.pickCards = function(cards) {
-    socket.emit('pickCards',{cards: cards});
-  };
+    game.pickCards = (cards) => {
+      socket.emit('pickCards', { cards });
+    };
 
-  game.pickWinning = function(card) {
-    socket.emit('pickWinning',{card: card.id});
-  };
+    game.pickWinning = (card) => {
+      socket.emit('pickWinning', { card: card.id });
+    };
 
-  decrementTime();
-
-  return game;
-}]);
+    game.chat = (data) => {
+      socket.emit('send chat', data);
+    };
+    game.replyChat = () => {
+      socket.on('reply chat', () => {
+      });
+    };
+    game.startNextRound = () => {
+      socket.emit('czarCardSelected');
+    };
+    decrementTime();
+    return game;
+  }]);
