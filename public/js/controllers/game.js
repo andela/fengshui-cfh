@@ -1,11 +1,14 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) => {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$anchorScroll', ($scope, game, $timeout, $location, MakeAWishFactsService, socket) => {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
   $scope.modalShown = false;
   $scope.game = game;
   $scope.pickedCards = [];
+  $scope.messagesList = '';
+  $scope.chatControler = '^';
+  $scope.charactersLeft = 100;
   let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -18,7 +21,6 @@ angular.module('mean.system')
           $scope.hasPickedCards = true;
         } else if (game.curQuestion.numAnswers === 2 &&
           $scope.pickedCards.length === 2) {
-            // delay and send
           $scope.hasPickedCards = true;
           $timeout($scope.sendPickedCards, 300);
         }
@@ -146,8 +148,7 @@ angular.module('mean.system')
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
-
-      $http.post(`/api/games/${game.gameID}/start`, gameData);
+      window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });
 
@@ -172,6 +173,46 @@ angular.module('mean.system')
         }
       }
     }
+  });
+
+  $scope.changeFormOpenIcon = () => {
+    if ($scope.chatControler === '^') {
+      $scope.chatControler = 'v';
+    } else {
+      $scope.chatControler = '^';
+    }
+  };
+
+  $scope.charactersRemaining = () => {
+    const myMessage = ($scope.message).trim();
+    const messageLength = myMessage.length;
+    $scope.charactersLeft = 100 - messageLength;
+  };
+
+  $scope.chat = () => {
+    const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
+    const playerAvatar = $scope.game.players[$scope.game.playerIndex].avatar;
+    const myMessage = $scope.message;
+    const timeSent = new Date(Date.now()).toLocaleString();
+    const gameID = $scope.game.gameID;
+    const newMessage = {
+      sender: IndividualPlayer,
+      message: myMessage,
+      date: timeSent,
+      avater: playerAvatar,
+      gameID
+    };
+    game.chat(newMessage);
+    $scope.message = '';
+    $scope.charactersLeft = 100;
+  };
+
+  socket.on('reply chat', (data) => {
+    const message = [];
+    Object.keys(data.chat).forEach((key) => {
+      message.push(data.chat[key]);
+    });
+    $scope.messagesList = message;
   });
 
   if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
