@@ -160,17 +160,17 @@ exports.jwtSignIn = (req, res) => {
   }).exec((error, existingUser) => {
     if (error) {
       return res.status(500).json({
-        error: 'Server Login Error'
+        message: 'Server Login Error'
       });
     }
     if (!existingUser) {
       return res.status(404).json({
-        error: 'User not found'
+        message: 'User not found'
       });
     }
     if (!existingUser.authenticate(req.body.password)) {
       return res.status(400).json({
-        error: 'Invalid Login details'
+        message: 'Invalid Login details'
       });
     }
     req.logIn(existingUser, () => {
