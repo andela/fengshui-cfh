@@ -4,8 +4,6 @@
 import mongoose from 'mongoose';
 
 const Game = mongoose.model('Game');
-
-
 /**
  * Save user game data
  * @param {object} req - request object sent to a route
