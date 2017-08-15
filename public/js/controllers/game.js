@@ -111,7 +111,7 @@ angular.module('mean.system')
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#41c2ca',
       cancelButtonText: 'Wait a little',
       confirmButtonText: 'Start Game Now'
     }).then(() => {
