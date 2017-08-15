@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     config = require('../../config/config'),
     Schema = mongoose.Schema;
 
@@ -25,7 +25,7 @@ var QuestionSchema = new Schema({
         type: Boolean
     },
     expansion: {
-        type: String,
+        type: String, 
         default: '',
         trim: true
     }
