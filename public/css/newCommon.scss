@@ -9,26 +9,6 @@ $mq-custom-wide : 1200px !default;
 
 $color-background: #fff;
 
-@mixin gradient-bg {
-/* IE10 Consumer Preview */
-background-image: -ms-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Mozilla Firefox */
-background-image: -moz-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Opera */
-background-image: -o-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* Webkit (Safari/Chrome 10) */
-background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #0B394E), color-stop(1, #ABCE8D));
-
-/* Webkit (Chrome 11+) */
-background-image: -webkit-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-
-/* W3C Markup, IE10 Release Preview */
-background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
-}
-
 // Both portrait and landscape
 @mixin mobile-only {
     @media (max-width : $mq-mobile-landscape) {
@@ -384,21 +364,10 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
 
 html, body, .main-container, .cont, #first-section, #inner-container{
     height: 100%;
+    margin: 0 !important;
 }
 
 html{
-    // margin: 20px;
-    // margin-top: 5px;
-    // background: url(/img/minimal-wallpaper.jpg) no-repeat center center fixed;
-    // -webkit-background-size: cover;
-    // -moz-background-size: cover;
-    // -o-background-size: cover;
-    // background-size: cover;
-    @include gradient-bg;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    position: relative;
-
     @include mobile-only{
         //margin: 3px;
         margin-top: 0px;
@@ -406,15 +375,15 @@ html{
 }
 body{
     font-family: $main-font;
-    background: transparent;
-    margin: 10px;
+    background:	lighten(#DCDCDC, 10%) !important;
+    margin: 0px;
 
     @include tablet-portrait-only{
-        margin: 5px;
+        margin: 0px;
     }
 
     @include mobile-only{
-        margin: 1px;
+        margin: 0px;
     }
 }
 
@@ -456,28 +425,17 @@ body{
                 display: inline-block;
                 margin-left: 10px;
                 font-size: 28px;
-                font-family: 'Lobster', cursive;
+                font-family: Rancho, cursive;
+                color: #F21368 !important;
+
 
                 @include mobile-only{
                     font-size: 20px;
-                }
-
-                #first-word{
-                    color: #7CE4E8;
-                }
-
-                #second-word{
-                    color: #FFFFA5;
-                }
-
-                #third-word{
-                    color: #FC575E;
                 }
             }
 
             #abandon-game-button{
                 display: inline-block;
-                float:right;
                 border-radius: 8px;
                 -moz-border-radius: 8px;
                 -webkit-border-radius: 8px;
@@ -1326,4 +1284,184 @@ body{
     }
 }
 
+// new styles for donation, team and footer
+.newdonation {
+   height: auto;
+   width: 100%;
+   background: #EBEBEB;
+   text-align: center;
+   padding:2%;
+   div h4 a {
+     color:green;
+   }
+   .donatelink {
+     padding: 2%;
+     a {
+       text-align: center;
+       width: 200%;
+     }
+   }
+  .donatereason {
+     font-size:20px;
+     padding:2%;
+     text-align: justify;
+     p {
+       font-family: Coustard;
+     }
+     a {
+       text-align: center;
+     }
+  }
+}
 
+.newteam {
+  height: auto;
+  width: 100%;
+  background: #BDACAC;
+  text-align: center;
+  padding: 2%;
+  div h1 {
+    font-family: Abel Open sans;
+  }
+  .newteamcontainer {
+    margin-bottom:3%;
+    margin-top:3%;
+  }
+  .newteammember {
+    background: #EBEBEB;
+    width:200px;
+    height:200px;
+    border-radius: 100px;
+    margin-left:12%;
+    margin-bottom:1%;
+    padding: 0px;
+  }
+  .newteamimagecontainer {
+    width: 100%;
+    height:70%;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  .newteamimage {
+    width: 80%;
+  }
+  .newteammembername {
+    margin-top:5%;
+    font-family: Tahoma;
+    font-size: 20px;
+  }
+  .newteamcontainertwo {
+    margin-bottom:3%;
+  }
+}
+
+.newfooter {
+   height: auto;
+   width: 100%;
+   background: #AF521F;
+   opacity:0.8;
+   padding:1%;
+   font-family: Comic;
+   color: white;
+   .newlegal {
+     text-align:justify;
+     font-size: 14px;
+   }
+}
+
+
+// new styles for donation, team and footer
+
+.how-to {
+    box-shadow: 0 2px 5px #333;
+}
+
+#slogan-head .wpb-slogan h2 {
+    color: black;
+}
+
+// new styles for donation, team and footer
+// styles for chat
+.chat-holder {
+  color:red;
+  position: fixed;
+  bottom: 1%;
+  right: 3px;
+  display: block;
+  background: white;
+  padding: 1%;
+  z-index: 1999;
+  height: auto;
+  max-height: 500px;
+  overflow: fixed;
+  width: 230px;
+  border-radius:5px;
+  .chat-title {
+    width:85%;
+    color: white;
+  }
+  .chat-open {
+    width:13%;
+    color: white;
+    text-align:center;
+    padding: 5px;
+  }
+  .demo {
+    color:white;
+    float:right;
+  }
+  .mycollapse {
+    max-height: 300px;
+    overflow: scroll;
+    padding: 2px;
+    font-size: 11px;
+    color: green;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+  .chat-messageholder {
+    padding: 2px;
+    font-size: 12px;
+  }
+  .chat-list {
+     margin: 3px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     border-left:5px solid #ccc;
+  }
+  .avater-holder {
+    text-align: center;
+  }
+  .chat-avater {
+    width:70%;
+    height: 70%;
+  }
+  .message-input {
+    margin-top:5px;
+  }
+  .send-message {
+    margin-top:3px;
+  }
+  .messageholder {
+    padding: 4px;
+    overflow: auto;
+  }
+  .message-area {
+    width: 100%;
+    margin-top:5px;
+    margin: 2px;
+    font-size: 10px;
+    border-radius: 4px;
+    border-left: 5px solid green;
+  }
+  .message-container {
+    padding: 0px;
+  }
+  .post {
+    padding: 2px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid green;
+  }
+  .chat-header {
+    text-align: center;
+  }
+}
