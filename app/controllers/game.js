@@ -1,12 +1,8 @@
 /**
  * Module dependencies.
  */
-<<<<<<< HEAD
-const mongoose = require('mongoose');
-=======
 import mongoose from 'mongoose';
 
->>>>>>> 20668bdf3a71408f10654d03530955892b22763c
 const Game = mongoose.model('Game');
 
 

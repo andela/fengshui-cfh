@@ -57,13 +57,8 @@ angular.module('mean.system')
         $location.path('/#!/');
         location.reload();
       }
-<<<<<<< HEAD
     }, (response) => {
       $scope.alert = response.data.message;
-=======
-    }, () => {
-      // alert(err);
->>>>>>> 20668bdf3a71408f10654d03530955892b22763c
     });
   };
 
