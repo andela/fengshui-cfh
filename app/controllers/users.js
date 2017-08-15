@@ -6,10 +6,22 @@ const mongoose = require('mongoose'),
   User = mongoose.model('User');
 const avatars = require('./avatars').all();
 
-exports.authCallback = (req, res, next) => {
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Void}
+ * Auth callback
+ */
+exports.authCallback = (req, res) => {
   res.redirect('/chooseavatars');
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Show login form
+ */
 exports.signin = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
@@ -18,7 +30,12 @@ exports.signin = (req, res) => {
   }
 };
 
-
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Show sign up form
+ */
 exports.signup = (req, res) => {
   if (!req.user) {
     res.redirect('/#!/signup');
@@ -27,6 +44,12 @@ exports.signup = (req, res) => {
   }
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Logout
+ */
 exports.signout = (req, res) => {
   req.logout();
   return res.json({
@@ -34,12 +57,24 @@ exports.signout = (req, res) => {
   });
 };
 
-
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Session
+ */
 exports.session = (req, res) => {
   res.redirect('/');
 };
 
-
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Check avatar - Confirm if the user who logged in via passport
+ * already has an avatar. If they don't have one, redirect them
+ * to our Choose an Avatar page.
+ */
 exports.checkAvatar = (req, res) => {
   if (req.user && req.user._id) {
     User.findOne({
@@ -139,7 +174,6 @@ exports.jwtSignIn = (req, res) => {
       });
     }
     req.logIn(existingUser, () => {
-      
       const newUser = {
         name: existingUser.name,
         email: existingUser.email
@@ -174,6 +208,12 @@ exports.ensureToken = (req, res, next) => {
   }
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Assign avatar to user
+ */
 exports.avatars = (req, res) => {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
@@ -199,7 +239,7 @@ exports.addDonation = (req, res) => {
       .exec((err, user) => {
         // Confirm that this object hasn't already been entered
         let duplicate = false;
-        for (let i = 0; i < user.donations.length; i++) {
+        for (let i = 0; i < user.donations.length; i += 1) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
@@ -215,6 +255,12 @@ exports.addDonation = (req, res) => {
   res.send();
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ *  Show profile
+ */
 exports.show = (req, res) => {
   const user = req.profile;
   res.render('users/show', {
@@ -223,10 +269,25 @@ exports.show = (req, res) => {
   });
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @return{Object} request object
+ * Send User
+ */
 exports.me = (req, res) => {
   res.jsonp(req.user || null);
 };
 
+/**
+ * @param{Object} req
+ * @param{Object} res
+ * @param{Function} next
+ * @param{Number} id
+ * @return{Object} request object
+ * @return{Object} request object
+ * Find user by id
+ */
 exports.user = (req, res, next, id) => {
   User
     .findOne({
