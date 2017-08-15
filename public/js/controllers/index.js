@@ -57,8 +57,8 @@ angular.module('mean.system')
         $location.path('/#!/');
         location.reload();
       }
-    }, () => {
-      // alert(err);
+    }, (response) => {
+      $scope.alert = response.data.message;
     });
   };
 
