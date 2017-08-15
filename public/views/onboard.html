@@ -30,5 +30,47 @@
     </div>
     <answers></answers>
   </div>
+  <!--Chat Begins -->
+  <div class="chat-holder" id="chat-for-Tour">
+    <div class="">
+      <button class="btn btn-success chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon()) data-target="#demo">
+        Chat with Other Players
+      </button>
+      <button  data-toggle="collapse" data-target="#demo" class="btn btn-success chat-open" ng-click=(changeFormOpenIcon())>
+        {{chatControler}}
+      </button>
+      <div id="demo" class="collapse mycollapse">
+        <div>
+          <p class="chat-header"> This is the beginning of chat for this Game </p>
+          <hr />
+          <ul class="message-container">
+            <li ng-repeat="message in messagesList" class="row post">
+          <div class="col-sm-4" class="avater-holder">
+            <img src={{message.avater}} alt="Avatar" class="chat-avater"  />
+            <b>{{message.sender}}</b>
+          </div>
+          <div class="col-sm-8">
+              <p>{{message.message}}</p>
+              <b>{{message.date}} </b>
+          </div>
+        </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <form ng-submit=(chat())>
+    <textarea
+      class="message-area"
+      placeholder="Type your message here"
+      maxlength="100"
+      required
+      ng-model="message"
+      ng-keyUp=(charactersRemaining())
+    ></textarea>
+    <input type="submit" value="Send" class="btn btn-success"/>
+    <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
+    </form>
+  </div>
+  <!--Chat Begins -->
   <div ng-app="tour" ng-controller="GameTourController"/>
 </div>
