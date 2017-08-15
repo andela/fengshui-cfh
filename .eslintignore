@@ -1,2 +1,8 @@
 node_modules
 dist
+public/js/services/game.js
+config/socket/socket.js
+config/routes.js
+app/models/question.js
+app/controllers/questions.js
+app/controllers/index.js
