@@ -1,8 +1,6 @@
-/**
- * Module dependencies.
- */
-const mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
 
 /**
  * Game Schema

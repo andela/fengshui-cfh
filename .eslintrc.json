@@ -13,7 +13,9 @@
     "introJs": true,
     "document": true,
     "window": true,
-    "location": true
+    "location": true,
+    "_": true,
+    "io": true
   },
   "rules": {
     "one-var": 0,
