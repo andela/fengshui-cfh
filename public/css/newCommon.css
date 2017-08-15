@@ -71,7 +71,11 @@ html, body, .main-container, .cont, #first-section, #inner-container {
 
 body {
   font-family: "helvetica neue", helvetica, sans-serif;
+<<<<<<< HEAD:public/css/common.css
+  background: transparent;
+=======
   background: #f6f6f6 !important;
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   margin: 0px; }
   @media only screen and (min-width: 521px) and (max-width: 768px) {
     body {
@@ -850,7 +854,11 @@ body {
     border-top: 0px solid black !important; }
 
 .newdonation {
+<<<<<<< HEAD:public/css/common.css
+  heigth: auto;
+=======
   height: auto;
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   width: 100%;
   background: #EBEBEB;
   text-align: center;
@@ -872,7 +880,11 @@ body {
       text-align: center; }
 
 .newteam {
+<<<<<<< HEAD:public/css/common.css
+  heigth: auto;
+=======
   height: auto;
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   width: 100%;
   background: #BDACAC;
   text-align: center;
@@ -905,7 +917,11 @@ body {
     margin-bottom: 3%; }
 
 .newfooter {
+<<<<<<< HEAD:public/css/common.css
+  heigth: auto;
+=======
   height: auto;
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   width: 100%;
   background: #AF521F;
   opacity: 0.8;
@@ -916,11 +932,23 @@ body {
     text-align: justify;
     font-size: 14px; }
 
+<<<<<<< HEAD:public/css/common.css
+.controlChat {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  position: fixed;
+  border: 0px;
+  background-color: white;
+  bottom: 1%;
+  right: 3px; }
+=======
 .how-to {
   box-shadow: 0 2px 5px #333; }
 
 #slogan-head .wpb-slogan h2 {
   color: black; }
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
 
 .chat-holder {
   color: red;
@@ -932,6 +960,22 @@ body {
   padding: 1%;
   z-index: 1999;
   height: auto;
+<<<<<<< HEAD:public/css/common.css
+  max-height: 600px;
+  overflow: fixed;
+  width: 250px;
+  border-radius: 5px; }
+  .chat-holder .chat-title {
+    width: 72%;
+    color: white; }
+  .chat-holder .chat-open {
+    width: 12%;
+    color: white;
+    text-align: center;
+    padding: 5px; }
+  .chat-holder .close-chat {
+    width: 12%;
+=======
   max-height: 500px;
   overflow: fixed;
   width: 230px;
@@ -941,6 +985,7 @@ body {
     color: white; }
   .chat-holder .chat-open {
     width: 13%;
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
     color: white;
     text-align: center;
     padding: 5px; }
@@ -964,9 +1009,12 @@ body {
     border-left: 5px solid #ccc; }
   .chat-holder .avater-holder {
     text-align: center; }
+<<<<<<< HEAD:public/css/common.css
+=======
   .chat-holder .chat-avater {
     width: 70%;
     height: 70%; }
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   .chat-holder .message-input {
     margin-top: 5px; }
   .chat-holder .send-message {
@@ -980,12 +1028,38 @@ body {
     margin: 2px;
     font-size: 10px;
     border-radius: 4px;
+<<<<<<< HEAD:public/css/common.css
+    border-left: 5px solid green;
+    height: 80px; }
+=======
     border-left: 5px solid green; }
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
   .chat-holder .message-container {
     padding: 0px; }
   .chat-holder .post {
     padding: 2px;
+<<<<<<< HEAD:public/css/common.css
+    margin-bottom: 12px; }
+  .chat-holder .chat-header {
+    text-align: center; }
+  .chat-holder .chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 40px;
+    font-size: 12px;
+    line-height: 30px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    width: 100%; }
+  .chat-holder .chip img {
+    float: left;
+    margin: 0 10px 0 -25px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%; }
+=======
     margin-bottom: 8px;
     border-bottom: 1px solid green; }
   .chat-holder .chat-header {
     text-align: center; }
+>>>>>>> 557bc60ddbf67ee4c2f8eb5ac654e6287fda64b4:public/css/newCommon.css
