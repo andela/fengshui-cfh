@@ -7,4 +7,5 @@ c4h_keys.txt
 package-lock.json
 bower_components
 dist
+.vscode
 coverage

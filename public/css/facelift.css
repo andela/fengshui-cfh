@@ -1,0 +1,185 @@
+body {
+  background: #f5f5f5;
+  color: #333;
+  font-family: 'Basic', sans-serif;
+  font-size: 1.8em;  
+}
+
+a, a:hover {
+  color: #B5011C !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.navbar {
+  background: transparent;
+  border-radius: none;
+  border: none;
+  padding-top: 10px;
+}
+
+.navbar a {
+  color: #fff !important;
+}
+
+header {
+  height: 100vh;
+  background: url('cards-against-humanity.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.container-fluid {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+}
+
+.hero {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.hero p {
+  padding: 20px;
+}
+
+.hero h1, .navbar-brand {
+  font-family: 'Shrikhand', cursive;
+  letter-spacing: 2px;
+}
+
+.main-copy {
+  margin-top: 150px;
+}
+
+a.btn-normal {
+  margin-right: 20px;
+}
+
+a.btn-normal:last-child {
+  margin-right: 0;
+}
+
+.btn-normal, .btn-normal:hover {
+  background: #B5011C;
+  color: #fff !important;
+  padding: 10px 30px;
+  border: 1px solid #B5011C;
+}
+
+.how-to-play {
+  padding-bottom: 60px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.how-to-play h1, .donate h1, .meet-the-team h1 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.how-to {
+  margin-bottom: 30px;
+}
+
+.big {
+  color: #fb5669;
+  font-size: 3em;
+  float: left;
+  font-weight: bold;
+}
+
+.card {
+  height: 200px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.donate {
+  text-align: center;
+  background: url('poor-children.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  color: #fff;
+}
+
+.donate p:last-child {
+  padding-bottom: 60px;
+}
+
+.donate .overlay {
+  height: auto;
+}
+
+.pink {
+  color: #fb5669;
+}
+
+.icon {
+  height: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.steps {
+  display: table;
+}
+
+.steps div {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px;
+}
+
+.meet-the-team {
+  text-align: center;
+  background: #fff;
+  padding-bottom: 30px;
+}
+
+.meet-the-team img {
+  border-radius: 100%;
+  width: 150px;
+}
+
+.meet-the-team .row {
+  margin-bottom: 20px;
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.copy-div {
+  display: table;
+  height: 45px;
+}
+
+.copy-text {
+  display: table-cell;
+  vertical-align: middle;
+}
+.donate-box {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 50px 30px;
+}
