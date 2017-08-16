@@ -1,3 +1,4 @@
+
 import dotenv from 'dotenv';
 import express from 'express';
 import fs from 'fs';
@@ -13,12 +14,12 @@ dotenv.config();
 
 // Load configurations
 // if test env, load example file
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const config = require('./config/config');
 const auth = require('./config/middlewares/authorization');
 const mongoose = require('mongoose');
 // Bootstrap db connection
-mongoose.connect(config.db);
+const db = mongoose.connect(config.db);
 
 // Bootstrap models
 const modelsPath = `${__dirname}/app/models`;
