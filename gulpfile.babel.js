@@ -113,6 +113,11 @@ gulp.task('angular-unstable', () => {
   .pipe(gulp.dest('public/lib/angular-unstable'));
 });
 
+gulp.task('emoji', () => {
+  gulp.src('bower_components/emojionearea/**/*')
+  .pipe(gulp.dest('public/lib/emojionearea'));
+});
+
 gulp.task('clean', () => {
   gulp.src('bower_components')
       .pipe(clean({ force: true }));
@@ -140,5 +145,5 @@ gulp.task('babelify', () => {
 });
 
 gulp.task('transpile', runSequence('babelify', 'move_json', 'move_jades', 'move_libs'));
-gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore', 'intro', 'angular-intro', 'angular-cookies', 'angular-unstable', 'font-awesome', 'angular-resource'));
+gulp.task('install', runSequence('bower', 'angular', 'angular-bootstrap', 'angularUtils', 'bootstrap', 'jquery', 'underscore', 'intro', 'angular-intro', 'angular-cookies', 'angular-unstable', 'font-awesome', 'angular-resource', 'emoji'));
 gulp.task('default', runSequence('transpile'));
