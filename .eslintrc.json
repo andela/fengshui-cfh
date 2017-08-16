@@ -4,7 +4,31 @@
   "env": {
     "node": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "browser": true
+  },
+  "globals": {
+    "angular": true,
+    "$": true,
+    "swal": true
+  },
+  "globals": {
+    "angular": true,
+    "$": true,
+    "swal": true,
+    "introJs": true,
+    "document": true,
+    "window": true,
+    "location": true
+  },
+  "globals": {
+    "angular": true,
+    "$": true,
+    "swal": true,
+    "introJs": true,
+    "document": true,
+    "window": true,
+    "location": true
   },
   "globals": {
     "angular": true,
