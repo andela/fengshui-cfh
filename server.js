@@ -1,14 +1,12 @@
-/**
- * Module dependencies.
- */
-require('dotenv').config();
-var express = require('express'),
-  fs = require('fs'),
-  passport = require('passport'),
-  logger = require('mean-logger'),
-  io = require('socket.io'),
-  dotenv = require('dotenv').config();
 
+import dotenv from 'dotenv';
+import express from 'express';
+import fs from 'fs';
+import passport from 'passport';
+import logger from 'mean-logger';
+import io from 'socket.io';
+
+dotenv.config();
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
@@ -16,37 +14,37 @@ var express = require('express'),
 
 // Load configurations
 // if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./config/config'),
-    auth = require('./config/middlewares/authorization'),
-    mongoose = require('mongoose');
-
+const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const config = require('./config/config');
+const auth = require('./config/middlewares/authorization');
+const mongoose = require('mongoose');
 // Bootstrap db connection
-var db = mongoose.connect(config.db);
+const db = mongoose.connect(config.db);
 
 // Bootstrap models
-var models_path = __dirname + '/app/models';
-var walk = function(path) {
-    fs.readdirSync(path).forEach(function(file) {
-        var newPath = path + '/' + file;
-        var stat = fs.statSync(newPath);
-        if (stat.isFile()) {
-            if (/(.*)\.(js|coffee)/.test(file)) {
-                require(newPath);
-            }
-        } else if (stat.isDirectory()) {
-            walk(newPath);
-        }
-    });
+const modelsPath = `${__dirname}/app/models`;
+
+const walk = (path) => {
+  fs.readdirSync(path).forEach((file) => {
+    const newPath = `${path}/${file}`;
+    const stat = fs.statSync(newPath);
+    if (stat.isFile()) {
+      if (/(.*)\.(js|coffee)/.test(file)) {
+        require(newPath);
+      }
+    } else if (stat.isDirectory()) {
+      walk(newPath);
+    }
+  });
 };
-walk(models_path);
+walk(modelsPath);
 
 // bootstrap passport config
 require('./config/passport')(passport);
 
-var app = express();
+const app = express();
 
-app.use(function(req, res, next)  {
+app.use((req, res, next) => {
   res.locals.bar = 'jwtToken';
   next();
 });
@@ -58,12 +56,11 @@ require('./config/express')(app, passport, mongoose);
 require('./config/routes')(app, passport, auth);
 
 // Start the app by listening on <port>
-var port = config.port;
-var server = app.listen(port);
-var ioObj = io.listen(server, { log: false });
+const port = config.port;
+const server = app.listen(port);
+const ioObj = io.listen(server, { log: false });
 // game logic handled here
 require('./config/socket/socket')(ioObj);
-console.log('Express app started on port ' + port);
 
 // initialize socket to listen for chat messagesList
 
@@ -71,4 +68,4 @@ console.log('Express app started on port ' + port);
 logger.init(app, passport, mongoose);
 
 // expose app
-exports = module.exports = app;
+export default app;

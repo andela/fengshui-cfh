@@ -1,29 +1,26 @@
 angular.module('mean.system')
-.factory('socket', ['$rootScope', function($rootScope){
-  var socket = io.connect();
+.factory('socket', ['$rootScope', ($rootScope) => {
+  const socket = io.connect();
   return {
-    on: function (eventName, callback) {
-      socket.on(eventName, function () {
-        var args = arguments;
-        $rootScope.safeApply(function () {
+    on: (eventName, callback) => {
+      socket.on(eventName, (...args) => {
+        $rootScope.safeApply(() => {
           callback.apply(socket, args);
         });
       });
     },
-    emit: function(eventName, data, callback) {
-      socket.emit(eventName, data, function () {
-        var args = arguments;
+    emit: (eventName, data, callback) => {
+      socket.emit(eventName, data, () => {
       });
-      $rootScope.safeApply(function() {
+      $rootScope.safeApply((...args) => {
         if (callback) {
           callback.apply(socket, args);
         }
       });
     },
-    removeAllListeners: function(eventName, callback){
-      socket.removeAllListeners(eventName, function () {
-        var args = arguments;
-        $rootScope.safeApply(function () {
+    removeAllListeners: (eventName, callback) => {
+      socket.removeAllListeners(eventName, (...args) => {
+        $rootScope.safeApply(() => {
           if (callback) {
             callback.apply(socket, args);
           }

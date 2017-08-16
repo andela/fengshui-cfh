@@ -57,8 +57,8 @@ angular.module('mean.system')
         $location.path('/#!/');
         location.reload();
       }
-    }, () => {
-      // alert(err);
+    }, (response) => {
+      $scope.alert = response.data.message;
     });
   };
 
@@ -88,7 +88,7 @@ angular.module('mean.system')
       $http({
         method: 'GET',
         url: '/play'
-      }).then((response) => {
+      }).then(() => {
         $location.path('/app');
       });
     });
@@ -100,7 +100,7 @@ angular.module('mean.system')
       Authorization: `token ${token}`,
       Accept: 'application/json;odata=verbose'
     }
-  };
+    };
     swal({
       title: 'Start a new game session',
       text: 'Are you sure you want start?',

@@ -23,7 +23,6 @@ angular.module('mean.system')
           $scope.hasPickedCards = true;
         } else if (game.curQuestion.numAnswers === 2 &&
           $scope.pickedCards.length === 2) {
-            // delay and send
           $scope.hasPickedCards = true;
           $timeout($scope.sendPickedCards, 300);
         }
@@ -153,6 +152,7 @@ angular.module('mean.system')
       };
 
       $http.post(`/api/games/${game.gameID}/start`, gameData);
+      window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });
 
@@ -186,8 +186,8 @@ angular.module('mean.system')
     }
   };
 
-  $scope.charactersRemaining = () => {
-    const myMessage = ($scope.message).trim();
+  $scope.charactersRemaining = (event) => {
+    const myMessage = (event).trim();
     const messageLength = myMessage.length;
     $scope.charactersLeft = 100 - messageLength;
   };
@@ -199,17 +199,16 @@ angular.module('mean.system')
     }
   };
 
-  $scope.chat = () => {
+  $scope.chat = (event) => {
     const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
     const playerAvatar = $scope.game.players[$scope.game.playerIndex].avatar;
-    const myMessage = $scope.message;
     const timeSent = new Date(Date.now()).toLocaleString();
     const time = (timeSent.split(','))[1];
     const gameID = $scope.game.gameID;
-    if (myMessage !== '' && myMessage !== undefined) {
+    if (event !== '' && event !== undefined) {
       const newMessage = {
         sender: IndividualPlayer,
-        message: myMessage,
+        message: event,
         date: time,
         avater: playerAvatar,
         gameID

@@ -1,8 +1,4 @@
-const jwt =require('jsonwebtoken');
-const mongoose = require('mongoose');
-const async = require('async');
-const _ = require('underscore');
-const users = require('./users');
+import jwt from 'jsonwebtoken';
 
 /**
  * @param{Object} req
