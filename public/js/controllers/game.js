@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$anchorScroll', ($scope, game, $timeout, $location, MakeAWishFactsService, socket) => {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog','$http', '$anchorScroll', ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll, $http) => {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
@@ -9,6 +9,8 @@ angular.module('mean.system')
   $scope.messagesList = '';
   $scope.chatControler = '^';
   $scope.charactersLeft = 100;
+  $scope.showChatStatus = false;
+  $scope.chatter = {};
   let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -111,7 +113,7 @@ angular.module('mean.system')
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#41c2ca',
+      cancelButtonColor: '#d33',
       cancelButtonText: 'Wait a little',
       confirmButtonText: 'Start Game Now'
     }).then(() => {
@@ -148,6 +150,8 @@ angular.module('mean.system')
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
+
+      $http.post(`/api/games/${game.gameID}/start`, gameData);
       window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });
@@ -174,7 +178,6 @@ angular.module('mean.system')
       }
     }
   });
-
   $scope.changeFormOpenIcon = () => {
     if ($scope.chatControler === '^') {
       $scope.chatControler = 'v';
@@ -183,28 +186,46 @@ angular.module('mean.system')
     }
   };
 
-  $scope.charactersRemaining = () => {
-    const myMessage = ($scope.message).trim();
+  $scope.charactersRemaining = (event) => {
+    const myMessage = (event).trim();
     const messageLength = myMessage.length;
     $scope.charactersLeft = 100 - messageLength;
   };
 
-  $scope.chat = () => {
+  $scope.submitWithEnter = (event) => {
+    if (event.which === 13) {
+      event.preventDefault();
+      $scope.chat();
+    }
+  };
+
+  $scope.chat = (event) => {
     const IndividualPlayer = $scope.game.players[$scope.game.playerIndex].username;
     const playerAvatar = $scope.game.players[$scope.game.playerIndex].avatar;
-    const myMessage = $scope.message;
     const timeSent = new Date(Date.now()).toLocaleString();
+    const time = (timeSent.split(','))[1];
     const gameID = $scope.game.gameID;
-    const newMessage = {
-      sender: IndividualPlayer,
-      message: myMessage,
-      date: timeSent,
-      avater: playerAvatar,
-      gameID
-    };
-    game.chat(newMessage);
-    $scope.message = '';
-    $scope.charactersLeft = 100;
+    if (event !== '' && event !== undefined) {
+      const newMessage = {
+        sender: IndividualPlayer,
+        message: event,
+        date: time,
+        avater: playerAvatar,
+        gameID
+      };
+      game.chat(newMessage);
+      $scope.message = '';
+      $scope.charactersLeft = 100;
+    }
+  };
+
+  $scope.gotoBottom = () => {
+    $location.hash('bottom');
+    $anchorScroll();
+  };
+
+  $scope.showChat = () => {
+    $scope.showChatStatus = !$scope.showChatStatus;
   };
 
   socket.on('reply chat', (data) => {
@@ -213,6 +234,7 @@ angular.module('mean.system')
       message.push(data.chat[key]);
     });
     $scope.messagesList = message;
+    $scope.gotoBottom();
   });
 
   if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
