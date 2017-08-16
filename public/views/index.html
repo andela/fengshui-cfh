@@ -14,7 +14,7 @@
   <source src="/img/cfh-bg.mp4" type="video/mp4" />
 </video>
 <!-- Main bod starts -->
-<div landing id="new-main-bod">
+<div landing id="new-main-bod" ng-controller="IndexController">
   <div style="padding: 0; margin: 0; background: rgba(0, 0, 0, 0.5); z-index: 0; height: 100vh;">
     <!-- Fixed Logo & Menu Bar Start -->
     <div id="top-part">
@@ -71,7 +71,7 @@
             <div id="new-sign-up">
               <span ng-show="showOptions">
         <a href="#!/signup" class="btn btn-reg"><div>Sign Up</div></a>
-        <a href="/play" class="btn btn-play"><div>Play Now</div></a>
+        <a href ng-click="showRegionGuest()" class="btn btn-play"><div>Play Now</div></a>
           <div id="new-sign-up-text">
           </div>
           <span id="tweet-container-index">
@@ -92,8 +92,14 @@
         </span>
         <span ng-controller="IndexController" ng-hide="showOptions">
           <button id="sign-up-btn-landing" onclick="location.href='#!/gametour'">Take A Game Tour</button>
-          <a ng-click="playGame()"><div id="sign-up-btn-landing">Play Game with Strangers</div></a>
-          <a ng-click="playGameCustom()"><div id="sign-up-btn-landing">Play Game with Friends</div></a>
+          <span ng-hide="showOptions">
+            <a href="#!/app"><div id="sign-up-btn-landing">Join Game</div></a>
+          </span>
+          <span ng-hide="showOptions" ng-controller="IndexController">
+            <div class="button">
+              <a ng-click="showRegion()"><div id="sign-up-btn-landing">PLAY GAME</div></a>
+            </div>
+          </span>
               <span id='twitter-facebook'>
                 <span id="tweet-container-index">
                   <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
@@ -158,14 +164,6 @@
         </div>
         </span>
 
-        <span ng-hide="showOptions">
-          <a href="#!/app"><div id="sign-up-btn-landing">Join Game</div></a>
-        </span>
-        <span ng-hide="showOptions" ng-controller="IndexController">
-            <div class="button">
-              <button ng-click="showRegion()" class="btn btn-info">PLAY GAME</button>
-            </div>
-            </span>
        </div>
     </div>
   </section>
@@ -313,34 +311,66 @@
 </section>
 <!-- Footer End -->
 <!--  Select Region -->
+  +<!--  Select Region -->
   <div class="modal" id="select-region" tabindex="-1" role="document" ng-controller="IndexController" aria-labelledby="myModalLabel"
-  aria-hidden="true" style="overflow-y:hidden;"> 
-      <div class="modal-dialog panel"> 
-          <div class="modal-content"> 
-              <div class="modal-header popUpHeader"> 
-                <h3 class="modal-title">Select Region</h3> 
-              </div> 
-              <div class="modal-body">
-                <div class="headerText usernameHeader"><span>Select Region</span></div>
-                <div  class="modalHeight">
-                 <select ng-model="region" class="form-control">
-                   <option value="NG">Nigeria</option>
-                   <option value="UK">United Kingdom</option>
-                 </select>
-                </div>
-                </div> 
-                <div class='allModalBtn playModal'>
-                  <button class="modalBtn" ng-click="playWithStrangers()" >
-                    PLAY WITH STRANGERS
-                  </button>
-                   <button class="modalBtn" ng-click="playWithFriends()" >
-                    PLAY WITH FRIENDS
-                  </button>
-                  <button data-dismiss="modal" class="modalBtn">Cancel</button>
-                </div>
-              <div class="modal-footer">Cards for Humanity</div> 
-          </div> 
-      </div> 
-  </div> 
+   aria-hidden="true" style="overflow-y:hidden;"> 
+       <div class="modal-dialog panel"> 
+           <div class="modal-content"> 
+               <div class="modal-header popUpHeader"> 
+                 <h3 class="modal-title">Select Region</h3> 
+               </div> 
+               <div class="modal-body">
+                 <div class="headerText usernameHeader"><span>Select Region</span></div>
+                 <div  class="modalHeight">
+                  <select ng-model="region" class="form-control">
+                    <option value="NG">Nigeria</option>
+                    <option value="UK">United Kingdom</option>
+                  </select>
+                 </div>
+                 </div> 
+                 <center><div>
+                   <button class="btn btn-default" ng-click="playWithStrangers()" >
+                     PLAY WITH STRANGERS
+                   </button>
+                    <button class="btn btn-warning" ng-click="playWithFriends()" >
+                     PLAY WITH FRIENDS
+                   </button>
+                   <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
+                 </div></center>
+               <div class="modal-footer">Cards for Humanity</div> 
+           </div> 
+       </div> 
+   </div> 
+ 
+     <!-- Guest  Select Region -->
+   <div class="modal" id="select-region-guest" tabindex="-1" role="document" ng-controller="IndexController" aria-labelledby="myModalLabel"
+   aria-hidden="true" style="overflow-y:hidden;"> 
+       <div class="modal-dialog panel"> 
+           <div class="modal-content"> 
+               <div class="modal-header popUpHeader"> 
+                 <h3 class="modal-title">Select Region</h3> 
+               </div> 
+               <div class="modal-body">
+                 <div class="headerText usernameHeader"><span>Select Region</span></div>
+                 <div  class="modalHeight">
+                  <select ng-model="region" class="form-control">
+                    <option value="NG">Nigeria</option>
+                    <option value="UK">United Kingdom</option>
+                  </select>
+                 </div>
+                 </div> 
+                 <center>
+                   <div>
+                   <button class="btn btn-warning" ng-click="playWithStrangers()" >
+                     PLAY GAME
+                   </button>
+                   <button data-dismiss="modal" class="modalBtn">Cancel</button>
+                 </div>
+                   </center>
+               <div class="modal-footer">Cards for Humanity</div> 
+           </div> 
+       </div> 
+   </div> 
+ </div>
 </div>
 <!-- Main bod ends -->
