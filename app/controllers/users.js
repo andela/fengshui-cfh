@@ -193,7 +193,6 @@ exports.jwtSignIn = (req, res) => {
 
 exports.ensureToken = (req, res, next) => {
   let token = req.headers.authorization;
-  console.log('my token', token);
   if (token) {
     token = token.split(' ');
     token = token[1];
@@ -201,11 +200,9 @@ exports.ensureToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        console.log(err);
         res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
         req.token = decoded;
-        
         // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
         next();
       }

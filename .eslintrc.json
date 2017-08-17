@@ -10,32 +10,6 @@
   "globals": {
     "angular": true,
     "$": true,
-<<<<<<< HEAD
-=======
-    "swal": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
-    "swal": true,
-    "introJs": true,
-    "document": true,
-    "window": true,
-    "location": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
-    "swal": true,
-    "introJs": true,
-    "document": true,
-    "window": true,
-    "location": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
->>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
     "swal": true,
     "introJs": true,
     "document": true,
@@ -54,10 +28,6 @@
     "no-underscore-dangle": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [0, { "commonjs": true }],
-<<<<<<< HEAD
-    "import/extensions": [ 0, "always" ],
-=======
->>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
