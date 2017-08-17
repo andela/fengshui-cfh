@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
 import users from '../app/controllers/users';
 import answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
