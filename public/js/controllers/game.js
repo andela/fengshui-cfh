@@ -150,8 +150,6 @@ angular.module('mean.system')
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
-
-      $http.post(`/api/games/${game.gameID}/start`, gameData);
       window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });

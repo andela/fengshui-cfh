@@ -7,4 +7,8 @@ c4h_keys.txt
 package-lock.json
 bower_components
 dist
+<<<<<<< HEAD
 coverage
+=======
+coverage
+>>>>>>> 01ec7d271526e9b19afcce30056b60276b435e8f
