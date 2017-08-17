@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$http', '$anchorScroll', ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll, $http) => {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$anchorScroll', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll, $http) => {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
@@ -150,9 +150,7 @@ angular.module('mean.system')
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
-
       $http.post(`/api/games/${game.gameID}/start`, gameData);
-      window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });
 
