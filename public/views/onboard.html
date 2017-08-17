@@ -31,58 +31,48 @@
     <answers></answers>
   </div>
   <!--Chat Begins -->
-  <button class="controlChat" ng-click="showChat()" ng-hide="showChatStatus" id="chat-for-Tour">
-    <img src="img/chat.png" width="100%" height="100%" />
-  </button>
-  <div class="chat-holder" id="chat-for-Tour" ng-show="showChatStatus">
+  <div class="chat-holder" id="chat-for-Tour">
     <div class="">
-      <button style="background: rgb(65, 194, 202); width: 70%;" class="btn mybutton chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon()) data-target="#demo">
-        Chat Now
+      <button class="btn btn-success chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon()) data-target="#demo">
+        Chat with Other Players
       </button>
-      <button style="background: rgb(65, 194, 202);" data-toggle="collapse" data-target="#demo" class="btn mybutton chat-open" ng-click=(changeFormOpenIcon())>
+      <button  data-toggle="collapse" data-target="#demo" class="btn btn-success chat-open" ng-click=(changeFormOpenIcon())>
         {{chatControler}}
       </button>
-      <button class="btn mybutton close-chat" ng-click="showChat()" style="background: rgb(65, 194, 202);">
-        X
-      </button>
-      <div id="demo" class="collapse mycollapse" scroll-glue>
-        <div ng-style="chatter" style="color: black">
+      <div id="demo" class="collapse mycollapse">
+        <div>
           <p class="chat-header"> This is the beginning of chat for this Game </p>
           <hr />
-          <ul class="message-container scrollBottom">
-            <li ng-repeat="message in messagesList" class="post" style="border: 0px;">
-              <div class="chip" style="font-size: 14px">
-                <img src={{message.avater}} alt="Sender" width="96" height="96">
-                {{message.sender}}
-              </div>
-              <div class="" style="text-align: justify; padding-left: 23%;">
-                  <span style="word-wrap: break-word; font-size: 14px;">{{message.message}}</span><br/>
-                  <b style="font-size: 8px; float: right;">{{message.date}} </b>
-              </div>
-            </li>
+          <ul class="message-container">
+            <li ng-repeat="message in messagesList" class="row post">
+          <div class="col-sm-4" class="avater-holder">
+            <img src={{message.avater}} alt="Avatar" class="chat-avater"  />
+            <b>{{message.sender}}</b>
+          </div>
+          <div class="col-sm-8">
+              <p>{{message.message}}</p>
+              <b>{{message.date}} </b>
+          </div>
+        </li>
         </ul>
-        <a href="" id="bottom"></a>
       </div>
       </div>
-      <div id="container"></div>
     </div>
     <form ng-submit=(chat())>
-        <textarea
-          class="form-control message-area"
-          placeholder="Type your message here and Press Enter to Submit."
-          maxlength="100"
-          ng-model="message"
-          required
-          ng-keyUp="charactersRemaining($event); submitWithEnter($event)"
-          id="textarea"
-          style="border-color: rgb(65, 194, 202);"
-          ></textarea>
-      </p>
+    <textarea
+      class="message-area"
+      placeholder="Type your message here"
+      maxlength="100"
+      required
+      ng-model="message"
+      ng-keyUp=(charactersRemaining())
+    ></textarea>
+    <input type="submit" value="Send" class="btn btn-success"/>
     <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
     </form>
   </div>
-    <div ng-app="tour" ng-controller="GameTourController"/>
   <!--Chat Begins -->
+  <div ng-app="tour" ng-controller="GameTourController"/>
 </div>
 <script>
    $(document).ready(function() {
