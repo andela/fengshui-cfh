@@ -1,4 +1,3 @@
-
 import users from '../app/controllers/users';
 import answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
@@ -20,6 +19,7 @@ module.exports = (app, passport) => {
 
     // Donation Routes
   app.post('/donations', users.addDonation);
+  app.get('/api/donations', users.ensureToken, users.getDonations);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',
@@ -94,4 +94,6 @@ module.exports = (app, passport) => {
   app.get('/gametour', index.gameTour);
   // Game route
   app.post('/api/games/:id/start', users.ensureToken, game.startGame);
+  app.get('/api/games/history', users.ensureToken, game.getGameHistory);
+  app.get('/api/leaderboard', users.ensureToken, game.getLeaderBoard);
 };

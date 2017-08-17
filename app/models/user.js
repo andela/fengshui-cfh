@@ -17,6 +17,10 @@ const UserSchema = new Schema({
   premium: Number, // null or 0 for non-donors, 1 for everyone else (for now)
   donations: [],
   hashed_password: String,
+  gameWins: {
+    type: Number,
+    default: 0
+  },
   facebook: {},
   twitter: {},
   github: {},
