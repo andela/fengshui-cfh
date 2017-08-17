@@ -4,12 +4,9 @@
 const mongoose = require('mongoose');
 
 const Game = mongoose.model('Game');
-<<<<<<< HEAD
 const User = mongoose.model('User');
 
 
-=======
->>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
 /**
  * Save user game data
  * @param {object} req - request object sent to a route
@@ -56,7 +53,6 @@ exports.getLeaderBoard = (req, res) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
     } else {
-      console.log(users);
       res.status(200).json({ leaderBoard: users });
     }
   });

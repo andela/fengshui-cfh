@@ -23,12 +23,9 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
           .when('/choose-avatar', {
             templateUrl: '/views/choose-avatar.html'
           })
-<<<<<<< HEAD
           .when('/dashboard', {
             templateUrl: '/views/dashboard.html'
           })
-=======
->>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
           .when('/gametour', {
             templateUrl: '/views/onboard.html'
           })
