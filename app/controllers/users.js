@@ -192,7 +192,8 @@ exports.jwtSignIn = (req, res) => {
 };
 
 exports.ensureToken = (req, res, next) => {
-  let token = req.body.token || req.params.token || req.headers.authorization;
+  let token = req.headers.authorization;
+  console.log('my token', token);
   if (token) {
     token = token.split(' ');
     token = token[1];
@@ -200,15 +201,18 @@ exports.ensureToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
+        console.log(err);
         res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
         req.token = decoded;
+        
         // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
         next();
       }
     });
   } else {
-    res.redirect('/#!/signin?error=No_token_provided');
+    res.status(400).send({ success: false, message: 'No token provided' });
+    // res.redirect('/#!/signin?error=No_token_provided');
   }
 };
 
@@ -303,4 +307,14 @@ exports.user = (req, res, next, id) => {
       req.profile = user;
       next();
     });
+};
+
+exports.getDonations = (req, res) => {
+  User.findOne({ username: req.token.id }, (err, user) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else {
+      res.json({ donations: user.donations });
+    }
+  });
 };
