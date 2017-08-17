@@ -1,11 +1,15 @@
 /**
  * Module dependencies.
  */
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Game = mongoose.model('Game');
+<<<<<<< HEAD
+const User = mongoose.model('User');
 
 
+=======
+>>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
 /**
  * Save user game data
  * @param {object} req - request object sent to a route
@@ -20,16 +24,40 @@ exports.startGame = (req, res) => {
   game.gameWinner = req.body.gameWinner;
   game.date = new Date();
   game.gamePlayers = req.body.gamePlayers;
+  game.gameRounds = req.body.gameRounds;
 
-  if (req.token) {
-    game.save((error) => {
-      if (error) {
-        return error;
-      }
-      res.json(game);
-    });
-  } else {
-    res.json({ message: 'Please login to access this feature' });
-  }
+  User.findOne({ name: req.token.data.name }, (err, user) => {
+    if (user === req.body.gameWinner) {
+      user.gameWins += 1;
+    }
+  });
+  game.save((error) => {
+    if (error) {
+      return error;
+    }
+    res.json(game);
+  });
 };
 
+exports.getGameHistory = (req, res) => {
+  Game.find({ gameOwner: req.token.id }, (err, results) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else if (!results) {
+      res.status(404).json('No Game found');
+    } else {
+      res.json({ history: results });
+    }
+  });
+};
+
+exports.getLeaderBoard = (req, res) => {
+  User.find({}).sort('-gameWins').exec((err, users) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else {
+      console.log(users);
+      res.status(200).json({ leaderBoard: users });
+    }
+  });
+};

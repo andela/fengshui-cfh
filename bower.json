@@ -2,11 +2,24 @@
   "name": "mean",
   "version": "1.0.0",
   "dependencies": {
-    "bootstrap": "~3.0.0",
+    "bootstrap": "~3.3.7",
     "angular-bootstrap": "~0.4.0",
     "angular-ui-utils": "0.0.4",
     "jquery": "~1.9.1",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "intro.js": "~2.5.0"
+=======
+    "intro.js": "~2.5.0",
+    "emojionearea": "~2.1.0",
+    "angular-scroll-glue": "^2.2.0"
+>>>>>>> 935b371c2402837a52e024a65dcb965c48752b03
+=======
+    "intro.js": "~2.5.0",
+    "emojionearea": "~2.1.0",
+    "angular-scroll-glue": "^2.2.0"
+>>>>>>> ab2210e73908e268c1e287e3d36941daca9317e2
   },
   "exportsOverride": {
     "bootstrap": {
@@ -17,5 +30,8 @@
     "angular-ui-utils": {
       "modules": "modules/route/route.js"
     }
+  },
+  "resolutions": {
+    "intro.js": "~2.5.0"
   }
 }
