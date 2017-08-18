@@ -608,9 +608,6 @@
  }
 
  /**** Portfolio ****/
- .wpb-portfolio-body {
-
- }
 
  .wpb-portfolio-body .wpb-teaser {
    min-height: 350px;
@@ -765,8 +762,6 @@
 
 
  /**** Single Portfolio Item ****/
- .wpb-single-portfolio {
- }
 
  .wpb-single-portfolio .wpb-content-inner {
    padding: 0px;
@@ -878,9 +873,11 @@
 
  /**** Contact Us ****/
  .wpb-contact-us {
+   padding: 0%;
    min-height: 540px;
    position: relative;
    z-index:890;
+   background: #BDACAC;
  }
 
  .wpb-contact-us .google-map-container {
@@ -1001,6 +998,7 @@
 
 #donations {
    margin-top: 160px;
+   background: #BDACAC;
 }
 
 /*MORE MEDIA QUERIESS WHOOOOOAAAA*/
@@ -1201,7 +1199,6 @@
       font-family: Arial;
       font-size: 20px;
       font-weight: bold;
-      vertical-align: top;
       width: 100%;
    }
 
@@ -1255,3 +1252,4 @@
       margin: 0 0 0 4px;
    }
  }
+ 
