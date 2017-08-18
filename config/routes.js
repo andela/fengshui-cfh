@@ -11,10 +11,10 @@ import middleware from './middlewares/authorization';
 
 const User = mongoose.model('User');
 const sg = require('sendgrid')('SG.SsgxbJ1IRiSImn2gI1qAkA.' +
- +  'VdN9m18YcsrOoc6-kpg_C3h4B207Ftxc_znG3dHE5qk');
+ + 'VdN9m18YcsrOoc6-kpg_C3h4B207Ftxc_znG3dHE5qk');
 const sendMail = (inviteeMail, gameLink, gameOwner) => {
    const request = sg.emptyRequest({
-    method: 'POST',
+     method: 'POST',
      path: '/v3/mail/send',
      body: {
        personalizations: [
@@ -34,10 +34,10 @@ const sendMail = (inviteeMail, gameLink, gameOwner) => {
          {
            type: 'text/html',
            value: `
-           <a href="http://fengshui-cfh-staging.herokuapp.com//#!/">
-             <img style="display: block; margin: auto;"
-               src="http://i.imgur.com/FuXN2R2.jpg"/>
-           </a>
+          <a href="http://might-guy-cfh-staging.herokuapp.com/#!/">
+            <img style="display: block; margin: auto;"
+              src="http://i.imgur.com/FuXN2R2.jpg"/>
+          </a>
            <h2 style="margin-top: 40px; text-align: center">
            Cards For Humanity player,
            <span style="color: rgba(203, 109, 81, 0.9)">${gameOwner}</span>,
@@ -69,15 +69,14 @@ const sendMail = (inviteeMail, gameLink, gameOwner) => {
        ],
      },
    });
- 
-   sg.API(request)
+  sg.API(request)
      .then(() => {
        winston.info(`Mail to ${inviteeMail} successfully sent.`);
      })
      .catch(error =>
        winston.info(error)
      );
-}
+};
 module.exports = (app, passport) => {
     // User Routes
   app.get('/signin', users.signin);

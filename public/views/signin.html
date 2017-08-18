@@ -14,9 +14,8 @@
       </div>
       <hr>
       <p class = "text-center" style="font-size: 20px; font-weight:bold;">Or</p>
-
-      <div>
-       {{alert}}
+      <div class="sign-error">
+        Please check your username/password and try again.
       </div>
       <form class="form-horizontal" ng-submit="signIn()" method="post">
     <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
@@ -26,12 +25,12 @@
       </div>
     </div>
     <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <div class="input-group"> 
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>         
         <input type="password" ng-model="formData.password" class="form-control input-lg" id="password" placeholder="Enter password" name="password" required>
       </div>
     </div>
-    <div class="form-group" id="signupbtn">
+    <div class="form-group" id="signupbtn">        
       <div class="col-sm-12 btnmargin">
         <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ">Sign In</button></center>
       </div>
