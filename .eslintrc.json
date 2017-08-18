@@ -10,29 +10,6 @@
   "globals": {
     "angular": true,
     "$": true,
-    "swal": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
-    "swal": true,
-    "introJs": true,
-    "document": true,
-    "window": true,
-    "location": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
-    "swal": true,
-    "introJs": true,
-    "document": true,
-    "window": true,
-    "location": true
-  },
-  "globals": {
-    "angular": true,
-    "$": true,
     "swal": true,
     "introJs": true,
     "document": true,
