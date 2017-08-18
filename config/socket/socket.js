@@ -51,7 +51,6 @@ module.exports = (io) => {
       }
     }
   };
-
   const createGameWithFriends = (player, socket) => {
     let isUniqueRoom = false;
     let uniqueRoom = '';
@@ -206,7 +205,6 @@ module.exports = (io) => {
     socket.on('leaveGame', () => {
       exitGame(socket);
     });
-
     socket.on('disconnect', () => {
       exitGame(socket);
     });
