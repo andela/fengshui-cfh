@@ -1,3 +1,4 @@
+ /* eslint-disable no-alert, no-console */
 angular.module('mean.system')
 .controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', '$window', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, $window, socket, game, AvatarService) => {
   $scope.global = Global;

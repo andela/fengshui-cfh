@@ -1,11 +1,5 @@
-/**
- * Module dependencies.
-*/
-const localStorage = require('localStorage');
+import localStorage from 'localStorage';
 
-/**
-* Find user by id
- */
-exports.setRegion = (req, res) => {
+exports.setRegion = (req) => {
   localStorage.setItem('player_region', req.body.player_region);
 };
