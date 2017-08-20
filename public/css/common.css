@@ -1,0 +1,110 @@
+.controlChat {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  position: fixed;
+  border: 0px;
+  background-color: white;
+  bottom: 1%;
+  right: 3px; }
+
+.chat-holder {
+  color: red;
+  position: fixed;
+  bottom: 1%;
+  right: 3px;
+  display: block;
+  background: white;
+  padding: 1%;
+  z-index: 1999;
+  height: auto;
+  max-height: 600px;
+  overflow: static;
+  width: 250px;
+  border-radius: 5px; }
+
+.chat-holder .chat-title {
+  width: 72%;
+  color: white; }
+
+.chat-holder .chat-open {
+  width: 12%;
+  color: white;
+  text-align: center;
+  padding: 5px; }
+
+.chat-holder .close-chat {
+  width: 12%;
+  color: white;
+  text-align: center;
+  padding: 5px; }
+
+.chat-holder .demo {
+  color: white;
+  float: right; }
+
+.chat-holder .mycollapse {
+  max-height: 300px;
+  overflow: scroll;
+  padding: 2px;
+  font-size: 11px;
+  color: green;
+  font-family: "Comic Sans MS", cursive, sans-serif; }
+
+.chat-holder .chat-messageholder {
+  padding: 2px;
+  font-size: 12px; }
+
+.chat-holder .chat-list {
+  margin: 3px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  border-left: 5px solid #ccc; }
+
+.chat-holder .avater-holder {
+  text-align: center; }
+
+.chat-holder .message-input {
+  margin-top: 5px; }
+
+.chat-holder .send-message {
+  margin-top: 3px; }
+
+.chat-holder .messageholder {
+  padding: 4px;
+  overflow: auto; }
+
+.chat-holder .message-area {
+  width: 100%;
+  margin-top: 5px;
+  margin: 2px;
+  font-size: 10px;
+  border-radius: 4px;
+  border-left: 5px solid green;
+  height: 80px; }
+
+.chat-holder .message-container {
+  padding: 0px; }
+
+.chat-holder .post {
+  padding: 2px;
+  margin-bottom: 12px; }
+
+.chat-holder .chat-header {
+  text-align: center; }
+
+.chat-holder .chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 40px;
+  font-size: 12px;
+  line-height: 30px;
+  border-radius: 25px;
+  width: 100%; }
+
+.chat-holder .chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%; }

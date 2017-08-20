@@ -1,4 +1,3 @@
-
 import users from '../app/controllers/users';
 import region from '../app/controllers/region';
 import answers from '../app/controllers/answers';
@@ -21,6 +20,7 @@ module.exports = (app, passport) => {
 
     // Donation Routes
   app.post('/donations', users.addDonation);
+  app.get('/api/donations', users.ensureToken, users.getDonations);
 
   app.post('/users/session', passport.authenticate('local', {
     failureRedirect: '/signin',
@@ -99,4 +99,6 @@ module.exports = (app, passport) => {
   
   // Set Region
   app.post('/region', region.setRegion);
+  app.get('/api/games/history', users.ensureToken, game.getGameHistory);
+  app.get('/api/leaderboard', users.ensureToken, game.getLeaderBoard);
 };
