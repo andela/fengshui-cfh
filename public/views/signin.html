@@ -1,6 +1,6 @@
 <header>
   <div class="overlay">
-    <div class="row" ng-controller="IndexController">
+    <div class="row" ng-controller="IndexController" style="color:black;">
     <div style="max-width: 480px; margin: 60px auto;">
     <div class="panel panel-default signup-panel" style="border-radius: 0px 0px 25px 25px; ">
       <div id="login-buttons" class="panel-heading text-center" style="font-size: 20px; font-weight:bold;">
@@ -20,6 +20,7 @@
           Please check your username/password and try again.
         </div>
         <form class="form-horizontal" ng-submit="signIn()" method="post">
+          <div class="form-group tex-center" style="text-align: center; color:#B5011C ">{{alert}}</div>
       <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
         <div class="input-group">
           <span class="input-group-addon"><i class=" glyphicon glyphicon-envelope"></i></span>
