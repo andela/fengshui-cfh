@@ -11,7 +11,7 @@
         <div id="the-word-players"> Players </div>
       </div>
       <div id="loading-container">
-        <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
+        <div id="loading-gif"><img ng-src="../img/loader5.gif" style="height: 100px"/></div>
       </div>
       <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride)">
         <div id='start-game-button'>
@@ -37,4 +37,19 @@
     </div>
   </div>
 </div>
-
+ <div id="czarModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog">
+    <!-- Modal for the czar to draw card-->
+     <div class="modal-content center">
+      <center>
+         <h4 id="shuffleText">You are the Czar - Click a card to pick the next question</h4>
+        <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'><center>
+           <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard1' />
+           <img src='../img/card5.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard2' />
+           <img src='../img/card6.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard3' />
+           <img src='../img/card4.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard4' />
+         </div>
+      </center>
+     </div>
+   </div>
+ </div>

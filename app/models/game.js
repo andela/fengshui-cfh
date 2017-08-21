@@ -17,6 +17,11 @@ const GameSchema = new Schema({
     default: '',
     trim: true
   },
+  gameRounds: {
+    type: String,
+    default: '',
+    trim: true
+  },
 
   date: Date,
 

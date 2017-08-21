@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$http', '$anchorScroll', ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll, $http) => {
+.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', 'socket', '$dialog', '$anchorScroll', '$http', ($scope, game, $timeout, $location, MakeAWishFactsService, socket, $dialog, $anchorScroll, $http) => {
   $scope.hasPickedCards = false;
   $scope.winningCardPicked = false;
   $scope.showTable = false;
@@ -113,7 +113,7 @@ angular.module('mean.system')
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#41c2ca',
       cancelButtonText: 'Wait a little',
       confirmButtonText: 'Start Game Now'
     }).then(() => {
@@ -121,11 +121,27 @@ angular.module('mean.system')
     });
   };
 
+  $scope.shuffleCards = () => {
+    const card = $(`#${event.target.id}`);
+    card.addClass('animated flipOutY');
+    setTimeout(() => {
+      $scope.startNextRound();
+      card.removeClass('animated flipOutY');
+      $('#czarModal').modal('hide');
+    }, 500);
+  };
+
+  $scope.startNextRound = () => {
+    if ($scope.isCzar()) {
+      game.startNextRound();
+    }
+  };
+
   $scope.abandonGame = () => {
     game.leaveGame();
     $location.path('/');
   };
-
+  
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
   $scope.$watch('game.round', () => {
@@ -144,15 +160,32 @@ angular.module('mean.system')
     if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
       $scope.showTable = true;
     }
+    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+      $('#czarModal').modal({
+        dismissible: false
+      });
+      $('#czarModal').modal('open');
+    }
+    if (game.state === 'game dissolved') {
+      $('#czarModal').modal('close');
+    }
+    if ($scope.isCzar() === false && game.state === 'czar pick card'
+         && game.state !== 'game dissolved'
+         && game.state !== 'awaiting players' && game.table.length === 0) {
+      $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+    }
+    if (game.state !== 'czar pick card'
+        && game.state !== 'awaiting players'
+         && game.state !== 'game dissolve') {
+      $scope.czarHasDrawn = '';
+    }
     if ($scope.game.state === 'game dissolved' || $scope.game.state === 'game ended') {
       const gameData = { gameId: $scope.game.gameID,
         gameOwner: $scope.game.players[0].username,
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
-
       $http.post(`/api/games/${game.gameID}/start`, gameData);
-      window.location(`/api/games/${game.gameID}/start`, gameData);
     }
   });
 
