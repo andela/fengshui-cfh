@@ -1,4 +1,4 @@
-<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
+<!--<div ng-cloak id="cards-container" ng-hide="game.state === 'game ended' || game.state ==='game dissolved'">
   <div id="social-bar-container">
     <player></player>
   </div>
@@ -23,11 +23,11 @@
     </span>
 
   </div>
-</div>
+</div>-->
 
 <div id="info-container" ng-show="game.state === 'awaiting players'">
   <div id="inner-info">
-    <div id="lobby-how-to-play">How To Play</div>
+    <h4 style="text-align: center">How To Play</h4>
     <ol id="oh-el">
       <li>Each player begins with, and will always have, 10 white answer cards.</li>
       <li>For each round, one player is randomly chosen as the Card Czar.</li>
@@ -70,7 +70,7 @@
   </div>
 </div>
 <div id="czar-blank-container" ng-show="isCzar() && game.table.length===0 && game.state !== 'game dissolved' && game.state !== 'awaiting players'">
-  <div id="czar-blank-inner">
+  <div id="czar-blank-inner" style="text-align: center">
     You are the Card Czar. <br>
     <span id="smaller-text">Players are choosing their answers. Prepare to select a winner.</span>
   </div>
@@ -80,10 +80,5 @@
     <div id='charity-fact'>
        {{ makeAWishFact }}
     </div>
-
-    <div id='charity-logo-container'>
-      <img src='/img/make-a-wish-logo.png'/>
-    </div>
-
   </div>
 </div>

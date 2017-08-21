@@ -21,8 +21,8 @@ module.exports = (io) => {
   const fireGame = (player, socket) => {
     let game;
     if (gamesNeedingPlayers.length <= 0) {
-      // change id from 1 to timestamp
-      gameID += new Date().getTime();
+      // new player has just joined the game
+      gameID += 1;
       const gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;
@@ -51,7 +51,6 @@ module.exports = (io) => {
       }
     }
   };
-
   const createGameWithFriends = (player, socket) => {
     let isUniqueRoom = false;
     let uniqueRoom = '';
@@ -184,6 +183,10 @@ module.exports = (io) => {
       joinGame(socket, data);
     });
 
+    socket.on('czarCardSelected', () => {
+      allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
+    });
+
     socket.on('startGame', () => {
       const thisGame = allGames[socket.gameID];
       if (allGames[socket.gameID]) {
@@ -206,7 +209,6 @@ module.exports = (io) => {
     socket.on('leaveGame', () => {
       exitGame(socket);
     });
-
     socket.on('disconnect', () => {
       exitGame(socket);
     });
@@ -226,3 +228,4 @@ module.exports = (io) => {
     });
   });
 };
+
