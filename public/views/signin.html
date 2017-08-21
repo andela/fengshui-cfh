@@ -1,44 +1,50 @@
-<div class="row" ng-controller="IndexController">
-  <div style="max-width: 480px; margin: 60px auto;">
-  <div class="panel panel-default signup-panel" style="border-radius: 0px 0px 25px 25px; ">
-    <div id="login-buttons" class="panel-heading text-center" style="font-size: 20px; font-weight:bold;">
-      <span>Sign In With</span>
-    </div>
-    <div class="panel-body">
-      <hr>
-      <div class="text-center">
-        <a href="/auth/facebook"><i class="fa fa-facebook fa-4x" style="font-size:35px"></i></a>
-        <a href="/auth/github"style="margin-left:50px; "><i class="fa fa-github fa-4x" style="font-size:35px"></i></a>
-        <a href="/auth/twitter"style="margin-left:50px; "><i class="fa fa-twitter fa-4x" style="font-size:35px"></i></a>
-        <a href="/auth/google"style="margin-left:50px; "><i class="fa fa-google fa-4x" style="font-size:35px"></i></a>
+<header>
+  <div class="overlay">
+    <div class="row" ng-controller="IndexController">
+    <div style="max-width: 480px; margin: 60px auto;">
+    <div class="panel panel-default signup-panel" style="border-radius: 0px 0px 25px 25px; ">
+      <div id="login-buttons" class="panel-heading text-center" style="font-size: 20px; font-weight:bold;">
+        <span>Sign In With</span>
       </div>
-      <hr>
-      <p class = "text-center" style="font-size: 20px; font-weight:bold;">Or</p>
-      <div class="sign-error">
-        Please check your username/password and try again.
+      <div class="panel-body">
+        <hr>
+        <div class="text-center">
+          <a href="/auth/facebook"><i class="fa fa-facebook fa-4x" style="font-size:35px"></i></a>
+          <a href="/auth/github"style="margin-left:50px; "><i class="fa fa-github fa-4x" style="font-size:35px"></i></a>
+          <a href="/auth/twitter"style="margin-left:50px; "><i class="fa fa-twitter fa-4x" style="font-size:35px"></i></a>
+          <a href="/auth/google"style="margin-left:50px; "><i class="fa fa-google fa-4x" style="font-size:35px"></i></a>
+        </div>
+        <hr>
+        <p class = "text-center" style="font-size: 20px; font-weight:bold;">Or</p>
+        <div class="sign-error">
+          Please check your username/password and try again.
+        </div>
+        <form class="form-horizontal" ng-submit="signIn()" method="post">
+      <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
+        <div class="input-group">
+          <span class="input-group-addon"><i class=" glyphicon glyphicon-envelope"></i></span>
+          <input type="email" ng-model="formData.email" class="form-control input-lg" id="email" placeholder="Enter email" name="email" required>
+        </div>
       </div>
-      <form class="form-horizontal" ng-submit="signIn()" method="post">
-    <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
-      <div class="input-group">
-        <span class="input-group-addon"><i class=" glyphicon glyphicon-envelope"></i></span>
-        <input type="email" ng-model="formData.email" class="form-control input-lg" id="email" placeholder="Enter email" name="email" required>
+      <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
+        <div class="input-group"> 
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>         
+          <input type="password" ng-model="formData.password" class="form-control input-lg" id="password" placeholder="Enter password" name="password" required>
+        </div>
       </div>
-    </div>
-    <div class="form-group"  style="padding-left: 20px; padding-right: 20px">
-      <div class="input-group"> 
-        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>         
-        <input type="password" ng-model="formData.password" class="form-control input-lg" id="password" placeholder="Enter password" name="password" required>
+      <div class="form-group" id="signupbtn">        
+        <div class="col-sm-12 btnmargin">
+          <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ">Sign In</button></center>
+        </div>
       </div>
-    </div>
-    <div class="form-group" id="signupbtn">        
-      <div class="col-sm-12 btnmargin">
-        <center><button type="submit" class="btn btn-warning btn-lg" style="background-color: #a21e4e ">Sign In</button></center>
+        <center><p class="account"> Not yet registered? <a href="#!/signup">Sign up</a></center>
+        <center class="homelink"><a href="/">Go to Home</a></center><!--  -->
+    </form>
       </div>
-    </div>
-      <center><p class="account"> Not yet registered? <a href="#!/signup">Sign up</a></center>
-      <center class="homelink"><a href="/">Go to Home</a></center><!--  -->
-  </form>
-    </div>
+      </div>
     </div>
   </div>
+
 </div>
+
+</header>
