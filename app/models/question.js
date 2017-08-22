@@ -21,6 +21,11 @@ const QuestionSchema = new Schema({
   official: {
     type: Boolean
   },
+  region: {
+    type: String,
+    default: '',
+    trim: true
+ },
   expansion: {
     type: String,
     default: '',
