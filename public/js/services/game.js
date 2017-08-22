@@ -21,10 +21,12 @@ angular.module('mean.system')
       timeLimits: {},
       joinOverride: false,
       modal: false,
-      modalMessage: ''
+      modalMessage: '',
+      joinOverrideTimeout: 0
     };
     const notificationQueue = [];
     let timeout = false;
+    // const self = this;
     const setNotification = () => {
       if (notificationQueue.length === 0) { // If notificationQueue is empty, stop
         clearInterval(timeout);
@@ -132,12 +134,20 @@ angular.module('mean.system')
       if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
         game.players = data.players;
       }
-
       if (newState || game.curQuestion !== data.curQuestion) {
         game.state = data.state;
       }
-
-      if (data.state === 'waiting for players to pick') {
+      if (data.state === 'czar pick card') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue(
+                `You are now a Czar, 
+                click black card to pop a new question`
+              );
+        } else {
+          addToNotificationQueue('Waiting for Czar to pick card');
+        }
+      } else if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
         // Extending the underscore within the question
@@ -155,13 +165,17 @@ angular.module('mean.system')
         }
       } else if (data.state === 'waiting for czar to decide') {
         if (game.czar === game.playerIndex) {
-          addToNotificationQueue("Everyone's done. Choose the winner!");
+          addToNotificationQueue('Everyone\'s done. Choose the winner!');
         } else {
           addToNotificationQueue('The czar is contemplating...');
         }
       } else if (data.state === 'winner has been chosen' &&
                 game.curQuestion.text.indexOf('<u></u>') > -1) {
         game.curQuestion = data.curQuestion;
+      } else if (data.state === 'awaiting players') {
+        game.joinOverrideTimeout = $timeout(() => {
+          game.joinOverride = true;
+        }, 15000);
       } else if (data.state === 'game dissolved' || data.state === 'game ended') {
         game.players[game.playerIndex].hand = [];
         game.time = 0;
@@ -202,6 +216,10 @@ angular.module('mean.system')
 
     game.pickWinning = (card) => {
       socket.emit('pickWinning', { card: card.id });
+    };
+
+    game.startNextRound = () => {
+      socket.emit('czarCardSelected');
     };
 
     game.chat = (data) => {
