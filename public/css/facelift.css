@@ -30,12 +30,13 @@ h1 {
 }
 
 header {
-  height: 120vh;
+  height: 100vh;
   background: url('cards-against-humanity.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #fff;
+  overflow: scroll;
 }
 
 .container-fluid {
@@ -45,7 +46,8 @@ header {
 
 .overlay {
   background: rgba(0, 0, 0, 0.6);
-  height: 120vh;
+  height: 100vh;
+  overflow: scroll;
 }
 
 .hero {
@@ -250,3 +252,39 @@ footer {
   text-align: center;
   padding: 20px;
 }
+
+/*@media (min-width: 768px){
+  #left {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    overflow-y: scroll; 
+  }
+  
+  #right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
+}*/
+
+.left {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    /*overflow-y: scroll; */
+  }
+  
+  .right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
