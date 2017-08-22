@@ -94,7 +94,7 @@ angular.module('mean.system')
     if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
       return $scope.colors[game.players[game.winningCardPlayer].color];
     }
-    return '#f9f9f9';
+    return 'rgba(255,255,255,0.5)';
   };
 
   $scope.pickWinning = (winningSet) => {
