@@ -1,8 +1,8 @@
 </script>
 <header>
   <div class="overlay">
-    <div id="app-container" ng-controller="GameController">
-      <nav class="navbar navbar-default">
+    <div ng-controller="GameController">
+      <nav class="navbar navbar-default default">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -29,86 +29,70 @@
         </div>
       </nav>
 
-
-        <!--Chat Begins -->
-  <button class="controlChat" ng-click="showChat()" ng-hide="showChatStatus">
+      <!--Chat Begins -->
+      <button class="controlChat" ng-click="showChat()" ng-hide="showChatStatus">
     <img src="img/chat.png" width="100%" height="100%" />
   </button>
-  <div class="chat-holder" id="chat-for-Tour" ng-show="showChatStatus">
-    <div class="">
-      <button style="background: rgb(65, 194, 202); width: 70%;" class="btn mybutton chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon()) data-target="#demo">
+      <div class="chat-holder" id="chat-for-Tour" ng-show="showChatStatus">
+        <div class="">
+          <button style="background: rgb(65, 194, 202); width: 70%;" class="btn mybutton chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon())
+            data-target="#demo">
         Chat Now
       </button>
-      <button style="background: rgb(65, 194, 202);" data-toggle="collapse" data-target="#demo" class="btn mybutton chat-open" ng-click=(changeFormOpenIcon())>
+          <button style="background: rgb(65, 194, 202);" data-toggle="collapse" data-target="#demo" class="btn mybutton chat-open"
+            ng-click=(changeFormOpenIcon())>
         {{chatControler}}
       </button>
-      <button class="btn mybutton close-chat" ng-click="showChat()" style="background: rgb(65, 194, 202);">
+          <button class="btn mybutton close-chat" ng-click="showChat()" style="background: rgb(65, 194, 202);">
         X
       </button>
-      <div id="demo" class="collapse mycollapse" scroll-glue>
-        <div ng-style="chatter" style="color: black">
-          <p class="chat-header"> This is the beginning of chat for this Game </p>
-          <hr />
-          <ul class="message-container scrollBottom">
-            <li ng-repeat="message in messagesList" class="post" style="border: 0px;">
-              <div class="chip" style="font-size: 14px">
-                <img src={{message.avater}} alt="Sender" width="96" height="96">
-                {{message.sender}}
-              </div>
-              <div class="" style="text-align: justify; padding-left: 23%;">
-                  <span style="word-wrap: break-word; font-size: 14px;">{{message.message}}</span><br/>
-                  <b style="font-size: 8px; float: right;">{{message.date}} </b>
-              </div>
-            </li>
-        </ul>
-        <a href="" id="bottom"></a>
+          <div id="demo" class="collapse mycollapse" scroll-glue>
+            <div ng-style="chatter" style="color: black">
+              <p class="chat-header"> This is the beginning of chat for this Game </p>
+              <hr />
+              <ul class="message-container scrollBottom">
+                <li ng-repeat="message in messagesList" class="post" style="border: 0px;">
+                  <div class="chip" style="font-size: 14px">
+                    <img src={{message.avater}} alt="Sender" width="96" height="96"> {{message.sender}}
+                  </div>
+                  <div class="" style="text-align: justify; padding-left: 23%;">
+                    <span style="word-wrap: break-word; font-size: 14px;">{{message.message}}</span><br/>
+                    <b style="font-size: 8px; float: right;">{{message.date}} </b>
+                  </div>
+                </li>
+              </ul>
+              <a href="" id="bottom"></a>
+            </div>
+          </div>
+          <div id="container"></div>
+        </div>
+        <form ng-submit=(chat())>
+          <textarea class="form-control message-area" placeholder="Type your message here and Press Enter to Submit." maxlength="100"
+            ng-model="message" required ng-keyUp="charactersRemaining($event); submitWithEnter($event)" id="textarea" style="border-color: rgb(65, 194, 202);"></textarea>
+          </p>
+          <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
+        </form>
       </div>
-      </div>
-      <div id="container"></div>
-    </div>
-    <form ng-submit=(chat())>
-        <textarea
-          class="form-control message-area"
-          placeholder="Type your message here and Press Enter to Submit."
-          maxlength="100"
-          ng-model="message"
-          required
-          ng-keyUp="charactersRemaining($event); submitWithEnter($event)"
-          id="textarea"
-          style="border-color: rgb(65, 194, 202);"
-          ></textarea>
-      </p>
-    <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
-    </form>
-  </div>
-  <!--Chat Begins -->
+      <!--Chat Begins -->
 
       <!-- Game Screen Begins -->
-      <div class="container-fluid">
+      <div class="container-fluid eighty">
         <div class="row">
-          <div class="col-sm-3">
-            <div class="timer-container">
-              <timer></timer>
+          <div class="col-sm-9 left">
+            <div class="col-sm-4">
+              <div class="timer-container">
+                <timer></timer>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="question-container">
-              <question></question>
+            <div class="col-sm-8">
+              <div class="question-container">
+                <question></question>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="players">
-              <player></player>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="container-fluid">
-        <!--<div class="row">-->
-          <div class="col-sm-9">
-            <div id="cards" class='hand'>
-
+            <div class="row">
+              <div class="col-sm-12">
+                <div id="cards" class='hand'>
               <span ng-show="winnerPicked()"></span>
 
               <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
@@ -127,25 +111,60 @@
             </span>
           </div>
           <answers></answers>
-        <!--</div>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3 right">
+            <div class="players">
+              <player></player>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!--<div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            <div id="cards" class='hand'>
+              <span ng-show="winnerPicked()"></span>
+
+              <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
+                ng-repeat="card in game.players[game.playerIndex].hand" ng-animate="{enter:'animated fadeInUp', leave: 'animated fadeInOut'}">
+                <span ng-bind-html-unsafe="card.text"></span>
+                <span id='selection-number' ng-show="showFirst(card)"> 1 </span>
+                <span id='selection-number' ng-show="showSecond(card)"> 2 </span>
+              </div>
+
+              <span ng-repeat="answer in game.table">
+                  <div class="card smallest" ng-style="pointerCursorStyle()" id='table' ng-click="pickWinning(answer)" ng-show="showTable || isCzar()" ng-repeat="card in answer.card" ng-animate="{enter:'animated bounceInLeft'}" style="background-color:{{winningColor($parent.$index)}}">
+                    <span ng-bind-html-unsafe="card.text"></span>
+              <span id='selection-number' ng-show="firstAnswer($index)"> 1 </span>
+              <span id='selection-number' ng-show="secondAnswer($index)"> 2 </span>
+            </div>
+            </span>
+          </div>
+          <answers></answers>
+        </div>
+      </div>
+    </div>-->
   </div>
-<script>
-   $(document).ready(function() {
-    const emoji = $("#textarea").emojioneArea({
-      pickerPosition: "top",
-      events: {
-        keyup: function (editor, event) {
-          angular.element('#app-container').scope().charactersRemaining(this.getText());
-          if (event.which == 13) {
-            angular.element('#app-container').scope().chat(this.getText());
-            this.setText('');
+  <script>
+    $(document).ready(function () {
+      const emoji = $("#textarea").emojioneArea({
+        pickerPosition: "top",
+        events: {
+          keyup: function (editor, event) {
+            angular.element('#app-container').scope().charactersRemaining(this.getText());
+            if (event.which == 13) {
+              angular.element('#app-container').scope().chat(this.getText());
+              this.setText('');
+            }
           }
         }
-      }
+      });
     });
-  });
-</script>
+
+  </script>
   </div>
 </header>
