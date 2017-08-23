@@ -74,3 +74,19 @@
   <!--Chat Begins -->
   <div ng-app="tour" ng-controller="GameTourController"/>
 </div>
+<script>
+   $(document).ready(function() {
+    const emoji = $("#textarea").emojioneArea({
+      pickerPosition: "top",
+      events: {
+        keyup: function (editor, event) {
+          angular.element('#app-container').scope().charactersRemaining(this.getText());
+          if (event.which == 13) {
+            angular.element('#app-container').scope().chat(this.getText());
+            this.setText('');
+          }
+        }
+        }
+    });
+  });
+</script>

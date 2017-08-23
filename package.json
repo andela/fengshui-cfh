@@ -45,6 +45,7 @@
     "gulp-sequence": "^0.4.6",
     "jade": "~0.35.0",
     "jsonwebtoken": "^7.4.1",
+    "localStorage": "^1.0.3",
     "mean-logger": "~0.0.1",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.7",

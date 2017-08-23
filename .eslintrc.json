@@ -4,7 +4,8 @@
   "env": {
     "node": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "browser": true
   },
   "globals": {
     "angular": true,
@@ -27,6 +28,7 @@
     "no-underscore-dangle": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [0, { "commonjs": true }],
+    "import/extensions": 0,
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
