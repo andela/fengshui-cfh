@@ -11,6 +11,8 @@ angular.module('mean.system')
   $scope.chatControler = '^';
   $scope.charactersLeft = 100;
   $scope.showChatStatus = false;
+  $scope.invitedUsers = [];
+  $scope.friendList = [];
   $scope.chatter = {};
   let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
   $scope.makeAWishFact = makeAWishFacts.pop();
@@ -95,7 +97,7 @@ angular.module('mean.system')
     if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
       return $scope.colors[game.players[game.winningCardPlayer].color];
     }
-    return '#f9f9f9';
+    return 'rgba(255,255,255,0.5)';
   };
 
   $scope.pickWinning = (winningSet) => {
@@ -122,11 +124,26 @@ angular.module('mean.system')
     });
   };
 
+  $scope.shuffleCards = () => {
+    const card = $(`#${event.target.id}`);
+    card.addClass('animated flipOutY');
+    setTimeout(() => {
+      $scope.startNextRound();
+      card.removeClass('animated flipOutY');
+      $('#czarModal').modal('hide');
+    }, 500);
+  };
+
+  $scope.startNextRound = () => {
+    if ($scope.isCzar()) {
+      game.startNextRound();
+    }
+  };
+
   $scope.abandonGame = () => {
     game.leaveGame();
     $location.path('/');
   };
-
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
   $scope.$watch('game.round', () => {
@@ -144,6 +161,25 @@ angular.module('mean.system')
   $scope.$watch('game.state', () => {
     if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
       $scope.showTable = true;
+    }
+    if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+      $('#czarModal').modal({
+        dismissible: false
+      });
+      $('#czarModal').modal('open');
+    }
+    if (game.state === 'game dissolved') {
+      $('#czarModal').modal('close');
+    }
+    if ($scope.isCzar() === false && game.state === 'czar pick card'
+         && game.state !== 'game dissolved'
+         && game.state !== 'awaiting players' && game.table.length === 0) {
+      $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+    }
+    if (game.state !== 'czar pick card'
+        && game.state !== 'awaiting players'
+         && game.state !== 'game dissolve') {
+      $scope.czarHasDrawn = '';
     }
     if ($scope.game.state === 'game dissolved' || $scope.game.state === 'game ended') {
       const gameData = { gameId: $scope.game.gameID,
@@ -339,23 +375,19 @@ angular.module('mean.system')
     if ($scope.invitedUsers.length <= 10) {
       const inviteButton = document.getElementById(`${button.target.id}`);
       inviteButton.disabled = true;
-      inviteButton.className.replace(/\binvite pull-right\b/, '');
-      if (inviteButton.class === 'invite') {
-        $scope.class = 'invite';   
-      } else {
-        $scope.class = 'invite';
-      }
       if ($scope.invitedUsers.indexOf(user.name) === -1) {
         $scope.invitedUsers.push(user.name);
         sessionStorage.invitedUsers = JSON.stringify($scope.invitedUsers);
       }
     }
+
     const url = button.target.baseURI;
     const obj = {
       url,
       invitee: user.email,
       gameOwner: game.players[0].username
     };
+
     $http.post('/inviteusers', obj);
   };
 
