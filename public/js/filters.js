@@ -4,4 +4,12 @@ angular.module('mean.system')
       input = input || '';
       return input.charAt(0).toUpperCase() + input.slice(1);
     }
+  ))
+  .filter('addFriends', () => (
+    (input, friendsEmail) => {
+      if (friendsEmail.includes(input)) {
+        return 'Unfriend';
+      }
+      return 'Add Friend';
+    }
   ));

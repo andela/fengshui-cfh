@@ -108,3 +108,110 @@
   height: 40px;
   width: 40px;
   border-radius: 50%; }
+  #searchbox {
+  width: 200px;
+  height: 50px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+
+#searchbox .glyphicon-search {
+  vertical-align: middle;
+  position: absolute;
+  left: 15px;
+  top: 8px;
+}
+
+#searchbox input#search {
+  width: 180px;
+  height: 30px;
+  background: #eaeeef;
+  border: none;
+  font-size: 12px;
+  color: #63717f;
+  padding-left: 45px;
+  border-radius: 5px;
+  outline: 0;
+}
+
+.search-button, .search-button:active, .search-button:focus {
+  height: 30px;
+  font-size: 13px;
+  outline: 0;
+}
+.dropdown-menu > li > span > a {
+  color: #333 !important;
+  padding: 10px;
+  font-size: 0.9em;
+  font-weight: 200;
+  float: left;
+  border-bottom: #d8d8d8 2px solid;
+  cursor: pointer;
+}
+.dropdown-menu > li > span > a:hover {
+  color: #213367 !important;
+  padding: 10px;
+  font-size: 0.9em;
+  font-weight: 200;
+  float: left;
+  text-decoration: underline;
+}
+.dropdown-menu {
+  width: 280px;
+}
+
+.invite {
+    border: none;
+    outline: none;
+    background: #14a4d4;
+    padding: 9px 9px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    transition: .5s ease-in;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -o-border-radius: 25px;
+    -moz-border-radius: 25px;
+}
+.invite-friend {
+    border: none;
+    outline: none;
+    background: #14a4d4;
+    padding: 10px 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    transition: .5s ease-in;
+    -webkit-transition: .5s ease-in;
+    -moz-transition: .5s ease-in;
+    -o-transition: .5s ease-in;
+    -ms-transition: .5s ease-in;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -moz-border-radius: 5px;
+    text-align: center;
+
+}
+.invite:hover {
+  background: #748e9c;
+}
+button[disabled] {
+  background: #ccc;
+  opacity: 0.65; 
+  pointer-events: none;
+  color: #333;
+}
+
+.glyphicon {
+    font-size: 18px;
+}
+.dropdown-menu span {
+  font-size: 18px;
+}

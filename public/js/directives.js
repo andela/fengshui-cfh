@@ -27,6 +27,11 @@ angular.module('mean.directives', [])
       templateUrl: '/views/answers.html',
       link: (scope) => {
         scope.$watch('game.state', () => {
+          if (scope.isCustomGame()) {
+            scope.showInviteButton = true;
+          } else {
+            scope.showInviteButton = false;
+          }
           if (scope.game.state === 'winner has been chosen') {
             const curQ = scope.game.curQuestion;
             const curQuestionArr = curQ.text.split('_');
