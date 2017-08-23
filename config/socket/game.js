@@ -171,6 +171,8 @@ class Game {
     Game.shuffleCards(this.questions);
     Game.shuffleCards(this.answers);
     Game.stateChoosing(this);
+    this.changeCzar(this);
+    this.sendUpdate();
   }
 
 /**
@@ -199,12 +201,6 @@ class Game {
     }
     self.round += 1;
     self.dealAnswers();
-    // Rotate card czar
-    if (self.czar >= self.players.length - 1) {
-      self.czar = 0;
-    } else {
-      self.czar += 1;
-    }
     self.sendUpdate();
     self.choosingTimeout = setTimeout(() => {
       Game.stateJudging(self);
@@ -267,7 +263,7 @@ class Game {
       if (winner !== -1) {
         self.stateEndGame(winner);
       } else {
-        Game.stateChoosing(self);
+        self.changeCzar(self);
       }
     }, self.timeLimits.stateResults * 1000);
   }
@@ -511,6 +507,33 @@ class Game {
     clearTimeout(this.resultsTimeout);
     clearTimeout(this.choosingTimeout);
     clearTimeout(this.judgingTimeout);
+  }
+
+/**
+ * @param {Object} self
+ * @return {void} void
+ */
+  changeCzar() {
+    this.state = 'czar pick card';
+    this.table = [];
+    if (this.czar >= this.players.length - 1) {
+      this.czar = 0;
+    } else {
+      this.czar += 1;
+    }
+    this.sendUpdate();
+  }
+
+/**
+ * @param {Object} self
+ * @return {void} void
+ */
+  startNextRound() {
+    if (this.state === 'czar pick card') {
+      Game.stateChoosing(this);
+    } else if (this.state === 'czar left game') {
+      this.changeCzar(this);
+    }
   }
 }
 
