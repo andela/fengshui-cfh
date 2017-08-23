@@ -192,7 +192,7 @@ exports.jwtSignIn = (req, res) => {
 };
 
 exports.ensureToken = (req, res, next) => {
-  let token = req.body.token || req.params.token || req.headers.authorization;
+  let token = req.headers.authorization;
   if (token) {
     token = token.split(' ');
     token = token[1];
@@ -208,7 +208,8 @@ exports.ensureToken = (req, res, next) => {
       }
     });
   } else {
-    res.redirect('/#!/signin?error=No_token_provided');
+    res.status(400).send({ success: false, message: 'No token provided' });
+    // res.redirect('/#!/signin?error=No_token_provided');
   }
 };
 
@@ -303,4 +304,14 @@ exports.user = (req, res, next, id) => {
       req.profile = user;
       next();
     });
+};
+
+exports.getDonations = (req, res) => {
+  User.findOne({ username: req.token.id }, (err, user) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else {
+      res.json({ donations: user.donations });
+    }
+  });
 };
