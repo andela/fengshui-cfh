@@ -1,5 +1,6 @@
+ /* eslint-disable no-alert, no-console */
 angular.module('mean.system')
-.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, socket, game, AvatarService) => {
+.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', '$window', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, $window, socket, game, AvatarService) => {
   $scope.global = Global;
 
   $scope.playAsGuest = () => {
@@ -7,11 +8,49 @@ angular.module('mean.system')
     $location.path('/app');
   };
 
+  $scope.playWithStrangers = () => {
+    if ($scope.region === undefined) {
+      alert('Please Select your Region');
+      return;
+    }
+    $scope.data = { player_region: $scope.region };
+    $http.post('/setregion', $scope.data)
+    .success((data) => {
+      console.log(data);
+    });
+    const myModal = $('#select-region');
+    myModal.modal('hide');
+    $window.location.href = '/play';
+  };
+
+  $scope.playWithFriends = () => {
+    if ($scope.region === undefined) {
+      alert('Please Select your Region');
+      return;
+    }
+    $scope.data = { player_region: $scope.region };
+    $http.post('/setregion', $scope.data)
+      .success((data) => {
+        console.log(data);
+      });
+    const myModal = $('#select-region');
+    myModal.modal('hide');
+    $window.location.href = '/play';
+  };
+
   $scope.showError = () => {
     if ($location.search().error) {
       return $location.search().error;
     }
     return false;
+  };
+  $scope.showRegion = () => {
+    const myModal = $('#select-region');
+    myModal.modal('show');
+  };
+  $scope.showRegionGuest = () => {
+    const myModal = $('#select-region-guest');
+    myModal.modal('show');
   };
 
   $scope.avatars = [];
