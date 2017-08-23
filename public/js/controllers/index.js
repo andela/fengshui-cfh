@@ -13,7 +13,7 @@ angular.module('mean.system')
       alert('Please Select your Region');
       return;
     }
-    $scope.data = { player_region: $scope.region };
+    $scope.data = { playerRegion: $scope.region };
     $http.post('/setregion', $scope.data)
     .success((data) => {
       console.log(data);
@@ -28,7 +28,7 @@ angular.module('mean.system')
       alert('Please Select your Region');
       return;
     }
-    $scope.data = { player_region: $scope.region };
+    $scope.data = { playerRegion: $scope.region };
     $http.post('/setregion', $scope.data)
       .success((data) => {
         console.log(data);
