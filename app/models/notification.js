@@ -10,4 +10,4 @@ const NotificationSchema = new Schema({
   link: String,
   read: Number // 1 should be mark as read
 });
-mongoose.model('Notification', NotificationSchema);
+mongoose.model('Notificate', NotificationSchema);
