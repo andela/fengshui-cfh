@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  Notification = mongoose.model('Notification');
+  Notificate = mongoose.model('Notificate');
 
 exports.addFriend = (req, res) => {
   const friendId = req.body.friendId,
@@ -50,7 +50,7 @@ exports.getFriends = (req, res) => {
 
 exports.loadNotification = (req, res) => {
   const userId = req.body.user_id;
-  Notification.find(
+  Notificate.find(
     {
       to: userId,
       read: 0
@@ -82,7 +82,7 @@ exports.sendNotification = (req, res) => {
     friendList = req.body.friendList;
   let count = 0;
   friendList.forEach((friendId) => {
-    const Notify = new Notification(
+    const Notify = new Notificate(
       {
         to: friendId,
         from: userName,
