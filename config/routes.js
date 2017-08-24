@@ -1,6 +1,7 @@
 import winston from 'winston';
 import mongoose from 'mongoose';
 import users from '../app/controllers/users';
+import region from '../app/controllers/region';
 import answers from '../app/controllers/answers';
 import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
@@ -164,8 +165,12 @@ module.exports = (app, passport) => {
   app.get('/play', index.play);
   app.get('/', index.render);
   app.get('/gametour', index.gameTour);
+
   // Game route
   app.post('/api/games/:id/start', users.ensureToken, game.startGame);
+
+  // Set Region
+  app.post('/region', region.setRegion);
   app.get('/api/games/history', users.ensureToken, game.getGameHistory);
   app.get('/api/leaderboard', users.ensureToken, game.getLeaderBoard);
   app.get('/api/search/users', middleware.requiresLogin, (req, res) => {

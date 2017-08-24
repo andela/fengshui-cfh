@@ -22,7 +22,7 @@ module.exports = (io) => {
     let game;
     if (gamesNeedingPlayers.length <= 0) {
       // new player has just joined the game
-      gameID += 1;
+      gameID += new Date().getTime();
       const gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;
