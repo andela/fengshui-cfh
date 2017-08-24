@@ -29,19 +29,19 @@
     </nav>
     
     <div ng-controller="DashboardController" class="dashboard">
-
+<center>
 <div class="btn-group nav-buttons-group">
-    <span class="nav-buttons btn btn-default" ng-click="showLeaderboard()"> Leaderboard</span>
+    <span class="nav-buttons btn btn-default" ng-click="showLeaderboard()" > Leaderboard</span>
 
     <span class="nav-buttons btn btn-default " ng-click="showGameHistory()"> Game History</span>
 
     <span class="nav-buttons btn btn-default" ng-click="showDonations()" > Donations </span>
 </div>
 
- 
-<div class="board   container" ng-show="leaderboardShow">
-    <h2 class="board-header"> Leardboard </h2>
-    <table class="table table-bordered jumbotron">
+ <center>
+<div class="board container" ng-show="leaderboardShow">
+    <h2 class="board-header"> Leaderboard </h2>
+    <table class="table table-bordered jumbotron active">
     <th> Rank </th>
     <th> Name </th>
     <th> Number of Wins </th>
@@ -52,6 +52,7 @@
     </tr>
     </table>
 </div>
+</center>
 
 <div class="board container" ng-show="gameHistoryShow"> 
   <h2 class="board-header"> Game History </h2>
@@ -81,6 +82,7 @@
     </tr>
     </table>
 </div>
+</center>
 </div>
   </div>
 </header>

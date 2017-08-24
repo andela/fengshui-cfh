@@ -184,7 +184,12 @@ angular.module('mean.system')
         gameWinner: $scope.game.players[game.gameWinner].username,
         gamePlayers: $scope.game.players
       };
-      $http.post(`/api/games/${game.gameID}/start`, gameData);
+      const token = window.localStorage.getItem('jwt');
+      const config = { headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json;odata=verbose'
+      } };
+      $http.post(`/api/games/${game.gameID}/start`, gameData, config);
     }
   });
 

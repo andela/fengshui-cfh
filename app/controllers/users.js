@@ -198,6 +198,7 @@ exports.ensureToken = (req, res, next) => {
     token = token[1];
   }
   if (token) {
+    console.log('my token', token);
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
@@ -231,7 +232,7 @@ exports.avatars = (req, res) => {
       user.save();
     });
   }
-  return res.redirect('/#!/app');
+  return res.redirect('/');
 };
 
 exports.addDonation = (req, res) => {

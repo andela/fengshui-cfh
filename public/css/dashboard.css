@@ -13,7 +13,7 @@
 }
 
 .board-header{
-  margin-left: 40px;
+  margin-left: -27px;
   margin-bottom: 30px;
   font-size: 50px !important;
   color: #fff !important;
@@ -26,8 +26,7 @@
 }
 
 .nav-buttons-group{
-  margin-left: 60px;
-  margin-right: 50px;
+  margin-right: 130px;
   margin-top: 50px;
   position: relative;
   padding-left: 60px;
@@ -39,8 +38,13 @@
 .nav-buttons{
   padding-left: 60px; 
   padding-right: 50px;
-  font-size: 40px;
+  font-size: 30px;
 }
+
+.nav-buttons:hover {
+   background-color: #B5011C;
+   color: white;
+} 
 
 .leadertable{
   border-radius: 10px;
