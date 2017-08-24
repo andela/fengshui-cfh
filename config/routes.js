@@ -12,7 +12,7 @@ import middleware from './middlewares/authorization';
 
 const User = mongoose.model('User');
 const sg = require('sendgrid')('SG.SsgxbJ1IRiSImn2gI1qAkA.' +
- 'VdN9m18YcsrOoc6-kpg_C3h4B207Ftxc_znG3dHE5qk');
+ + 'VdN9m18YcsrOoc6-kpg_C3h4B207Ftxc_znG3dHE5qk');
 
 const sendMail = (inviteeMail, gameLink, gameOwner) => {
   const request = sg.emptyRequest({

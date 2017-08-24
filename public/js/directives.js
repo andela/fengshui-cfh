@@ -27,6 +27,7 @@ angular.module('mean.directives', [])
       templateUrl: '/views/answers.html',
       link: (scope) => {
         scope.$watch('game.state', () => {
+          console.log(scope.isCustomGame());
           if (scope.isCustomGame()) {
             scope.showInviteButton = true;
           } else {
