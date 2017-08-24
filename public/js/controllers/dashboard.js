@@ -31,6 +31,9 @@ angular.module('mean.system')
           $scope.gameHistoryShow = true;
           $scope.donationsShow = false;
         }
+      })
+      .catch(() => {
+        $scope.gameHistory = 'You have not played any game';
       });
   };
 
@@ -43,6 +46,9 @@ angular.module('mean.system')
           $scope.leaderboardShow = false;
           $scope.gameHistoryShow = false;
         }
+      })
+      .catch(() => {
+        $scope.donations = '';
       });
   };
 }]);
