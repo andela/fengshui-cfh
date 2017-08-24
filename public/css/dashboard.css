@@ -49,3 +49,7 @@
 .leadertable{
   border-radius: 10px;
 }
+
+th{
+  font-weight: bold;
+}

@@ -198,12 +198,12 @@ exports.ensureToken = (req, res, next) => {
     token = token[1];
   }
   if (token) {
-    console.log('my token', token);
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
         req.token = decoded;
+        console.log('data ====>.>', req.token);
         // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
         next();
       }

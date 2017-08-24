@@ -24,6 +24,7 @@ exports.startGame = (req, res) => {
   game.gameRounds = req.body.gameRounds;
 
   User.findOne({ name: req.token.data.name }, (err, user) => {
+    console.log('my user +++++', user);
     if (user === req.body.gameWinner) {
       user.gameWins += 1;
     }
@@ -37,7 +38,7 @@ exports.startGame = (req, res) => {
 };
 
 exports.getGameHistory = (req, res) => {
-  Game.find({ gameOwner: req.token.id }, (err, results) => {
+  Game.find({ gameOwner: req.token.data.name }, (err, results) => {
     if (err) {
       res.status(500).send({ error: 'An error occured' });
     } else if (!results) {

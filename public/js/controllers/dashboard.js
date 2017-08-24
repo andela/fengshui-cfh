@@ -26,6 +26,7 @@ angular.module('mean.system')
     $http.get('/api/games/history', config)
       .then((response) => {
         $scope.gameHistory = response.data.history;
+        console.log('your game', $scope.gameHistory[0].gamePlayers[0].username);
         if (response.data.history) {
           $scope.leaderboardShow = false;
           $scope.gameHistoryShow = true;
