@@ -5,6 +5,10 @@ body {
   font-size: 1.8em;
 }
 
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
 a, a:hover {
   color: #B5011C !important;
 }
@@ -67,7 +71,6 @@ header {
 }
 
 .main-copy {
-  margin-top: 150px;
 }
 
 a.btn-normal {
@@ -86,19 +89,22 @@ a.btn-normal:last-child {
 }
 
 .how-to-play {
-  padding-bottom: 60px;
   width: 80%;
   margin: 0 auto;
 }
 
+.how-to-play, .donate .overlay, .meet-the-team {
+  padding: 60px 0;  
+}
+
 .how-to-play h1, .donate h1, .meet-the-team h1 {
   text-align: center;
-  margin-top: 40px;
   margin-bottom: 20px;
 }
 
 .how-to {
   margin-bottom: 30px;
+  box-shadow: none;
 }
 
 .big {
@@ -125,9 +131,6 @@ a.btn-normal:last-child {
   color: #fff;
 }
 
-.donate p:last-child {
-  padding-bottom: 60px;
-}
 
 .donate .overlay {
   height: auto;
@@ -156,16 +159,11 @@ a.btn-normal:last-child {
 .meet-the-team {
   text-align: center;
   background: #fff;
-  padding-bottom: 30px;
 }
 
 .meet-the-team img {
   border-radius: 100%;
   width: 150px;
-}
-
-.meet-the-team .row {
-  margin-bottom: 20px;
 }
 
 footer {
@@ -336,4 +334,26 @@ footer {
 .eighty {
   width: 80%;
   margin-top: 30px;
+}
+
+.hero {
+  display: table;
+}
+
+.main-copy div:first-child {
+  display: table-cell;
+  vertical-align: middle;
+  height: 85vh;
+}
+
+.form {
+  margin: 0 auto;
+  max-height: 480px;
+  max-width: 100%;
+}
+
+.form-inner {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100vh;
 }
