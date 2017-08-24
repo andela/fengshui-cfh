@@ -49,6 +49,7 @@
     "mean-logger": "~0.0.1",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.7",
+    "nodemailer": "^4.0.1",
     "nodemon": "^1.11.0",
     "passport": "~0.1.17",
     "passport-facebook": "~2.0.0",
