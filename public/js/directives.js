@@ -4,7 +4,20 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       templateUrl: '/views/player.html',
       link: (scope) => {
-        scope.colors = ['#7CE4E8', '#FFFFa5', '#FC575E', '#F2ADFF', '#398EC4', '#8CFF95'];
+        scope.colors = [
+          'rgba(124,228,232,0.5)',
+          'rgba(255,255,165,0.5)',
+          'rgba(252,87,94,0.5)',
+          'rgba(242,173,255,0.5)',
+          'rgba(57,142,196,0.5)',
+          'rgba(140,255,149,0.5)',
+          'rgba(245, 130, 48, 0.5)',
+          'rgba(170, 110, 40, 0.5)',
+          'rgba(128, 128, 0, 0.5)',
+          'rgba(245, 130, 48, 0.5)',
+          'rgba(128, 128, 0, 0.5)',
+          'rgba(210, 245, 60, 0.5)'
+        ];
       }
     }
   ))
@@ -57,7 +70,7 @@ angular.module('mean.directives', [])
     {
       restrict: 'EA',
       templateUrl: '/views/question.html',
-      link: () => {}
+      link: () => { }
     }
   ))
   .directive('modal', () => (
@@ -98,7 +111,7 @@ angular.module('mean.directives', [])
     {
       restrict: 'EA',
       templateUrl: '/views/timer.html',
-      link: () => {}
+      link: () => { }
     }
   ))
   .directive('landing', () => (

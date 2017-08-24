@@ -1,5 +1,6 @@
 import async from 'async';
 import _ from 'underscore';
+import localStorage from 'localStorage';
 import questions from '../../app/controllers/questions';
 import answers from '../../app/controllers/answers';
 
@@ -157,9 +158,20 @@ class Game {
         if (err) {
           throw new Error(err);
         }
-        self.questions = results[0];
-        self.answers = results[1];
-
+        if (localStorage.getItem('player_region')) {
+          if (localStorage.getItem('player_region') !== '') {
+            const newQuestion = results[0].filter(result => (result.region === localStorage.getItem('player_region')));
+            const newAnswers = results[1].filter(result => (result.region === localStorage.getItem('player_region')));
+            self.questions = newQuestion;
+            self.answers = newAnswers;
+          } else {
+            self.questions = results[0];
+            self.answers = results[1];
+          }
+        } else {
+          self.questions = results[0];
+          self.answers = results[1];
+        }
         self.startGame();
       });
   }
@@ -171,6 +183,8 @@ class Game {
     Game.shuffleCards(this.questions);
     Game.shuffleCards(this.answers);
     Game.stateChoosing(this);
+    this.changeCzar(this);
+    this.sendUpdate();
   }
 
 /**
@@ -199,12 +213,6 @@ class Game {
     }
     self.round += 1;
     self.dealAnswers();
-    // Rotate card czar
-    if (self.czar >= self.players.length - 1) {
-      self.czar = 0;
-    } else {
-      self.czar += 1;
-    }
     self.sendUpdate();
     self.choosingTimeout = setTimeout(() => {
       Game.stateJudging(self);
@@ -267,7 +275,7 @@ class Game {
       if (winner !== -1) {
         self.stateEndGame(winner);
       } else {
-        Game.stateChoosing(self);
+        self.changeCzar(self);
       }
     }, self.timeLimits.stateResults * 1000);
   }
@@ -511,6 +519,33 @@ class Game {
     clearTimeout(this.resultsTimeout);
     clearTimeout(this.choosingTimeout);
     clearTimeout(this.judgingTimeout);
+  }
+
+/**
+ * @param {Object} self
+ * @return {void} void
+ */
+  changeCzar() {
+    this.state = 'czar pick card';
+    this.table = [];
+    if (this.czar >= this.players.length - 1) {
+      this.czar = 0;
+    } else {
+      this.czar += 1;
+    }
+    this.sendUpdate();
+  }
+
+/**
+ * @param {Object} self
+ * @return {void} void
+ */
+  startNextRound() {
+    if (this.state === 'czar pick card') {
+      Game.stateChoosing(this);
+    } else if (this.state === 'czar left game') {
+      this.changeCzar(this);
+    }
   }
 }
 

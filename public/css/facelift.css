@@ -34,7 +34,9 @@ header {
   background: url('cards-against-humanity.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #fff;
+  overflow: scroll;
 }
 
 .container-fluid {
@@ -45,6 +47,7 @@ header {
 .overlay {
   background: rgba(0, 0, 0, 0.6);
   height: 100vh;
+  overflow: scroll;
 }
 
 .hero {
@@ -105,10 +108,12 @@ a.btn-normal:last-child {
   font-weight: bold;
 }
 
-.card {
-  height: 200px;
+.card, .card.smallest {
+  height: 150px;
   border-radius: 10px;
-  background: #fff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }
 
 .donate {
@@ -182,4 +187,153 @@ footer {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.5);
   padding: 50px 30px;
+}
+
+.timer-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.timer-container #timer-status-round {
+  color: #fff;
+}
+
+.timer-container #time {
+  color: #fff;
+  font-size: 7em;
+}
+
+.question-container .card.longBlack {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-family: 'Basic';
+}
+
+#player-container {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#player-container #player-container-inner div {
+  display: inline;
+}
+
+.avatar {
+  width: 50px;
+}
+
+#info-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+#info-container h4, #finding-players {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+#info-container #oh-el {
+  padding: 0;
+}
+
+#info-container li {
+  margin-bottom: 10px;
+}
+
+#info-container li:last-child,{
+  margin-bottom: 0;
+}
+
+#start-game-button {
+  background: rgb(65, 194, 202);
+  border-radius: 5px;
+  width: 30%;
+  padding: 5px 0;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+#czar-blank-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/*@media (min-width: 768px){
+  #left {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    overflow-y: scroll; 
+  }
+  
+  #right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
+}*/
+
+.left {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    /*overflow-y: scroll; */
+  }
+  
+  .right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
+
+  .hand {
+    margin: 20px 0;
+    margin-left: 10px;
+    padding: 0;
+  }
+
+  #game-end-container {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  #crDonateWidget_cfhio_cards4humanity {
+    margin: 20px 0 0 0;
+    font-family: 'Basic', sans-serif;
+    width: 100% !important;
+  }
+
+  .default {
+    background: #000;
+    padding-bottom: 10px;
+  }
+
+.eighty {
+  width: 80%;
+  margin-top: 30px;
 }
