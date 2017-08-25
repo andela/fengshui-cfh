@@ -1,8 +1,8 @@
 </script>
 <header>
   <div class="overlay">
-    <div id="app-container" ng-controller="GameController">
-      <nav class="navbar navbar-default">
+    <div id="app-container">
+      <nav class="navbar navbar-default default">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -12,14 +12,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="" id="logo">CardsForHumanity</a>
+            <a id='logo' class="navbar-brand" href="">CardsForHumanity</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="" id="abandon-game-button" ng-click="abandonGame()" id="abandon-game-button">Abandon Game</a></li>
-              <li id="tweet-container"><a class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
+              <li><a href="" id="abandon-game-button" ng-click="abandonGame()">Abandon Game</a></li>
+              <li><a id="tweet-container" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
                   data-related="CFH_App">Tweet</a></li>
               <script>
                 !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');
@@ -29,86 +29,117 @@
         </div>
       </nav>
 
-
-        <!--Chat Begins -->
-  <button class="controlChat" ng-click="showChat()"  id="chat-for-Tour" ng-hide="showChatStatus">
-    <img src="img/chat.png" width="100%" height="100%" />
+      <!--Chat Begins -->
+      <button class="controlChat" ng-click="showChat()" ng-hide="showChatStatus">
+    <img src="img/chat.png" width="100%" height="100%" id="chat-for-Tour"/>
   </button>
-  <div class="chat-holder" ng-show="showChatStatus">
-    <div class="">
-      <button style="background: rgb(65, 194, 202); width: 70%;" class="btn mybutton chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon()) data-target="#demo">
+      <div class="chat-holder" id="chat-for-Tour" ng-show="showChatStatus" style="width: 270px;">
+        <div class="">
+          <button style="background: rgb(65, 194, 202); width: 70%;" class="btn mybutton chat-title" data-toggle="collapse" ng-click=(changeFormOpenIcon())
+            data-target="#demo">
         Chat Now
       </button>
-      <button style="background: rgb(65, 194, 202);" data-toggle="collapse" data-target="#demo" class="btn mybutton chat-open" ng-click=(changeFormOpenIcon())>
+          <button style="background: rgb(65, 194, 202);" data-toggle="collapse" data-target="#demo" class="btn mybutton chat-open"
+            ng-click=(changeFormOpenIcon())>
         {{chatControler}}
       </button>
-      <button class="btn mybutton close-chat" ng-click="showChat()" style="background: rgb(65, 194, 202);">
+          <button class="btn mybutton close-chat" ng-click="showChat()" style="background: rgb(65, 194, 202);">
         X
       </button>
-      <div id="demo" class="collapse mycollapse" scroll-glue>
-        <div ng-style="chatter" style="color: black">
-          <p class="chat-header"> This is the beginning of chat for this Game </p>
-          <hr />
-          <ul class="message-container scrollBottom">
-            <li ng-repeat="message in messagesList" class="post" style="border: 0px;">
-              <div class="chip" style="font-size: 14px">
-                <img src={{message.avater}} alt="Sender" width="96" height="96">
-                {{message.sender}}
-              </div>
-              <div class="" style="text-align: justify; padding-left: 23%;">
-                  <span style="word-wrap: break-word; font-size: 14px;">{{message.message}}</span><br/>
-                  <b style="font-size: 8px; float: right;">{{message.date}} </b>
-              </div>
-            </li>
-        </ul>
-        <a href="" id="bottom"></a>
+          <div id="demo" class="collapse mycollapse" scroll-glue>
+            <div ng-style="chatter" style="color: black">
+              <p class="chat-header"> This is the beginning of chat for this Game </p>
+              <hr />
+              <ul class="message-container scrollBottom">
+                <li ng-repeat="message in messagesList" class="post" style="border: 0px;">
+                  <div class="chip" style="font-size: 14px">
+                    <img src={{message.avater}} alt="Sender" width="96" height="96"> {{message.sender}}
+                  </div>
+                  <div class="" style="text-align: justify; padding-left: 23%;">
+                    <span style="word-wrap: break-word; font-size: 14px;">{{message.message}}</span><br/>
+                    <b style="font-size: 8px; float: right;">{{message.date}} </b>
+                  </div>
+                </li>
+              </ul>
+              <a href="" id="bottom"></a>
+            </div>
+          </div>
+          <div id="container"></div>
+        </div>
+        <form ng-submit=(chat())>
+          <textarea class="form-control message-area" placeholder="Type your message here and Press Enter to Submit." maxlength="100"
+            ng-model="message" required ng-keyUp="charactersRemaining($event); submitWithEnter($event)" id="textarea" style="border-color: rgb(65, 194, 202);"></textarea>
+          </p>
+          <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
+        </form>
       </div>
-      </div>
-      <div id="container"></div>
-    </div>
-    <form ng-submit=(chat())>
-        <textarea
-          class="form-control message-area"
-          placeholder="Type your message here and Press Enter to Submit."
-          maxlength="100"
-          ng-model="message"
-          required
-          ng-keyUp="charactersRemaining($event); submitWithEnter($event)"
-          id="textarea"
-          style="border-color: rgb(65, 194, 202);"
-          ></textarea>
-      </p>
-    <span style="float: right; font-size: 9px;">{{charactersLeft}} charaters more</span>
-    </form>
-  </div>
-  <!--Chat Begins -->
+      <!--Chat Begins -->
 
       <!-- Game Screen Begins -->
-      <div class="container-fluid">
+      <div class="container-fluid eighty">
         <div class="row">
-          <div class="col-sm-3" id="timer-container">
-            <div class="timer-container">
-              <timer></timer>
+          <div class="col-sm-9 left">
+            <div class="col-sm-4">
+              <div class="timer-container" id="timer-container">
+
+
+              <div id = "inner-timer-container">
+  <div id="time">0</div>
+</div>
+
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="question-container" id="question-container-outer">
-              <question></question>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="players">
-              <player></player>
-            </div>
-          </div>
+            <div class="col-sm-8">
+              <div class="question-container" id="question-container-outer">
+<div id="question-container-inner">
+  <div class="card longBlack">
+    <span></span>
+
+    <div id="notifications"></div>
+    <div id="startGame">
+      <div id="finding-players">Finding Players</div>
+      <div id="player-count-container">
+        <div id="player-count">1 / 12 </div>
+        <div id="the-word-players"> Players </div>
+      </div>
+      <div id="loading-container">
+        <div id="loading-gif"><img ng-src="../img/loader5.gif" style="height: 100px"/></div>
+      </div>
+      <div id="start-game-container">
+        <div id='start-game-button'>
+          Start Game
         </div>
       </div>
+    </div>
+  </div>
+</div>
+              </div>
+              </div>
+            </div>
 
-      <div class="container-fluid">
-        <!--<div class="row">-->
-          <div class="col-sm-9" id="answers-container">
-            <div id="cards" class='hand'>
+          <div class="col-sm-3 right">
+            <div class="players">
 
+<div id="player-container" style="background-color:#1F959C">
+  <div id="above-czar-container">
+    <div id="avatar_" style="display: inline-block">
+      <img class="avatar" src="/img/chosen/E01.png"/>
+    </div>
+    <h4 style="display: inline-block">Nurudeen</h4>
+    <h4 style="margin-left: 55px" style="display: inline-block">0/5</h4>
+    <div id="player-star" style="margin-left: 55px; display: inline">
+      <img src="../img/11.png" />
+    </div>
+  </div>
+</div>
+            </div>
+            </div>
+          </div>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div id="cards" class='hand'>
               <span ng-show="winnerPicked()"></span>
 
               <div ng-style="{'cursor':'pointer'}" class="card smallest" id='answers' ng-click="pickCard(card)" ng-hide="showTable || isCzar()"
@@ -126,27 +157,25 @@
             </div>
             </span>
           </div>
-          <answers></answers>
-        <!--</div>-->
+<div id="answers-container">
+<div id="info-container">
+  <div id="inner-info">
+    <h4 style="text-align: center">How To Play</h4>
+    <ol id="oh-el">
+      <li>Each player begins with, and will always have, 10 white answer cards.</li>
+      <li>For each round, one player is randomly chosen as the Card Czar.</li>
+      <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
+      <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
+      <li>*Want to adorn your avatar with a glorious crown? Donate to charity after the game!</li>
+    </ol>
+  </div>
+</div>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+  </div>
   <div ng-app="tour" ng-controller="GameTourController"/>
-  </div>
-<script>
-   $(document).ready(function() {
-    const emoji = $("#textarea").emojioneArea({
-      pickerPosition: "top",
-      events: {
-        keyup: function (editor, event) {
-          angular.element('#app-container').scope().charactersRemaining(this.getText());
-          if (event.which == 13) {
-            angular.element('#app-container').scope().chat(this.getText());
-            this.setText('');
-          }
-        }
-      }
-    });
-  });
-</script>
-  </div>
 </header>
