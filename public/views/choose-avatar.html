@@ -1,35 +1,44 @@
 <div id="main-bod" ng-controller="IndexController">
   <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
-          </div>      
+  <header landing>
+  <div class="overlay">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+          <a class="navbar-brand" href="#">CardsForHumanity</a>
+        </div>
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" ng-controller="IndexController" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#!">Home</a></li>
+            <li><a href="#!/#instruction">How to play</a></li>
+            <li><a href="#!/#charity">Charity</a></li>
+            <li ng-show="showOptions"><a href="#!/signup">Sign up</a></li>
+            <li ng-show="showOptions"><a href="#!/signin">Sign in</a></li>
+            <li ng-hide="showOptions"><a href="#!/dashboard">Dashboard</a></li>
+            <li ng-hide="showOptions"><a href="" ng-click="logOut()">Sign Out</a ></li>
+          </ul>
         </div>
       </div>
-    </div>
-  </div>
+    </nav>
 <!-- Fixed Logo & Menu Bar End -->
 
 <!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
-    <div class="row" id="main-text"> 
+<div class="wpb-teaser parallax-background" id="homer" style="background: transparent;">
+  <div class="background-opacity" style="background: transparent;"></div> 
+  <div class="modified-container" style="background: transparent;">
+    <div class="row" id="main-text" style="background: transparent;"> 
     <!-- Teaser Text Start -->
-    <div id="landing-logo">
+    <div id="landing-logo" style="background: transparent;">
       <h2 id="slogan">Choose an Avatar!</h2>
       <p id="create">You're almost there! Just pick an avatar from the options below!</p>
 
@@ -46,7 +55,7 @@
               </ul>
             </div>
             <div class="form-actions">
-              <button id="sign-up-btn" type='submit'>Let's Go!</button>
+              <button id="sign-up-btn" type='submit' class="btn btn-normal">Let's Go!</button>
             </div>
           </form>
         </div>
@@ -56,6 +65,11 @@
     </div>
   </div>
 </div>
+</header>
+
+
+
+
 
 
 
