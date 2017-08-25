@@ -70,9 +70,6 @@ header {
   letter-spacing: 2px;
 }
 
-.main-copy {
-}
-
 a.btn-normal {
   margin-right: 20px;
 }
@@ -86,6 +83,11 @@ a.btn-normal:last-child {
   color: #fff !important;
   padding: 10px 30px;
   border: 1px solid #B5011C;
+}
+
+.btn-small, .btn-small:hover {
+  margin-top: 8px !important;
+  padding: 5px 30px !important;
 }
 
 .how-to-play {
@@ -243,10 +245,6 @@ footer {
   padding: 0;
 }
 
-#info-container li {
-  margin-bottom: 10px;
-}
-
 #info-container li:last-child,{
   margin-bottom: 0;
 }
@@ -332,7 +330,7 @@ footer {
   }
 
 .eighty {
-  width: 80%;
+  width: 70%;
   margin-top: 30px;
 }
 
@@ -349,7 +347,7 @@ footer {
 .form {
   margin: 0 auto;
   max-height: 480px;
-  max-width: 100%;
+  width: 100%;
 }
 
 .form-inner {
