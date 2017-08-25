@@ -77,12 +77,12 @@ angular.module('mean.system')
     };
     $http.post(url, data)
     .then((response) => {
-      $scope.alert = `${response.data.message} You will be redirected after few minutes`;
+     // $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
       $timeout(() => {
         location.reload();
-        $location.path('/gametour');
-      }, 3000);
+        $location.path('/#!/');
+      }, 200);
     }, (response) => {
       $scope.alert = response.data.message;
     });

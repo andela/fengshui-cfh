@@ -30,6 +30,8 @@ angular.module('mean.system')
           $scope.leaderboardShow = false;
           $scope.gameHistoryShow = true;
           $scope.donationsShow = false;
+        } else {
+          $scope.gameHistory = 'You have not played any game';
         }
       });
   };
@@ -45,4 +47,6 @@ angular.module('mean.system')
         }
       });
   };
+
+  $scope.showLeaderboard();
 }]);

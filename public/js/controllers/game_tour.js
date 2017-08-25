@@ -30,10 +30,6 @@ const GameTourController = ($location) => {
       intro: 'Played enough? Click this button to quit the game'
     },
     {
-      element: '#tweet-container',
-      intro: 'Share game experience with friends on twitter'
-    },
-    {
       element: '#answers-container',
       intro: 'These are the rules of the game',
       position: 'top'

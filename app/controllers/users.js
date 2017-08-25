@@ -231,7 +231,7 @@ exports.avatars = (req, res) => {
       user.save();
     });
   }
-  return res.redirect('/#!/app');
+  return res.redirect('/');
 };
 
 exports.addDonation = (req, res) => {
