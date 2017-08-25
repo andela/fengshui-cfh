@@ -1,5 +1,6 @@
+ /* eslint-disable no-alert, no-console */
 angular.module('mean.system')
-.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, socket, game, AvatarService) => {
+.controller('IndexController', ['$scope', '$http', '$timeout', 'Global', '$location', '$window', 'socket', 'game', 'AvatarService', ($scope, $http, $timeout, Global, $location, $window, socket, game, AvatarService) => {
   $scope.global = Global;
 
   $scope.playAsGuest = () => {
@@ -7,11 +8,49 @@ angular.module('mean.system')
     $location.path('/app');
   };
 
+  $scope.playWithStrangers = () => {
+    if ($scope.region === undefined) {
+      alert('Please Select your Region');
+      return;
+    }
+    $scope.data = { playerRegion: $scope.region };
+    $http.post('/setregion', $scope.data)
+    .success((data) => {
+      console.log(data);
+    });
+    const myModal = $('#select-region');
+    myModal.modal('hide');
+    $window.location.href = '/play';
+  };
+
+  $scope.playWithFriends = () => {
+    if ($scope.region === undefined) {
+      alert('Please Select your Region');
+      return;
+    }
+    $scope.data = { playerRegion: $scope.region };
+    $http.post('/setregion', $scope.data)
+      .success((data) => {
+        console.log(data);
+      });
+    const myModal = $('#select-region');
+    myModal.modal('hide');
+    $window.location.href = '/play';
+  };
+
   $scope.showError = () => {
     if ($location.search().error) {
       return $location.search().error;
     }
     return false;
+  };
+  $scope.showRegion = () => {
+    const myModal = $('#select-region');
+    myModal.modal('show');
+  };
+  $scope.showRegionGuest = () => {
+    const myModal = $('#select-region-guest');
+    myModal.modal('show');
   };
 
   $scope.avatars = [];
@@ -38,12 +77,12 @@ angular.module('mean.system')
     };
     $http.post(url, data)
     .then((response) => {
-      $scope.alert = `${response.data.message} You will be redirected after few minutes`;
+      // $scope.alert = `${response.data.message} You will be redirected after few minutes`;
       window.localStorage.setItem('jwt', response.data.jwt);
       $timeout(() => {
         location.reload();
-        $location.path('/gametour');
-      }, 3000);
+        $location.path('/');
+      }, 2000);
     }, (response) => {
       $scope.alert = response.data.message;
     });
@@ -57,8 +96,8 @@ angular.module('mean.system')
         $location.path('/#!/');
         location.reload();
       }
-    }, () => {
-      // alert(err);
+    }, (response) => {
+      $scope.alert = response.data.message;
     });
   };
 

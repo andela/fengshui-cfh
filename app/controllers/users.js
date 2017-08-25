@@ -116,7 +116,11 @@ exports.create = (req, res) => {
             }).status(500);
           }
           req.logIn(user, (err) => {
-            if (err) return err;
+            if (err) {
+              return res.json({
+                message: 'Internal Server Error'
+              }).status(500);
+            }
             const newUser = {
               name: req.body.name,
               email: req.body.email
@@ -160,17 +164,17 @@ exports.jwtSignIn = (req, res) => {
   }).exec((error, existingUser) => {
     if (error) {
       return res.status(500).json({
-        error: 'Server Login Error'
+        message: 'Server Login Error'
       });
     }
     if (!existingUser) {
       return res.status(404).json({
-        error: 'User not found'
+        message: 'User not found'
       });
     }
     if (!existingUser.authenticate(req.body.password)) {
       return res.status(400).json({
-        error: 'Invalid Login details'
+        message: 'Invalid Login details'
       });
     }
     req.logIn(existingUser, () => {
@@ -188,7 +192,7 @@ exports.jwtSignIn = (req, res) => {
 };
 
 exports.ensureToken = (req, res, next) => {
-  let token = req.body.token || req.params.token || req.headers.authorization;
+  let token = req.headers.authorization;
   if (token) {
     token = token.split(' ');
     token = token[1];
@@ -199,12 +203,14 @@ exports.ensureToken = (req, res, next) => {
         res.json({ success: false, message: 'Failed to authenticate token.' }).status(403);
       } else {
         req.token = decoded;
+        console.log('data ====>.>', req.token);
         // result = res.json({ success: true, message: 'Token Correct', decoded }).status(200);
         next();
       }
     });
   } else {
-    res.redirect('/#!/signin?error=No_token_provided');
+    res.status(400).send({ success: false, message: 'No token provided' });
+    // res.redirect('/#!/signin?error=No_token_provided');
   }
 };
 
@@ -226,7 +232,7 @@ exports.avatars = (req, res) => {
       user.save();
     });
   }
-  return res.redirect('/#!/app');
+  return res.redirect('/');
 };
 
 exports.addDonation = (req, res) => {
@@ -299,4 +305,14 @@ exports.user = (req, res, next, id) => {
       req.profile = user;
       next();
     });
+};
+
+exports.getDonations = (req, res) => {
+  User.findOne({ username: req.token.id }, (err, user) => {
+    if (err) {
+      res.status(500).send({ error: 'An error occured' });
+    } else {
+      res.json({ donations: user.donations });
+    }
+  });
 };

@@ -1,0 +1,55 @@
+.dashboard{
+    color: #333333;
+    font-family: 'basic', sans-serif;
+}
+
+.board{
+  font-size: 1em;
+  margin-left: 60px;
+  margin-top: 15px;
+  margin-right: 60px;
+  height: 400px; 
+  overflow: scroll; 
+}
+
+.board-header{
+  margin-left: -27px;
+  margin-bottom: 30px;
+  font-size: 50px !important;
+  color: #fff !important;
+}
+
+.notify-message{
+  margin-left: 40px;
+  font-size: 50px !important;
+  color: #fff !important;
+}
+
+.nav-buttons-group{
+  margin-right: 130px;
+  margin-top: 50px;
+  position: relative;
+  padding-left: 60px;
+  left: 10px;
+  top: -20px;
+
+}
+
+.nav-buttons{
+  padding-left: 60px; 
+  padding-right: 50px;
+  font-size: 30px;
+}
+
+.nav-buttons:hover {
+   background-color: #B5011C;
+   color: white;
+} 
+
+.leadertable{
+  border-radius: 10px;
+}
+
+th{
+  font-weight: bold;
+}

@@ -1,8 +1,6 @@
-/**
- * Module dependencies.
- */
-const mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
 
 /**
  * Game Schema
@@ -15,6 +13,11 @@ const GameSchema = new Schema({
     type: String
   },
   gameWinner: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  gameRounds: {
     type: String,
     default: '',
     trim: true
