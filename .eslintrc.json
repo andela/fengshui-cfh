@@ -4,7 +4,8 @@
   "env": {
     "node": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "browser": true
   },
   "globals": {
     "angular": true,
@@ -13,7 +14,9 @@
     "introJs": true,
     "document": true,
     "window": true,
-    "location": true
+    "location": true,
+    "_": true,
+    "io": true
   },
   "rules": {
     "one-var": 0,
@@ -24,7 +27,9 @@
     "comma-dangle": 0,
     "no-underscore-dangle": 0,
     "curly": ["error", "multi-line"],
+    "import/extensions": ["off", "never"],
     "import/no-unresolved": [0, { "commonjs": true }],
+    "import/extensions": 0,
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
