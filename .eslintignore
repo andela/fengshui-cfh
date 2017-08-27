@@ -1,1 +1,5 @@
 node_modules
+dist
+public/js/emoji
+public/lib
+public/css

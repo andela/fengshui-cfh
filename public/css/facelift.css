@@ -1,0 +1,359 @@
+body {
+  background: #f5f5f5;
+  color: #333;
+  font-family: 'Basic', sans-serif;
+  font-size: 1.8em;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+a, a:hover {
+  color: #B5011C !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.navbar {
+  background: transparent;
+  border-radius: none;
+  border: none;
+  padding-top: 10px;
+}
+
+.navbar a {
+  color: #fff !important;
+}
+
+header {
+  height: 100vh;
+  background: url('cards-against-humanity.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  overflow: scroll;
+}
+
+.container-fluid {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  overflow: scroll;
+}
+
+.hero {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.hero p {
+  padding: 20px;
+}
+
+.hero h1, .navbar-brand {
+  font-family: 'Shrikhand', cursive;
+  letter-spacing: 2px;
+}
+
+.main-copy {
+}
+
+a.btn-normal {
+  margin-right: 20px;
+}
+
+a.btn-normal:last-child {
+  margin-right: 0;
+}
+
+.btn-normal, .btn-normal:hover {
+  background: #B5011C;
+  color: #fff !important;
+  padding: 10px 30px;
+  border: 1px solid #B5011C;
+}
+
+.how-to-play {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.how-to-play, .donate .overlay, .meet-the-team {
+  padding: 60px 0;  
+}
+
+.how-to-play h1, .donate h1, .meet-the-team h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.how-to {
+  margin-bottom: 30px;
+  box-shadow: none;
+}
+
+.big {
+  color: #fb5669;
+  font-size: 3em;
+  float: left;
+  font-weight: bold;
+}
+
+.card, .card.smallest {
+  height: 150px;
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.donate {
+  text-align: center;
+  background: url('poor-children.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  color: #fff;
+}
+
+
+.donate .overlay {
+  height: auto;
+}
+
+.pink {
+  color: #fb5669;
+}
+
+.icon {
+  height: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.steps {
+  display: table;
+}
+
+.steps div {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px;
+}
+
+.meet-the-team {
+  text-align: center;
+  background: #fff;
+}
+
+.meet-the-team img {
+  border-radius: 100%;
+  width: 150px;
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.copy-div {
+  display: table;
+  height: 45px;
+}
+
+.copy-text {
+  display: table-cell;
+  vertical-align: middle;
+}
+.donate-box {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 50px 30px;
+}
+
+.timer-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.timer-container #timer-status-round {
+  color: #fff;
+}
+
+.timer-container #time {
+  color: #fff;
+  font-size: 7em;
+}
+
+.question-container .card.longBlack {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-family: 'Basic';
+}
+
+#player-container {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#player-container #player-container-inner div {
+  display: inline;
+}
+
+.avatar {
+  width: 50px;
+}
+
+#info-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+#info-container h4, #finding-players {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+#info-container #oh-el {
+  padding: 0;
+}
+
+#info-container li {
+  margin-bottom: 10px;
+}
+
+#info-container li:last-child,{
+  margin-bottom: 0;
+}
+
+#start-game-button {
+  background: rgb(65, 194, 202);
+  border-radius: 5px;
+  width: 30%;
+  padding: 5px 0;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+#czar-blank-container {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/*@media (min-width: 768px){
+  #left {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    overflow-y: scroll; 
+  }
+  
+  #right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
+}*/
+
+.left {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    /*overflow-y: scroll; */
+  }
+  
+  .right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 25%;
+  }
+
+  .hand {
+    margin: 20px 0;
+    margin-left: 10px;
+    padding: 0;
+  }
+
+  #game-end-container {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  #crDonateWidget_cfhio_cards4humanity {
+    margin: 20px 0 0 0;
+    font-family: 'Basic', sans-serif;
+    width: 100% !important;
+  }
+
+  .default {
+    background: #000;
+    padding-bottom: 10px;
+  }
+
+.eighty {
+  width: 80%;
+  margin-top: 30px;
+}
+
+.hero {
+  display: table;
+}
+
+.main-copy div:first-child {
+  display: table-cell;
+  vertical-align: middle;
+  height: 85vh;
+}
+
+.form {
+  margin: 0 auto;
+  max-height: 480px;
+  max-width: 100%;
+}
+
+.form-inner {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100vh;
+}
