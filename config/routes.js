@@ -1,4 +1,4 @@
-import winston from 'winston';
+// import winston from 'winston';
 import mongoose from 'mongoose';
 import users from '../app/controllers/users';
 import region from '../app/controllers/region';
