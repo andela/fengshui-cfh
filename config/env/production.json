@@ -3,23 +3,23 @@
         "name": "Cards for Humanity"
     },
     "facebook": {
-        "clientID": "APP_ID",
-        "clientSecret": "APP_SECRET",
-        "callbackURL": "http://cfh.io/auth/facebook/callback"
+        "clientID": "FB_CLIENT_ID",
+        "clientSecret": "FB_CLIENT_SECRET",
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/facebook/callback"
     },
     "twitter": {
-        "clientID": "CONSUMER_KEY",
-        "clientSecret": "CONSUMER_SECRET",
-        "callbackURL": "http://cfh.io/auth/twitter/callback"
+        "clientID": "TWITTER_CONSUMER_KEY",
+        "clientSecret": "TWITTER_CONSUMER_SECRET",
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/twitter/callback"
     },
     "github": {
-        "clientID": "APP_ID",
-        "clientSecret": "APP_SECRET",
-        "callbackURL": "http://cfh.io/auth/github/callback"
+        "clientID": "GITHUB_CLIENT_ID",
+        "clientSecret": "GITHUB_CLIENT_SECRET",
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/github/callback"
     },
     "google": {
-        "clientID": "APP_ID",
-        "clientSecret": "APP_SECRET",
-        "callbackURL": "http://cfh.io/auth/google/callback"
+        "clientID": "GOOGLE_CLIENT_ID",
+        "clientSecret": "GOOGLE_CLIENT_SECRET",
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/google/callback"
     }
 }
