@@ -14,7 +14,7 @@ const GameTourController = ($location) => {
     },
     {
       element: '#timer-container',
-      intro: 'Choose an answer to the current question. After time out, CZAR then select a favorite answer. whoever submits CZAR\'s favorite answer wins the round.'
+      intro: 'This is the timer. You have just 20 seconds to choose an answer to the current question'
     },
     {
       element: '#player-container',
