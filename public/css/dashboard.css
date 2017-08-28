@@ -8,8 +8,8 @@
   margin-left: 60px;
   margin-top: 15px;
   margin-right: 60px;
-  height: 400px; 
-  overflow: scroll; 
+  /*height: 400px; 
+  overflow: scroll;*/
 }
 
 .board-header{
@@ -41,15 +41,40 @@
   font-size: 30px;
 }
 
-.nav-buttons:hover {
-   background-color: #B5011C;
+.nav-buttons:hover{
+   background-color: #B5011C !important;
    color: white;
 } 
 
-.leadertable{
-  border-radius: 10px;
+.nav-buttons:active{
+   background-color: #B5011C !important;
+   color: white;
+} 
+
+.table {
+  font-weight: normal;
+  border-radius: 10px !important;
 }
 
-th{
-  font-weight: bold;
+.alternate-color:nth-child(odd){
+  background: #ebebeb;
+}
+
+.alternate-color:nth-child(even){
+  background: #fff;
+}
+
+thead{
+  background: #B5011C;
+  color: #fff;
+  border-bottom: 2px solid #a4adb7;
+}
+
+td{
+  border-right: 1px solid #ddd;
+}
+
+.active-dashboard {
+  background: #B5011C;
+  color: white;
 }

@@ -154,9 +154,11 @@ module.exports = (passport) => {
        'google.id': profile.id
      }, (err, user) => {
        if (err) {
+         console.log('--============getting here==== err===========', err);
          return done(err);
        }
        if (!user) {
+         console.log('--============getting here= user not found==============', user);
          user = new User({
            name: profile.displayName,
            email: profile.emails[0].value,
@@ -166,9 +168,11 @@ module.exports = (passport) => {
          });
          user.save((err) => {
            if (err) throw new Error(err);
+           console.log('--============getting here= saving erro==============', err);
            return done(err, user);
          });
        } else {
+         console.log('--============getting here success===============', user);
          return done(err, user);
        }
      });

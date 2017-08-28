@@ -26,12 +26,15 @@ angular.module('mean.system')
     $http.get('/api/games/history', config)
       .then((response) => {
         $scope.gameHistory = response.data.history;
-        console.log('your game', $scope.gameHistory[0].gamePlayers[0].username);
+        console.log('your game', response);
         if (response.data.history) {
           $scope.leaderboardShow = false;
           $scope.gameHistoryShow = true;
           $scope.donationsShow = false;
         }
+      })
+      .catch(() => {
+        $scope.gameHistory = 'You have not played any games';
       });
   };
 

@@ -5,21 +5,21 @@
     "facebook": {
         "clientID": "FB_CLIENT_ID",
         "clientSecret": "FB_CLIENT_SECRET",
-        "callbackURL": "http://fengshui-cfh-staging.herokuapp.com/auth/facebook/callback"
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/facebook/callback"
     },
     "twitter": {
         "clientID": "TWITTER_CONSUMER_KEY",
         "clientSecret": "TWITTER_CONSUMER_SECRET",
-        "callbackURL": "http://fengshui-cfh-staging.herokuapp.com/auth/twitter/callback"
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/twitter/callback"
     },
     "github": {
         "clientID": "GITHUB_CLIENT_ID",
         "clientSecret": "GITHUB_CLIENT_SECRET",
-        "callbackURL": "http://fengshui-cfh-staging.herokuapp.com/auth/github/callback"
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/github/callback"
     },
     "google": {
         "clientID": "GOOGLE_CLIENT_ID",
         "clientSecret": "GOOGLE_CLIENT_SECRET",
-        "callbackURL": "http://fengshui-cfh-staging.herokuapp.com/auth/google/callback"
+        "callbackURL": "http://fengshui-cfh.herokuapp.com/auth/google/callback"
     }
 }
